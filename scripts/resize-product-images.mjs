@@ -1,5 +1,5 @@
 // Makes the smaller copies of the product photos that product cards and thumbnails load.
-// For every public/images/products/<handle>/NN.jpg|png it writes <handle>/w320/NN.webp, w640/NN.webp and
+// For every public/images/products/<handle>/NN.webp (or .jpg/.png) it writes <handle>/w320/NN.webp, w640/NN.webp and
 // w960/NN.webp (WebP, quality 80, never wider than the original). The originals stay as they are; the
 // featured-product galleries still show them.
 //
@@ -19,7 +19,7 @@ const WIDTHS = [320, 640, 960];
 const QUALITY = 80;
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../public/images/products");
 const force = process.argv.includes("--force");
-const isPhoto = (f) => /^[^.]+\.(jpe?g|png)$/i.test(f);
+const isPhoto = (f) => /^[^.]+\.(webp|jpe?g|png)$/i.test(f);
 const isSizedDir = (f) => /^w\d+$/.test(f);
 const base = (f) => f.replace(/\.[^.]+$/, "");
 

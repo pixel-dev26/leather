@@ -67,7 +67,7 @@ export function checkOut(outDir, base) {
       const scriptBase = urlPathOf(outDir, base, path.dirname(path.dirname(file))).replace(/\/$/, '');
       for (const [, value] of js.matchAll(/['"`](\/images\/[^'"`$]+\.(?:jpe?g|png|webp|svg))['"`]/gi)) {
         check(file, `${scriptBase}${value}`, '/');
-        const copy = value.replace(/\/([^/]+)\.(?:jpe?g|png)$/i, '/w__/$1.webp');
+        const copy = value.replace(/\/([^/]+)\.(?:webp|jpe?g|png)$/i, '/w__/$1.webp');
         if (copy !== value) for (const w of [320, 640, 960]) check(file, `${scriptBase}${copy.replace('w__', `w${w}`)}`, '/');
       }
     }

@@ -83,7 +83,7 @@ export default function Footer() {
 
       <div className={styles.bottomRow}>
         <Link href="/v3" className={styles.logo} aria-label="Morucha home">
-          <Image src="/brand/morucha-logo.png" alt="Morucha" width={667} height={256} />
+          <Image src="/brand/morucha-logo.webp" alt="Morucha" width={667} height={256} />
         </Link>
         <div>
           <p className={styles.heading}>Follow us on</p>

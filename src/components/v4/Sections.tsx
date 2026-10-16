@@ -45,7 +45,7 @@ export function Story() {
       <div className="v4-inner v4-split">
         <Reveal className={styles.storyAside}>
           <h2 id="story-title" className="v4-label">{story.label}</h2>
-          <Image src="/brand/morucha-logo.png" alt="" width={667} height={256} className={styles.storyMark} />
+          <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} className={styles.storyMark} />
         </Reveal>
         <div className={styles.panel}>
           <p className={styles.panelLead}>{story.title}.</p>
@@ -65,7 +65,7 @@ export function Process() {
   return (
     <section id="process" className={`v4-section v4-rule ${styles.process}`} aria-labelledby="process-title">
       <div className={styles.timelineHead}>
-        <Image src="/brand/morucha-logo.png" alt="" width={667} height={256} className={styles.timelineMark} />
+        <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} className={styles.timelineMark} />
         <h2 id="process-title" className="v4-label">{processContent.label}</h2>
         <p className={styles.timelineIntro}>{plain(processContent.title)}</p>
       </div>

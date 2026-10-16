@@ -67,7 +67,7 @@ export default function Header() {
 
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`} style={{ top: offset }}>
         <a href="#top" className={`${styles.logo} ${docked ? styles.logoDocked : ""}`} aria-label="Morucha home">
-          <Image src="/brand/morucha-logo-light.png" alt="Morucha" width={667} height={256} priority />
+          <Image src="/brand/morucha-logo-light.webp" alt="Morucha" width={667} height={256} priority />
         </a>
       </header>
 

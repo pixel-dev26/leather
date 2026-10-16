@@ -2,7 +2,7 @@
 // Lifestyle and product photos belong to Oliver Co. London (olivercompanylondon.com); the featured
 // product gallery belongs to DailyObjects (dailyobjects.com). They are hot-linked only to preview the
 // design and are NOT licensed for Morucha. Replace every entry with Morucha's own photos
-// (put files in /public/images and change the URL to "/images/<file>.jpg") before the site goes live.
+// (put files in /public/images and change the URL to "/images/<file>.webp") before the site goes live.
 
 const oc = (file: string, width = 1600) => `https://olivercompanylondon.com/cdn/shop/files/${file}?width=${width}`;
 

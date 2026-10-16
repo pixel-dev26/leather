@@ -55,7 +55,7 @@ export default function Header({ announcement, nav }: Props) {
             <Menu />
           </button>
           <a href="#top" className={styles.logo} aria-label="Morucha home">
-            <Image src="/brand/morucha-logo.png" alt="Morucha" width={667} height={256} priority />
+            <Image src="/brand/morucha-logo.webp" alt="Morucha" width={667} height={256} priority />
           </a>
           <nav className={styles.nav} aria-label="Main">
             {nav.map((n) => (
@@ -76,7 +76,7 @@ export default function Header({ announcement, nav }: Props) {
 
       <div className={`${styles.drawer} ${open ? styles.open : ""}`} aria-hidden={!open} inert={!open}>
         <div className={styles.drawerTop}>
-          <Image src="/brand/morucha-logo.png" alt="" width={667} height={256} className={styles.drawerLogo} />
+          <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} className={styles.drawerLogo} />
           <button aria-label="Close menu" onClick={() => setOpen(false)}><Close /></button>
         </div>
         <nav aria-label="Mobile">

@@ -58,7 +58,7 @@ export default function Header() {
             ))}
           </nav>
           <Link href="/v2" className={styles.logo} aria-label="Morucha home">
-            <Image src="/brand/morucha-logo.png" alt="Morucha" width={667} height={256} priority />
+            <Image src="/brand/morucha-logo.webp" alt="Morucha" width={667} height={256} priority />
           </Link>
           <div className={styles.right}>
             {nav.right.map((l) => (

@@ -34,7 +34,7 @@ export default function Footer({ data, newsletter }: { data: typeof FooterData; 
 
       <div className={`v6-wrap ${styles.cols}`}>
         <div className={styles.brand} data-reveal="up">
-          <Image src="/brand/morucha-logo-white.png" alt="Morucha" width={667} height={256} className={styles.logo} />
+          <Image src="/brand/morucha-logo-white.webp" alt="Morucha" width={667} height={256} className={styles.logo} />
           <a href="mailto:sales@morucha.co.uk">sales@morucha.co.uk</a>
         </div>
         {data.columns.map((col, i) => (

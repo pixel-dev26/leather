@@ -8,7 +8,7 @@ export default function Footer() {
     <footer>
       <div className={styles.band}>
         <div className={styles.intro}>
-          <Image src="/brand/morucha-logo-light.png" alt="Morucha" width={667} height={256} className={styles.logo} />
+          <Image src="/brand/morucha-logo-light.webp" alt="Morucha" width={667} height={256} className={styles.logo} />
           <p className={styles.tagline}>{footer.tagline}</p>
           <p className={styles.mission}>{footer.mission}</p>
         </div>

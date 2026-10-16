@@ -37,7 +37,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
-          <Image src="/brand/morucha-logo-white.png" alt="Morucha" width={667} height={256} className={styles.logo} />
+          <Image src="/brand/morucha-logo-white.webp" alt="Morucha" width={667} height={256} className={styles.logo} />
           <p className={styles.tagline}>British Leather · Tanned with Care</p>
         </div>
 

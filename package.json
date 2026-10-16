@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "images": "node scripts/resize-product-images.mjs",
+    "webp": "node scripts/convert-to-webp.mjs",
     "dev": "next dev",
     "build": "next build",
     "export": "node scripts/export.mjs",

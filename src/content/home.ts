@@ -54,13 +54,14 @@ export const leathers = {
   title: "Shop the *Hides*",
   subtitle: "By the hide, half-hide or swatch, with no minimum order",
   link: { label: "View all leathers", href: "#" },
+  // Main photos are Morucha's own (WebP copies of public/images/banners/new-leather-1.png … 6.png); hover photos are still references
   items: [
-    { name: "Vegetable Tanned Side", note: "Firm, natural, ages to a rich patina", meta: "Natural · 3.0–3.5mm", price: "From £XX / sq ft", tag: "Bestseller", image: { src: img.swatchFan, alt: "Fan of vegetable-tanned leather swatches" }, hover: { src: img.tooling, alt: "Vegetable-tanned leather being tooled" } },
-    { name: "Full Grain Calf", note: "The strongest, most honest cut of the hide", meta: "Ink & Mustard · 1.2mm", price: "From £XX / sq ft", image: { src: img.grainPanels, alt: "Full-grain calf leather panels" }, hover: { src: img.walletNavy, alt: "Full-grain calf made into a wallet" } },
-    { name: "Pebble Grain", note: "Textured, hard-wearing, beautifully even", meta: "12 colours · 1.4mm", price: "From £XX / sq ft", tag: "New", image: { src: img.swatchGreen, alt: "Pebble-grain leather pieces" }, hover: { src: img.cardYellow, alt: "Pebble-grain card case" } },
-    { name: "Smooth Calf", note: "Smooth, fine and soft for small goods", meta: "Sky & Taupe · 1.0mm", price: "From £XX / sq ft", image: { src: img.cardBlueTaupe, alt: "Smooth calf leather in sky and taupe" }, hover: { src: img.heroHands, alt: "Smooth calf card wallet in hand" } },
-    { name: "Nappa Lining", note: "Supple and luxurious for linings", meta: "Raspberry · 0.8mm", price: "From £XX / sq ft", image: { src: img.purseInside, alt: "Raspberry nappa lining" }, hover: { src: img.purseOpen1, alt: "Nappa-lined purse" } },
-    { name: "Swatch Box", note: "Feel the leathers before you order", meta: "20 leathers · posted free", price: "Free", tag: "Trade", image: { src: img.flatlay, alt: "A box of leather swatches" }, hover: { src: img.swatchFan, alt: "Swatches fanned out" } },
+    { name: "Vegetable Tanned Side", note: "Firm, natural, ages to a rich patina", meta: "Natural · 3.0–3.5mm", price: "From £XX / sq ft", tag: "Bestseller", image: { src: "/images/banners/w960/new-leather-1.webp", alt: "Fan of coloured leather swatches beside Morucha wallets" }, hover: { src: img.tooling, alt: "Vegetable-tanned leather being tooled" } },
+    { name: "Full Grain Calf", note: "The strongest, most honest cut of the hide", meta: "Ink & Mustard · 1.2mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-2.webp", alt: "Navy and mustard full-grain leather panels beside a black Morucha wallet", position: "30% 50%" }, hover: { src: img.walletNavy, alt: "Full-grain calf made into a wallet" } },
+    { name: "Pebble Grain", note: "Textured, hard-wearing, beautifully even", meta: "12 colours · 1.4mm", price: "From £XX / sq ft", tag: "New", image: { src: "/images/banners/w960/new-leather-3.webp", alt: "Cut pebble-grain wallet pieces and tools on a green cutting mat" }, hover: { src: img.cardYellow, alt: "Pebble-grain card case" } },
+    { name: "Smooth Calf", note: "Smooth, fine and soft for small goods", meta: "Sky & Taupe · 1.0mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-4.webp", alt: "Open navy and mustard leather trifold wallet with card slots", position: "55% 50%" }, hover: { src: img.heroHands, alt: "Smooth calf card wallet in hand" } },
+    { name: "Nappa Lining", note: "Supple and luxurious for linings", meta: "Raspberry · 0.8mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-5.webp", alt: "Red leather lining and zip pocket inside an open purse", position: "55% 50%" }, hover: { src: img.purseOpen1, alt: "Nappa-lined purse" } },
+    { name: "Swatch Box", note: "Feel the leathers before you order", meta: "20 leathers · posted free", price: "Free", tag: "Trade", image: { src: "/images/banners/w960/new-leather-6.webp", alt: "Flat lay of Morucha leather wallets, purses and belts" }, hover: { src: img.swatchFan, alt: "Swatches fanned out" } },
   ] as { name: string; note: string; meta: string; price: string; tag?: string; image: ImageSlot; hover?: ImageSlot }[],
 };
 
@@ -247,7 +248,8 @@ export const trade = {
   primary: { label: "Open a trade account", href: "mailto:sales@morucha.co.uk?subject=Trade%20account" },
   secondary: { label: "Request a swatch box", href: "mailto:sales@morucha.co.uk?subject=Swatch%20box" },
   email: "sales@morucha.co.uk",
-  image: { src: img.swatchGreen, alt: "Leather swatches ready for posting" } as ImageSlot,
+  // Morucha's own photo: a WebP copy of public/images/banners/leather-pieces.png
+  image: { src: "/images/banners/w1600/leather-pieces.webp", alt: "Cut black and tan leather wallet pieces and finished Morucha wallets with tools on a green cutting mat" } as ImageSlot,
 };
 
 export const newsletter = {

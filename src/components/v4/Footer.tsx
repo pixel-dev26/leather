@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`v4-inner ${styles.top}`}>
         <a href="#top" className={styles.logo} aria-label="Back to top">
-          <Image src="/brand/morucha-logo.png" alt="Morucha" width={667} height={256} />
+          <Image src="/brand/morucha-logo.webp" alt="Morucha" width={667} height={256} />
         </a>
         <form className={styles.news} action="#" aria-label="Newsletter">
           <p className={styles.newsText}>{footer.newsletter.text}</p>

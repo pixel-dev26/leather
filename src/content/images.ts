@@ -1,7 +1,7 @@
 // TEMPORARY REFERENCE PHOTOGRAPHY
 // These photos belong to Motoazabu Spica (spica-inc.jp) and are hot-linked only to preview the
 // design. They are NOT licensed for Morucha. Replace every entry with Morucha's own photos
-// (put files in /public/images and change the URL to "/images/<file>.jpg") before the site goes live.
+// (put files in /public/images and change the URL to "/images/<file>.webp") before the site goes live.
 
 const S = "https://www.spica-inc.jp/wp/wp-content/uploads/2025/07/leather-accessories-";
 

@@ -39,7 +39,7 @@ export default function Header() {
           </div>
 
           <Link href="/v3" className={styles.logo} aria-label="Morucha home">
-            <Image src="/brand/morucha-logo.png" alt="Morucha" width={667} height={256} priority />
+            <Image src="/brand/morucha-logo.webp" alt="Morucha" width={667} height={256} priority />
           </Link>
 
           <nav className={styles.nav} aria-label="Main">
@@ -77,7 +77,7 @@ export default function Header() {
       <div className={`${styles.scrim} ${open ? styles.scrimOn : ""}`} onClick={() => setOpen(false)} aria-hidden />
       <aside className={`${styles.drawer} ${open ? styles.drawerOn : ""}`} aria-hidden={!open} aria-label="Menu">
         <div className={styles.drawerTop}>
-          <Image src="/brand/morucha-logo.png" alt="" width={667} height={256} className={styles.drawerLogo} />
+          <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} className={styles.drawerLogo} />
           <button className={styles.iconBtn} aria-label="Close menu" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
             <Icon name="close" />
           </button>

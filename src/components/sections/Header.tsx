@@ -41,8 +41,8 @@ export default function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${solid ? styles.solid : ""}`}>
         <div className={styles.inner}>
           <a href="#top" className={styles.logo} aria-label="Morucha home">
-            <Image src="/brand/morucha-logo-light.png" alt="Morucha" width={667} height={256} priority className={styles.logoLight} />
-            <Image src="/brand/morucha-logo.png" alt="" width={667} height={256} priority className={styles.logoDark} aria-hidden />
+            <Image src="/brand/morucha-logo-light.webp" alt="Morucha" width={667} height={256} priority className={styles.logoLight} />
+            <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} priority className={styles.logoDark} aria-hidden />
           </a>
 
           <nav className={styles.nav} aria-label="Main">

@@ -2,7 +2,7 @@
 // Every photo below comes from Pexels (pexels.com/search/leather%20wallet/) and is hot-linked from
 // images.pexels.com. Pexels photos are free to use under the Pexels licence, but they are stock images
 // of other makers' wallets: replace them with Morucha's own photography before launch (put files in
-// /public/images and change the URL to "/images/<file>.jpg"). Photo pages: https://www.pexels.com/photo/<id>/
+// /public/images and change the URL to "/images/<file>.webp"). Photo pages: https://www.pexels.com/photo/<id>/
 
 const px = (path: string, width = 1200) => `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=${width}`;
 

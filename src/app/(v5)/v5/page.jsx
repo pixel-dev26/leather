@@ -88,7 +88,7 @@ export default function Page() {
         <section className="hero" aria-roledescription="carousel" aria-label="Featured collections" data-hero>
           <div className="hero__slides">
             <article className="slide is-active" aria-roledescription="slide" aria-label="1 of 3">
-              <div className="slide__media"><ProductPhoto src="/images/banners/v1-banner-1.png" widths={[640, 960, 1600]} sizes="100vw" alt="Black and tan Morucha leather bifold wallet resting on black leather" fetchPriority="high" /></div>
+              <div className="slide__media"><ProductPhoto src="/images/banners/v1-banner-1.webp" widths={[640, 960, 1600]} sizes="100vw" alt="Black and tan Morucha leather bifold wallet resting on black leather" fetchPriority="high" /></div>
               <div className="slide__content">
                 <p className="slide__label">Men's wallets</p>
                 <h1 className="slide__title" data-split="words">Built to be carried<br />every day.</h1>
@@ -97,7 +97,7 @@ export default function Page() {
               </div>
             </article>
             <article className="slide" aria-roledescription="slide" aria-label="2 of 3">
-              <div className="slide__media"><ProductPhoto src="/images/banners/banner-image-1.png" widths={[640, 960, 1600]} sizes="100vw" alt="Woman in red linen trousers holding a Morucha patchwork leather purse in blue, pink, black and red" loading="lazy" /></div>
+              <div className="slide__media"><ProductPhoto src="/images/banners/banner-image-1.webp" widths={[640, 960, 1600]} sizes="100vw" alt="Woman in red linen trousers holding a Morucha patchwork leather purse in blue, pink, black and red" loading="lazy" /></div>
               <div className="slide__content">
                 <p className="slide__label">Women's purses</p>
                 <h2 className="slide__title" data-split="words">Room for everything<br />you carry.</h2>
@@ -106,7 +106,7 @@ export default function Page() {
               </div>
             </article>
             <article className="slide" aria-roledescription="slide" aria-label="3 of 3">
-              <div className="slide__media"><ProductPhoto src="/images/banners/banner-3.png" widths={[640, 960, 1600]} sizes="100vw" alt="Man in a grey suit jacket sliding a black and tan Morucha leather wallet into his inside pocket" loading="lazy" style={{ objectPosition: '50% 30%' }} /></div>
+              <div className="slide__media"><ProductPhoto src="/images/banners/banner-3.webp" widths={[640, 960, 1600]} sizes="100vw" alt="Man in a grey suit jacket sliding a black and tan Morucha leather wallet into his inside pocket" loading="lazy" style={{ objectPosition: '50% 30%' }} /></div>
               <div className="slide__content">
                 <p className="slide__label">RFID protection</p>
                 <h2 className="slide__title" data-split="words">Your cards, kept<br />to yourself.</h2>
@@ -135,31 +135,31 @@ export default function Page() {
           <ul className="circles__list" data-stagger>
             <li><a className="circle" href="#range" data-range-link="men">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Bifold</span></a></li>
             <li><a className="circle" href="#range" data-range-link="men">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/mens-rfid-blocking-compact-genuine-distressed-hunter-leather-trifold-wallet-m45-brown/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/mens-rfid-blocking-compact-genuine-distressed-hunter-leather-trifold-wallet-m45-brown/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Trifold</span></a></li>
             <li><a className="circle" href="#range" data-range-link="cards">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/minimalist-genuine-leather-rfid-wallet-black-orange/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/minimalist-genuine-leather-rfid-wallet-black-orange/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Card Holders</span></a></li>
             <li><a className="circle" href="#range" data-range-link="women">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Purses</span></a></li>
             <li><a className="circle" href="#leathers">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Hunter Leather</span></a></li>
             <li><a className="circle" href="#range" data-range-link="men">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/01.jpg" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Chain Wallets</span></a></li>
             <li><a className="circle" href="#range" data-range-link="gifts">
               <span className="circle__ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" /></svg></span>
-              <span className="circle__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-genuine-leather-wallet-slim-bifold-card-holder-with-id-window-8-card-slots-m110-tan/01.png" widths={[320]} alt="" loading="lazy" /></span>
+              <span className="circle__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-genuine-leather-wallet-slim-bifold-card-holder-with-id-window-8-card-slots-m110-tan/01.webp" widths={[320]} alt="" loading="lazy" /></span>
               <span className="circle__name">Gift Boxed</span></a></li>
           </ul>
         </section>
@@ -220,19 +220,19 @@ export default function Page() {
             <p className="eyebrow">Explore the range</p>
             <h2 className="h2" id="range-title" data-split="words">Find the one you'll carry for years.</h2>
             <ul className="range__list" data-range>
-              <li><a className="range__item is-active" href="#" data-key="men" data-img="0"><sup>01</sup><span className="roll"><span>Men's Wallets</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/men-wallet.png" widths={[320]} alt="" loading="lazy" /></span></a></li>
-              <li><a className="range__item" href="#" data-key="women" data-img="1"><sup>02</sup><span className="roll"><span>Women's Purses</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/women-wallet.png" widths={[320]} alt="" loading="lazy" /></span></a></li>
-              <li><a className="range__item" href="#" data-key="cards" data-img="2"><sup>03</sup><span className="roll"><span>Card Holders</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/card-holder.png" widths={[320]} alt="" loading="lazy" /></span></a></li>
-              <li><a className="range__item" href="#" data-key="hunter" data-img="3"><sup>04</sup><span className="roll"><span>Hunter Leather</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/hunter-leather.png" widths={[320]} alt="" loading="lazy" /></span></a></li>
-              <li><a className="range__item" href="#" data-key="gifts" data-img="4"><sup>05</sup><span className="roll"><span>Gifts Under £30</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/gifts-under.png" widths={[320]} alt="" loading="lazy" /></span></a></li>
+              <li><a className="range__item is-active" href="#" data-key="men" data-img="0"><sup>01</sup><span className="roll"><span>Men's Wallets</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/men-wallet.webp" widths={[320]} alt="" loading="lazy" /></span></a></li>
+              <li><a className="range__item" href="#" data-key="women" data-img="1"><sup>02</sup><span className="roll"><span>Women's Purses</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/women-wallet.webp" widths={[320]} alt="" loading="lazy" /></span></a></li>
+              <li><a className="range__item" href="#" data-key="cards" data-img="2"><sup>03</sup><span className="roll"><span>Card Holders</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/card-holder.webp" widths={[320]} alt="" loading="lazy" /></span></a></li>
+              <li><a className="range__item" href="#" data-key="hunter" data-img="3"><sup>04</sup><span className="roll"><span>Hunter Leather</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/hunter-leather.webp" widths={[320]} alt="" loading="lazy" /></span></a></li>
+              <li><a className="range__item" href="#" data-key="gifts" data-img="4"><sup>05</sup><span className="roll"><span>Gifts Under £30</span></span><span className="range__thumb"><ProductPhoto src="/images/banners/gifts-under.webp" widths={[320]} alt="" loading="lazy" /></span></a></li>
             </ul>
           </div>
           <div className="range__media" data-range-media>
-            <figure className="range__fig is-active"><ProductPhoto src="/images/banners/men-wallet.png" widths={[640, 960, 1600]} sizes="50vw" alt="Hand holding up a black Morucha leather wallet with a tan edge" loading="lazy" /></figure>
-            <figure className="range__fig"><ProductPhoto src="/images/banners/women-wallet.png" widths={[640, 960, 1600]} sizes="50vw" alt="Woman in a white shirt holding a red Morucha leather purse" loading="lazy" /></figure>
-            <figure className="range__fig"><ProductPhoto src="/images/banners/card-holder.png" widths={[640, 960, 1600]} sizes="50vw" alt="Hands opening a black and tan leather wallet to show its card slots" loading="lazy" /></figure>
-            <figure className="range__fig"><ProductPhoto src="/images/banners/hunter-leather.png" widths={[640, 960, 1600]} sizes="50vw" alt="Black Morucha leather wallet on a workbench with leatherworking tools" loading="lazy" /></figure>
-            <figure className="range__fig"><ProductPhoto src="/images/banners/gifts-under.png" widths={[640, 960, 1600]} sizes="50vw" alt="Grey Morucha leather wallet beside its Morucha gift box" loading="lazy" style={{ objectPosition: '60% 50%' }} /></figure>
+            <figure className="range__fig is-active"><ProductPhoto src="/images/banners/men-wallet.webp" widths={[640, 960, 1600]} sizes="50vw" alt="Hand holding up a black Morucha leather wallet with a tan edge" loading="lazy" /></figure>
+            <figure className="range__fig"><ProductPhoto src="/images/banners/women-wallet.webp" widths={[640, 960, 1600]} sizes="50vw" alt="Woman in a white shirt holding a red Morucha leather purse" loading="lazy" /></figure>
+            <figure className="range__fig"><ProductPhoto src="/images/banners/card-holder.webp" widths={[640, 960, 1600]} sizes="50vw" alt="Hands opening a black and tan leather wallet to show its card slots" loading="lazy" /></figure>
+            <figure className="range__fig"><ProductPhoto src="/images/banners/hunter-leather.webp" widths={[640, 960, 1600]} sizes="50vw" alt="Black Morucha leather wallet on a workbench with leatherworking tools" loading="lazy" /></figure>
+            <figure className="range__fig"><ProductPhoto src="/images/banners/gifts-under.webp" widths={[640, 960, 1600]} sizes="50vw" alt="Grey Morucha leather wallet beside its Morucha gift box" loading="lazy" style={{ objectPosition: '60% 50%' }} /></figure>
             <a className="btn btn--light range__cta" href="#bestsellers"><span className="roll"><span data-range-cta>Shop men's wallets</span></span><span className="arw" aria-hidden="true"><svg><use href="#i-arrow" /></svg><svg><use href="#i-arrow" /></svg></span></a>
           </div>
         </section>
@@ -316,7 +316,7 @@ export default function Page() {
               <img className="lg-slide__bg" src={"https://images.unsplash.com/photo-1716295177956-420a647c83ac?auto=format&fit=crop&w=1400&h=1600&q=75"} alt="" loading="lazy" />
               <span className="lg-slide__label">Soft genuine leather</span>
               <div className="lg-slide__card"><div className="lg-slide__tilt">
-                <span className="lg-slide__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/03.jpg" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
+                <span className="lg-slide__img"><ProductPhoto src="/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/03.webp" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
                 <span className="lg-slide__meta"><span>{"MORUCHA Men’s RFID Blocking Leather Wallet – Genuine Soft Leather Bifold with Coin Pocket & ID Windows M-2028"}</span><span>£29.99</span></span>
               </div></div>
             </figure>
@@ -324,7 +324,7 @@ export default function Page() {
               <img className="lg-slide__bg" src={"https://images.unsplash.com/photo-1787243293233-92f3188cde4b?auto=format&fit=crop&w=1400&h=1600&q=75"} alt="" loading="lazy" />
               <span className="lg-slide__label">Nappa leather</span>
               <div className="lg-slide__card"><div className="lg-slide__tilt">
-                <span className="lg-slide__img"><ProductPhoto src="/images/products/mens-rfid-nappa-leather-billfold-wallet/01.jpg" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
+                <span className="lg-slide__img"><ProductPhoto src="/images/products/mens-rfid-nappa-leather-billfold-wallet/01.webp" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
                 <span className="lg-slide__meta"><span>Mens RFID Nappa Leather Billfold Wallet Black</span><span>£24.99</span></span>
               </div></div>
             </figure>
@@ -332,7 +332,7 @@ export default function Page() {
               <img className="lg-slide__bg" src={"https://images.unsplash.com/photo-1571829604981-ea159f94e5ad?auto=format&fit=crop&w=1400&h=1600&q=75"} alt="" loading="lazy" />
               <span className="lg-slide__label">Hunter leather</span>
               <div className="lg-slide__card"><div className="lg-slide__tilt">
-                <span className="lg-slide__img"><ProductPhoto src="/images/products/mens-rfid-hunter-leather-billfold-wallet/01.jpg" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
+                <span className="lg-slide__img"><ProductPhoto src="/images/products/mens-rfid-hunter-leather-billfold-wallet/01.webp" sizes="(max-width: 700px) 60vw, 360px" alt="" loading="lazy" /></span>
                 <span className="lg-slide__meta"><span>Mens RFID Oiled Hunter Leather Billfold Wallet Brown</span><span>£24.99</span></span>
               </div></div>
             </figure>

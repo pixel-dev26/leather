@@ -15,7 +15,7 @@
   // in the static export), so root paths like /images/… get it as a prefix.
   const BASE = new URL('..', document.currentScript?.src || location.href).pathname.replace(/\/$/, '');
   const money = (n) => `£${n.toFixed(2)}`;
-  const sized = (src, w) => `${BASE}${src.replace(/\/([^/]+)\.(?:jpe?g|png)$/i, `/w${w}/$1.webp`)}`;
+  const sized = (src, w) => `${BASE}${src.replace(/\/([^/]+)\.(?:webp|jpe?g|png)$/i, `/w${w}/$1.webp`)}`;
   const srcset = (src) => [320, 640, 960].map((w) => `${sized(src, w)} ${w}w`).join(', ');
   const photoAttrs = (src, sizes) => `src="${sized(src, 960)}" srcset="${srcset(src)}" sizes="${sizes}"`;
   const setPhoto = (img, src) => { img.srcset = srcset(src); img.src = sized(src, 960); };
@@ -218,84 +218,84 @@
     m2028: {
       name: 'MORUCHA Men’s RFID Blocking Leather Wallet – Genuine Soft Leather Bifold with Coin Pocket & ID Windows M-2028', price: 29.99, badge: 'Bestseller',
       variants: [
-        { name: 'Black / Green', c1: C.black, c2: C.green, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/01.jpg' },
-        { name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/02.jpg' },
-        { name: 'Tan / Black', c1: C.tan, c2: C.black, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/03.jpg' },
-        { name: 'Black / Grey', c1: C.black, c2: C.grey, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/04.jpg' },
+        { name: 'Black / Green', c1: C.black, c2: C.green, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/01.webp' },
+        { name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/02.webp' },
+        { name: 'Tan / Black', c1: C.tan, c2: C.black, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/03.webp' },
+        { name: 'Black / Grey', c1: C.black, c2: C.grey, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028/04.webp' },
       ],
     },
     m2025: {
       name: 'MORUCHA Men’s RFID Blocking Leather Wallet – Vertical Genuine Soft Leather Wallet with Coin Pocket & Zipped Compartment M2025', price: 29.99, badge: 'New',
       variants: [
-        { name: 'Tan / Black', c1: C.tan, c2: C.black, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/01.jpg', alt: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/02.jpg' },
-        { name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/12.jpg' },
+        { name: 'Tan / Black', c1: C.tan, c2: C.black, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/01.webp', alt: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/02.webp' },
+        { name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy/12.webp' },
       ],
     },
     m80: {
       name: 'Mans RFID Blocking Real Distressed Hunter Leather Wallet M-80 Dark Brown', price: 26.99,
-      variants: [{ name: 'Dark Brown', c1: C.brown, img: '/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/01.jpg', alt: '/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/02.jpg' }],
+      variants: [{ name: 'Dark Brown', c1: C.brown, img: '/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/01.webp', alt: '/images/products/mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown/02.webp' }],
     },
     m2015: {
       name: 'MORUCHA Men’s RFID Blocking Leather Wallet – Genuine Soft Leather Bifold with Coin Pocket & ID Windows – M2015 Black Tan', price: 29.99,
-      variants: [{ name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/01.jpg', alt: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/02.jpg' }],
+      variants: [{ name: 'Black / Tan', c1: C.black, c2: C.tan, img: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/01.webp', alt: '/images/products/morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan/02.webp' }],
     },
     m115: {
       name: 'MORUCHA Men’s RFID Blocking Soft Leather Passcase Wallet – Bifold Card Holder with ID Windows & Gift Box – M115 Burgundy', price: 24.99, badge: 'Gift boxed',
-      variants: [{ name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy/01.jpg', alt: '/images/products/morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy/02.jpg' }],
+      variants: [{ name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy/01.webp', alt: '/images/products/morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy/02.webp' }],
     },
     m100: {
       name: 'Mens Genuine Distressed Leather Biker Wallet with Detachable 31cm Safety Chain M100 Dark Brown', price: 29.99,
-      variants: [{ name: 'Dark Brown', c1: C.hunter, img: '/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/01.jpg', alt: '/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/02.jpg' }],
+      variants: [{ name: 'Dark Brown', c1: C.hunter, img: '/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/01.webp', alt: '/images/products/mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown/02.webp' }],
     },
     hunterBillfold: {
       name: 'Mens RFID Oiled Hunter Leather Billfold Wallet Brown', price: 24.99,
-      variants: [{ name: 'Brown', c1: C.hunter, img: '/images/products/mens-rfid-hunter-leather-billfold-wallet/01.jpg', alt: '/images/products/mens-rfid-hunter-leather-billfold-wallet/02.jpg' }],
+      variants: [{ name: 'Brown', c1: C.hunter, img: '/images/products/mens-rfid-hunter-leather-billfold-wallet/01.webp', alt: '/images/products/mens-rfid-hunter-leather-billfold-wallet/02.webp' }],
     },
     nappa: {
       name: 'Gents RFID Nappa Leather Trifold Passcase Wallet Black', price: 26.99,
-      variants: [{ name: 'Black', c1: C.black, img: '/images/products/gents-rfid-nappa-leather-passcase-wallet/01.jpg', alt: '/images/products/gents-rfid-nappa-leather-passcase-wallet/02.jpg' }],
+      variants: [{ name: 'Black', c1: C.black, img: '/images/products/gents-rfid-nappa-leather-passcase-wallet/01.webp', alt: '/images/products/gents-rfid-nappa-leather-passcase-wallet/02.webp' }],
     },
     m95: {
       name: 'MORUCHA Clutch Wallet for Women Genuine Leather RFID Blocking High Capacity Cardholder M95', price: 34.99, badge: 'Bestseller',
       variants: [
-        { name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/01.jpg' },
-        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/07.jpg' },
-        { name: 'Dark Brown', c1: C.brown, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/10.jpg' },
-        { name: 'Fuchsia', c1: C.fuchsia, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/08.jpg' },
-        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/11.jpg' },
-        { name: 'Red', c1: C.red, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/09.jpg' },
+        { name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/01.webp' },
+        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/07.webp' },
+        { name: 'Dark Brown', c1: C.brown, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/10.webp' },
+        { name: 'Fuchsia', c1: C.fuchsia, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/08.webp' },
+        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/11.webp' },
+        { name: 'Red', c1: C.red, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95/09.webp' },
       ],
     },
     m90: {
       name: 'MORUCHA Clutch Wallet for Women Genuine Leather RFID Blocking High Capacity Cardholder M90', price: 34.99,
       variants: [
-        { name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/01.jpg' },
-        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/21.jpg' },
-        { name: 'Dark Hunter Brown', c1: C.hunter, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/29.jpg' },
-        { name: 'Fuchsia', c1: C.fuchsia, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/14.jpg' },
-        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/08.jpg' },
+        { name: 'Burgundy', c1: C.burgundy, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/01.webp' },
+        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/21.webp' },
+        { name: 'Dark Hunter Brown', c1: C.hunter, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/29.webp' },
+        { name: 'Fuchsia', c1: C.fuchsia, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/14.webp' },
+        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90/08.webp' },
       ],
     },
     m85: {
       name: 'MORUCHA Clutch Wallet for Women Genuine Leather RFID Blocking High Capacity Cardholder Purse M85', price: 34.99, badge: 'New',
       variants: [
-        { name: 'Brown', c1: C.hunter, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/01.png' },
-        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/14.jpg' },
-        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/08.jpg' },
-        { name: 'Red', c1: C.red, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/20.jpg' },
+        { name: 'Brown', c1: C.hunter, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/01.webp' },
+        { name: 'Black', c1: C.black, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/14.webp' },
+        { name: 'Grey', c1: C.grey, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/08.webp' },
+        { name: 'Red', c1: C.red, img: '/images/products/morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-purse-m85/20.webp' },
       ],
     },
     longNavy: {
       name: 'Womens Ladies Girls RFID BLOCKING Real Leather Long Clutch Wallet Purse Dark Blue', price: 34.99,
-      variants: [{ name: 'Dark Blue', c1: C.navy, img: '/images/products/womens-ladies-girls-rfid-blocking-real-leather-long-clutch-wallet-purse-dark-blue/01.jpg', alt: '/images/products/womens-ladies-girls-rfid-blocking-real-leather-long-clutch-wallet-purse-dark-blue/02.jpg' }],
+      variants: [{ name: 'Dark Blue', c1: C.navy, img: '/images/products/womens-ladies-girls-rfid-blocking-real-leather-long-clutch-wallet-purse-dark-blue/01.webp', alt: '/images/products/womens-ladies-girls-rfid-blocking-real-leather-long-clutch-wallet-purse-dark-blue/02.webp' }],
     },
     redBlack: {
       name: 'Women Genuine Leather RFID Clutch Wallet Red Black', price: 34.99,
-      variants: [{ name: 'Red / Black', c1: C.red, c2: C.black, img: '/images/products/women-genuine-leather-rfid-clutch-wallet-red-black/01.jpg', alt: '/images/products/women-genuine-leather-rfid-clutch-wallet-red-black/02.jpg' }],
+      variants: [{ name: 'Red / Black', c1: C.red, c2: C.black, img: '/images/products/women-genuine-leather-rfid-clutch-wallet-red-black/01.webp', alt: '/images/products/women-genuine-leather-rfid-clutch-wallet-red-black/02.webp' }],
     },
     blueBlack: {
       name: 'Women Genuine Leather RFID Purse Black Blue', price: 34.99,
-      variants: [{ name: 'Black / Blue', c1: C.black, c2: C.blue, img: '/images/products/women-genuine-leather-rfid-purse-blue/01.jpg', alt: '/images/products/women-genuine-leather-rfid-purse-blue/02.jpg' }],
+      variants: [{ name: 'Black / Blue', c1: C.black, c2: C.blue, img: '/images/products/women-genuine-leather-rfid-purse-blue/01.webp', alt: '/images/products/women-genuine-leather-rfid-purse-blue/02.webp' }],
     },
   };
 

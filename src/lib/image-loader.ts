@@ -3,13 +3,13 @@
 // review export at /l/. The width only goes into a URL fragment, which servers ignore; it keeps srcset
 // entries distinct, so Next doesn't warn that the loader ignores width.
 //
-// Product photos (/images/products/<handle>/NN.jpg|png) have smaller WebP copies made by
+// Product photos (/images/products/<handle>/NN.webp) have smaller WebP copies made by
 // scripts/resize-product-images.mjs in <handle>/w320/, w640/ and w960/. Each srcset entry gets the smallest
 // copy at least that wide, and anything wider than 960 gets the original. The featured-product galleries
 // skip the loader (`unoptimized`, with withBase) so their main photos are always the originals.
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const PRODUCT_PHOTO = /^(\/images\/products\/[^/]+)\/([^/]+)\.(?:jpe?g|png)$/i;
+const PRODUCT_PHOTO = /^(\/images\/products\/[^/]+)\/([^/]+)\.(?:webp|jpe?g|png)$/i;
 const SIZED_WIDTHS = [320, 640, 960]; // keep in step with scripts/resize-product-images.mjs
 
 export default function imageLoader({ src, width }: { src: string; width: number }) {

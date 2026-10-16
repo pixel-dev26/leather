@@ -7,7 +7,7 @@ import data from "./products.json";
 
 export type ProductImage = {
   id: number;
-  src: string; // local path, e.g. "/images/products/<handle>/01.jpg"
+  src: string; // local path, e.g. "/images/products/<handle>/01.webp"
   alt: string;
   width: number;
   height: number | null;
