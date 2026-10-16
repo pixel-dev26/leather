@@ -1,0 +1,32 @@
+.discover { padding: clamp(24px, 2.5vw, 40px) clamp(12px, 1vw, 16px); }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1vw, 16px); }
+.card {
+  position: relative; display: block; height: min(86vh, 860px); min-height: 480px; overflow: hidden; color: var(--clr-text-light);
+}
+.photo { position: absolute !important; inset: 0; }
+.shade { display: none; }
+.copy { position: absolute; left: clamp(24px, 2.6vw, 40px); right: 24px; bottom: clamp(32px, 4vh, 48px); display: flex; flex-direction: column; gap: 22px; }
+.title {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(24px, 1.9vw, 30px); line-height: 1.15; letter-spacing: 0.005em;
+  white-space: pre-line;
+}
+.link {
+  align-self: flex-start; font-family: var(--font-label); font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+  padding-bottom: 3px; border-bottom: 1px solid currentColor; line-height: 1.4; transition: color 0.3s ease-out, border-color 0.3s ease-out;
+}
+.card:hover .link { color: var(--clr-gold-light); }
+
+@media (max-width: 1023px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .grid > li:last-child { grid-column: 1 / -1; }
+  .card { height: 560px; }
+  .grid > li:last-child .card { height: 420px; }
+}
+@media (max-width: 767px) {
+  .grid { grid-template-columns: 1fr; }
+  .card, .grid > li:last-child .card { height: 480px; min-height: 0; }
+}
+
+/* no bottom fade on the photo: a soft shadow keeps the white text readable */
+.card { text-shadow: 0 1px 14px rgba(20, 5, 7, 0.55), 0 0 2px rgba(20, 5, 7, 0.35); }

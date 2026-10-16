@@ -1,0 +1,83 @@
+/* ---------------------------------------------------------------- chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px; border: 1px solid var(--line);
+  font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.chip:hover { border-color: var(--ink); }
+.chip[aria-selected="true"], .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.chipCount { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0; opacity: 0.55; }
+
+/* ---------------------------------------------------------------- card */
+.card { position: relative; min-width: 0; display: flex; flex-direction: column; }
+.media { position: relative; aspect-ratio: 1 / 1.08; background: var(--well); overflow: hidden; isolation: isolate; }
+.mediaLink { position: absolute; inset: 0; display: block; }
+.main, .hover { object-fit: contain; padding: 10%; mix-blend-mode: multiply; transition: opacity 0.5s var(--ease), transform 0.9s var(--ease); }
+.main { animation: swap 0.5s var(--ease); }
+@keyframes swap { from { opacity: 0; } }
+.hover { opacity: 0; }
+.card:hover .main { transform: scale(1.04); }
+.card:hover .mediaLink:has(.hover) .main { opacity: 0; }
+.card:hover .hover { opacity: 1; }
+.badge { position: absolute; top: 12px; left: 12px; z-index: 2; }
+.heart {
+  position: absolute; top: 8px; right: 8px; z-index: 2; width: 38px; height: 38px; display: grid; place-items: center;
+  opacity: 0.55; transition: opacity 0.25s, color 0.2s;
+}
+.card:hover .heart, .heart:focus-visible, .saved { opacity: 1; }
+.saved { color: var(--red); }
+.saved svg { fill: currentColor; }
+
+.info { display: grid; gap: 4px; padding: 14px 2px 0; }
+.name { font-family: var(--sans); font-size: 15px; font-weight: 500; line-height: 1.4; }
+.name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.price { font-family: var(--display); font-size: 19px; font-weight: 800; }
+.swatches { display: flex; gap: 6px; margin-top: 4px; }
+.swatch { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); transition: box-shadow 0.2s; }
+.swatchOn { box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--ink); }
+
+/* ---------------------------------------------------------------- rail */
+.railSection { overflow: hidden; }
+.track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: clamp(250px, 22vw, 330px); gap: 16px;
+  /* sideways only: overflow-x alone would make the row scroll vertically too (cards rising in or zooming on hover) */
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  scroll-padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+}
+.track::-webkit-scrollbar { display: none; }
+.track > * { scroll-snap-align: start; }
+.railFoot { display: flex; align-items: center; gap: 24px; margin-top: 28px; }
+.progress { flex: 1; height: 2px; background: var(--line); overflow: hidden; display: block; }
+.progress > span { display: block; height: 100%; background: var(--ink); transform-origin: left; transition: transform 0.3s var(--ease); }
+.arrows { display: flex; gap: 8px; }
+.arrows button {
+  width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line);
+  transition: border-color 0.25s, opacity 0.25s;
+}
+.arrows button:hover:not(:disabled) { border-color: var(--ink); }
+.arrows button:disabled { opacity: 0.3; cursor: default; }
+
+/* ---------------------------------------------------------------- shop all */
+.shop { border-top: 1px solid var(--line); }
+.total { color: var(--muted); font-size: 15px; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 28px; }
+.sort { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.sort select {
+  height: 38px; padding: 0 34px 0 12px; border: 1px solid var(--line); background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23111' stroke-width='1.6'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none; font-size: 14px; color: var(--ink); cursor: pointer;
+}
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 16px; }
+.more { display: grid; justify-items: center; gap: 14px; margin-top: 56px; }
+.more p { font-size: 14px; color: var(--muted); }
+
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 10px; }
+  .track { grid-auto-columns: 70vw; gap: 10px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+  .heart { opacity: 1; }
+}

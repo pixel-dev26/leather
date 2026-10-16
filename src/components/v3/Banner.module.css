@@ -1,0 +1,13 @@
+/* v3rule.md §7 Full-bleed banner */
+.banner { position: relative; height: var(--banner-h); overflow: hidden; background: var(--clr-surface); color: #000; }
+.dark { color: #fff; }
+.copy { position: absolute; left: var(--inset-banner-x); bottom: var(--inset-banner-y); max-width: 430px; }
+.copy h2 { font-size: var(--fs-display); margin-bottom: 2px; }
+.copy p { font-size: var(--fs-body); line-height: 1.2; margin-bottom: 24px; }
+.points { display: grid; gap: 10px; margin: -8px 0 24px; }
+.points li { display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm); line-height: 1.3; }
+.points svg { flex: none; }
+
+@media (max-width: 599px) {
+  .copy { right: var(--inset-banner-x); }
+}

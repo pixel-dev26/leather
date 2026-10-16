@@ -1,0 +1,175 @@
+/* v3 design tokens and base styles, see v3rule.md §11. Everything is scoped under .v3 so v1 and v2 are untouched. */
+.v3 {
+  /* colour */
+  --clr-bg: #ffffff;
+  --clr-surface: #f7f7f7;
+  --clr-text: #000000;
+  --clr-text-nav: rgba(0, 0, 0, 0.87);
+  --clr-ink: #1a1b1f;
+  --clr-text-2: #909090;
+  --clr-text-3: #666666;
+  --clr-icon: #44474e;
+  --clr-inverse: #000000;
+  --clr-action: #20a87e;
+  --clr-action-hover: #178a66;
+  --clr-promo: #e66b55;
+  --clr-promo-ink: #ffe4d6;
+  --clr-error: #b3261e;
+  --clr-line: #e0e0e0;
+  --clr-line-soft: rgba(191, 191, 191, 0.2);
+  --clr-line-header: rgba(0, 0, 0, 0.16);
+  --clr-field-border: #bfbfbf;
+  --clr-dot: #bfbfbf;
+  --clr-skeleton: #cacacb;
+  --clr-arrow-hero: rgba(0, 0, 0, 0.35);
+  --clr-arrow-slider: rgba(0, 0, 0, 0.3);
+
+  /* type */
+  --font-head: var(--font-condensed), "Roboto Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Graphik", var(--font-inter), system-ui, sans-serif;
+  --fs-display: 38px;
+  --fs-h1: 28px;
+  --fs-h2: 26px;
+  --fs-price-lg: 24px;
+  --fs-title-lg: 24px;
+  --fs-label: 18px;
+  --fs-ui: 16px;
+  --fs-nav: 15px;
+  --fs-btn-sm: 13px;
+  --fs-body-lg: 18px;
+  --fs-body: 16px;
+  --fs-card: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+  --fs-xxs: 12px;
+  --lh-tight: 1.2;
+  --lh-name: 1.3;
+  --lh-long: 1.5;
+  --ls-btn: 0.006em;
+
+  /* layout */
+  --section-gap: 80px;
+  --heading-gap: 16px;
+  --heading-gap-slider: 24px;
+  --gutter: 48px;
+  --gutter-slider: 34px;
+  --gutter-footer: 5%;
+  --inset-banner-x: 80px;
+  --inset-banner-y: 60px;
+  --header-h: 80px;
+  --strip-h: 89px;
+  --banner-h: clamp(480px, 45vw, 720px);
+  --card-gap: 16px;
+  --page-max: 1680px;
+
+  /* shape */
+  --radius-btn: 4px;
+  --radius-chip: 6px;
+  --radius-card: 10px;
+
+  /* motion */
+  --t: 0.3s ease;
+
+  /* v1 globals read these, so point them at v3 values */
+  --font-display: var(--font-head);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-head);
+
+  min-height: 100vh;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-tight);
+  letter-spacing: 0;
+}
+
+@media (max-width: 599px) {
+  .v3 {
+    --fs-display: 31px;
+    --fs-h2: 24px;
+    --fs-price-lg: 22px;
+    --fs-title-lg: 20px;
+    --fs-label: 16px;
+    --fs-body-lg: 15px;
+    --fs-card: 13px;
+    --section-gap: 48px;
+    --heading-gap-slider: 16px;
+    --gutter: 16px;
+    --gutter-slider: 16px;
+    --gutter-footer: 16px;
+    --inset-banner-x: 28px;
+    --inset-banner-y: 32px;
+    --header-h: 52px;
+    --banner-h: 570px;
+  }
+}
+
+body:has(.v3) { background: #ffffff; background-image: none; }
+
+.v3 h1, .v3 h2, .v3 h3, .v3 h4 {
+  font-family: var(--font-head); font-weight: 700; line-height: var(--lh-tight);
+  text-transform: uppercase; letter-spacing: 0;
+}
+.v3 a { transition: color var(--t), background-color var(--t), opacity var(--t); }
+.v3 :focus-visible { outline: 2px solid var(--clr-text); outline-offset: 2px; }
+.v3 ::selection { background: var(--clr-text); color: #fff; }
+
+/* the 80px rhythm between home sections (v3rule.md §5) */
+.v3 main > * + * { margin-top: var(--section-gap); }
+.v3 main { padding-bottom: var(--section-gap); }
+
+/* Row heading: title left, "View All" right (v3rule.md §4A) */
+.v3 .v3-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+  padding-inline: var(--gutter); margin-bottom: var(--heading-gap);
+}
+.v3 .v3-head h2 { font-size: var(--fs-h1); }
+.v3 .v3-head--slider { padding-inline: var(--gutter-slider); margin-bottom: var(--heading-gap-slider); }
+.v3 .v3-viewall {
+  flex: none; font-size: var(--fs-body); text-decoration: underline; text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.v3 .v3-viewall:hover { color: var(--clr-text-3); }
+
+/* Buttons (v3rule.md §7) */
+.v3 .v3-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: var(--ls-btn);
+  border-radius: var(--radius-btn); white-space: nowrap; line-height: 1.2;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.v3 .v3-btn--sm { font-size: var(--fs-btn-sm); padding: 11px 24px; min-height: 37px; }
+.v3 .v3-btn--lg { font-size: var(--fs-ui); padding: 16px 32px; min-height: 51px; }
+.v3 .v3-btn--dark { background: #000; color: #fff; }
+.v3 .v3-btn--dark:hover { background: #262626; }
+.v3 .v3-btn--light { background: #fff; color: #000; }
+.v3 .v3-btn--light:hover { background: #ececec; }
+.v3 .v3-btn--action { background: var(--clr-action); color: #fff; }
+.v3 .v3-btn--action:hover { background: var(--clr-action-hover); }
+.v3 .v3-btn--outline { border: 1px solid #000; color: #000; background: transparent; }
+.v3 .v3-btn--outline:disabled { border-color: rgba(0, 0, 0, 0.26); color: rgba(0, 0, 0, 0.26); cursor: default; }
+
+/* Tab pills (v3rule.md §7) */
+.v3 .v3-tabs {
+  display: flex; gap: 12px; padding-inline: var(--gutter); margin-bottom: var(--heading-gap);
+  overflow-x: auto; scrollbar-width: none;
+}
+.v3 .v3-tabs::-webkit-scrollbar { display: none; }
+.v3 .v3-tab {
+  flex: none; padding: 6px 12px; border: 1px solid #000; border-radius: var(--radius-btn);
+  font-weight: 500; font-size: var(--fs-body); line-height: 1.15; color: var(--clr-ink); background: #fff;
+  transition: background-color var(--t), color var(--t);
+}
+.v3 .v3-tab[aria-selected="true"] { background: #000; color: #fff; }
+.v3 .v3-tab:not([aria-selected="true"]):hover { background: var(--clr-surface); }
+
+.v3 .tbc { border-bottom: 1px dashed currentColor; }
+
+@media (max-width: 599px) {
+  .v3 .v3-tab { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3 *, .v3 *::before, .v3 *::after { transition-duration: 0.01ms !important; animation-play-state: paused !important; }
+}

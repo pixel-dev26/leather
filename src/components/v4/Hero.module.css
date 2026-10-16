@@ -1,0 +1,39 @@
+/* v4rule.md §7 Hero (rev 4.2): video seen through a halftone cut-out */
+.track { --p: 0; position: relative; height: 170vh; background: #000; }
+.anchor { position: absolute; top: -200px; }
+
+.panel {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  display: grid; place-items: center; isolation: isolate; background: #000;
+}
+
+/* layer order: video → shade → black halftone field (core + dots cut out) → copy */
+.video {
+  position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover;
+  transform: scale(calc(1.06 - var(--p) * 0.06)); /* gentle counter-zoom while the burst opens */
+}
+.shade { position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 60% at 50% 50%, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.3)); }
+.burst { position: absolute; inset: 0; z-index: -1; }
+.halftone { width: 100%; height: 100%; display: block; }
+
+.copy {
+  padding: 0 var(--gutter); text-align: center;
+  transform: scale(calc(1 + var(--p) * 0.1));
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+.title {
+  display: grid; color: #fff;
+  font-family: var(--font-hero); font-size: var(--fs-hero); font-weight: 500; line-height: var(--lh-hero); letter-spacing: -0.005em; /* medium since rev 4.5 */
+}
+.sub {
+  margin-top: clamp(28px, 4.9vw, 70px);
+  font-size: var(--fs-hero-sub); line-height: 1.2; color: rgba(233, 233, 231, 0.75);
+}
+
+@media (max-width: 1024px) {
+  .track { height: auto; }
+  .panel { position: relative; height: min(100svh, 720px); min-height: 520px; }
+}
+@media (max-width: 767px) {
+  .panel { height: 78svh; }
+}

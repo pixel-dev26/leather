@@ -1,0 +1,26 @@
+.hero { position: relative; height: calc(100svh - var(--header-h) - 32px); min-height: 520px; max-height: 960px; overflow: hidden; background: var(--clr-text); }
+
+.slide { position: absolute; inset: 0; display: block; visibility: hidden; transition: visibility 0s 1s; }
+.active { visibility: visible; transition: none; z-index: 1; }
+
+.image img { opacity: 0; transform: scale(1.1); transition: opacity 0.3s var(--ease), transform 1s var(--ease-zoom) !important; }
+.active .image img { opacity: 1; transform: none; }
+
+.content {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(24px, 4vw, 56px); color: var(--clr-on-image); padding: 0 var(--gutter);
+}
+.word { height: clamp(120px, 22vw, 360px); max-width: 86vw; opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease) 0.2s, transform 0.8s var(--ease-zoom) 0.2s; }
+.active .word { opacity: 1; transform: none; }
+.caption { font-size: 20px; line-height: 1.2; text-align: center; }
+
+.dots {
+  position: absolute; z-index: 2; left: 50%; bottom: 24px; transform: translateX(-50%);
+  display: flex; gap: 6px; padding: 7px 9px; border-radius: 999px; background: var(--clr-bg-2);
+}
+.dots button { width: 7px; height: 7px; border-radius: 50%; background: var(--clr-text); opacity: 0.3; transition: opacity 0.2s; }
+.dots .dotOn { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .image img, .word { transition: opacity 0.3s !important; transform: none !important; }
+}

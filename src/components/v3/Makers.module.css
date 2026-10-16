@@ -1,0 +1,17 @@
+/* v3rule.md §4C + §7 Instagram marquee */
+.makers { text-align: center; }
+.makers h2 { font-size: var(--fs-h2); padding-inline: var(--gutter); }
+.makers > p { margin: 8px auto 32px; padding-inline: var(--gutter); font-size: var(--fs-sm); }
+
+.viewport { margin-inline: var(--gutter); overflow: hidden; }
+.track { display: flex; gap: 15px; width: max-content; animation: marquee linear infinite; }
+.viewport:hover .track, .viewport:focus-within .track { animation-play-state: paused; }
+.tile { position: relative; display: block; width: 353px; aspect-ratio: 1; background: var(--clr-surface); overflow: hidden; }
+.tile img { object-fit: cover; }
+
+/* the list is doubled, so moving by half its width (plus half a gap) loops seamlessly */
+@keyframes marquee { to { transform: translateX(calc(-50% - 7.5px)); } }
+
+@media (max-width: 599px) {
+  .tile { width: 44vw; }
+}

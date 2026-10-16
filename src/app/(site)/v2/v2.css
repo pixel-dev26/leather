@@ -1,0 +1,81 @@
+/* v2 design tokens and base styles, see v2rule.md §11. Everything is scoped under .v2 so v1 is untouched. */
+.v2 {
+  /* colour */
+  --clr-bg: #e4dfd9;
+  --clr-bg-2: #f3eee8;
+  --clr-bg-3: #dbd5cd;
+  --clr-text: #363636;
+  --clr-text-2: #565656;
+  --clr-text-muted: #aba8a1;
+  --clr-text-faint: #c5c4ba;
+  --clr-line: #cac6c1;
+  --clr-on-image: #edece9;
+  --clr-blue: #5a87b1;
+  --clr-olive: #888a6e;
+  --clr-orange: #ec8746;
+  --clr-red: #c15253;
+  --clr-yellow: #f0b55c;
+  --clr-deep: #3b1e2b;
+  --clr-deep-text-2: rgba(255, 255, 255, 0.65);
+
+  /* type */
+  --font-sans: var(--font-jost), "Supreme LL", "Futura", system-ui, sans-serif;
+  --font-serif: var(--font-instrument), "Times New Roman", serif;
+  --fs-h0: clamp(2rem, 0.75rem + 3.333vw, 3.75rem);
+  --fs-statement: clamp(1.5rem, 2.6vw, 2.375rem);
+  --fs-h1: clamp(1.375rem, 1.146rem + 0.976vw, 2rem);
+  --fs-title: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);   /* section titles, 32 → 56px */
+  --fs-h2: clamp(1.625rem, 1.2rem + 1.4vw, 2.5rem);   /* tab row, 26 → 40px */
+  --fs-h3: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);     /* card / collection titles, 20 → 28px */
+  --fs-card: clamp(1.0625rem, 0.95rem + 0.35vw, 1.25rem); /* product names and prices, 17 → 20px */
+  --fs-serif-xl: clamp(44px, 5.6vw, 80px);
+  --fs-label: 1rem;
+  --fs-nav: 1.125rem;
+  --fs-body: 0.875rem;
+  --lh-tight: 1.07;
+  --lh-body: 1.65;
+  --ls-label: 0.04em;
+
+  /* layout */
+  --gutter: 10px;
+  --gap: 10px;
+  --section-gap: clamp(56px, 8.3vw, 120px);
+  --section-gap-lg: clamp(64px, 11vw, 160px);
+  --header-h: 72px;
+  --radius-btn: 7px;
+
+  /* motion */
+  --ease: ease-in-out;
+  --ease-zoom: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* v1 globals read these, so point them at v2 values */
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+
+  min-height: 100vh;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: 0;
+}
+
+body:has(.v2) { background: #e4dfd9; background-image: none; }
+
+.v2 h1, .v2 h2, .v2 h3, .v2 h4 { font-family: var(--font-sans); font-weight: 400; line-height: 1.1; }
+.v2 em { font-style: italic; color: inherit; font-weight: inherit; }
+.v2 a { transition: color 0.2s var(--ease), opacity 0.2s var(--ease); }
+.v2 :focus-visible { outline: 2px solid var(--clr-text); outline-offset: 3px; }
+.v2 .tbc { color: inherit; border-bottom: 1px dashed currentColor; }
+
+@media (max-width: 999px) {
+  .v2 { --fs-nav: 1rem; }
+}
+
+/* Section title (v2rule.md §4A, enlarged): one centred sentence-case heading per section */
+.v2 .v2-title {
+  margin: 0 0 clamp(24px, 2.6vw, 40px); padding: 0 var(--gutter); text-align: center;
+  font-size: var(--fs-title); line-height: 1.05; letter-spacing: -0.01em;
+}

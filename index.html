@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morucha | Homepage Versions</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbf9f5;
+      --ink: #1d1a17;
+      --muted: #7d7268;
+      --line: #e4dbcd;
+      --gold: #b08d57;
+      --espresso: #2f231e;
+      --ease: cubic-bezier(.22, .8, .22, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Jost", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(40px, 7vw, 88px) clamp(16px, 4vw, 48px);
+      flex: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: clamp(36px, 5vw, 64px);
+    }
+
+    header img {
+      width: 110px;
+      margin: 0 auto 20px;
+      display: block;
+      mix-blend-mode: multiply;
+    }
+
+    .eyebrow {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -.015em;
+      margin: 0 0 12px;
+    }
+
+    header p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(20px, 3vw, 40px);
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid var(--line);
+      transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px -40px rgba(47, 35, 30, .5);
+    }
+
+    .card__media {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #efe8dd;
+    }
+
+    .card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 1.2s var(--ease);
+    }
+
+    .card:hover .card__media img {
+      transform: scale(1.05);
+    }
+
+    .card__body {
+      padding: 26px 28px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .card__num {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .card h2 {
+      font-weight: 400;
+      font-size: 1.7rem;
+      margin: 0;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 4px 0 8px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tags li {
+      font-size: .74rem;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      align-self: flex-start;
+      font-size: .74rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding-bottom: 5px;
+      border-bottom: 1px solid currentColor;
+    }
+
+    .cta svg {
+      width: 16px;
+      height: 16px;
+      transition: transform .4s var(--ease);
+    }
+
+    .card:hover .cta svg {
+      transform: translateX(5px);
+    }
+
+    footer {
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      padding: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <img src="https://www.morucha.co.uk/cdn/shop/files/MORUCHA_250x.jpg?v=1614291159" alt="Morucha" width="125"
+        height="80">
+      <p class="eyebrow">Homepage design options</p>
+      <h1>Choose a version to preview</h1>
+      <p>Two homepage directions for Morucha. Open either one to view it full screen.</p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="v1/">
+        <span class="card__media"><img
+            src="https://images.unsplash.com/photo-1614260937422-f93aec4da8c5?auto=format&fit=crop&w=1000&h=625&q=70"
+            alt="Version 1 preview"></span>
+        <span class="card__body">
+          <span class="card__num">Version 01</span>
+          <h2>Modern Minimal</h2>
+          <p>Clean and contemporary, with Satoshi type, a split hero, product rails and rounded buttons.</p>
+          <ul class="tags">
+            <li>Wingback</li>
+            <li>Oliver Co London</li>
+            <li>Satoshi</li>
+          </ul>
+          <span class="cta">View version 1 <svg viewBox="0 0 24 24">
+              <path d="M4 12h15m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg></span>
+        </span>
+      </a>
+      <a class="card" href="v2/">
+        <span class="card__media"><img
+            src="https://images.unsplash.com/photo-1620109176813-e91290f6c795?auto=format&fit=crop&w=1000&h=625&q=70"
+            alt="Version 2 preview"></span>
+        <span class="card__body">
+          <span class="card__num">Version 02</span>
+          <h2>Heritage Editorial</h2>
+          <p>Warm leather tones with a full-screen slideshow, scroll-driven text animation and a newspaper-style
+            journal.</p>
+          <ul class="tags">
+            <li>Soletrader</li>
+            <li>Nappa Dori</li>
+            <li>Jost + Bodoni</li>
+          </ul>
+          <span class="cta">View version 2 <svg viewBox="0 0 24 24">
+              <path d="M4 12h15m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg></span>
+        </span>
+      </a>
+    </div>
+  </main>
+  <footer>Morucha &middot; homepage concepts</footer>
+</body>
+
+</html>

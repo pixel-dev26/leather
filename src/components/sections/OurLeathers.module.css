@@ -1,0 +1,47 @@
+.leathers { padding-block: clamp(48px, 5vw, 80px); }
+
+.head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+  padding-inline: var(--gutter); margin-bottom: 22px;
+}
+.title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(24px, 2vw, 30px); line-height: 1.2; letter-spacing: 0.01em; }
+.title em { color: var(--clr-primary); }
+.actions { display: flex; align-items: center; gap: 14px; }
+.actions button { width: 32px; height: 32px; display: grid; place-items: center; color: var(--clr-text-2); transition: color 0.3s ease-out; }
+.actions button:hover { color: var(--clr-primary); }
+.viewAll {
+  margin-left: 10px; font-family: var(--font-label); font-size: 12px; letter-spacing: 0.06em;
+  border-bottom: 1px solid currentColor; padding-bottom: 2px; line-height: 1.4;
+}
+.viewAll:hover { color: var(--clr-primary); }
+
+/* full-bleed row: first card on the gutter, the rest runs off the right edge */
+.track {
+  display: flex; gap: 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding-inline: var(--gutter); scroll-padding-left: var(--gutter);
+}
+.track::-webkit-scrollbar { display: none; }
+.track > li { flex: 0 0 clamp(220px, min(23.5vw, 40vh), 380px); scroll-snap-align: start; }
+
+.card { display: block; }
+.media { position: relative; aspect-ratio: 2 / 3; overflow: hidden; background: #efeae4; }
+.main, .alt { position: absolute !important; inset: 0; }
+.alt { opacity: 0; transition: opacity 0.8s ease-out; }
+.card:hover .alt { opacity: 1; }
+.tag {
+  position: absolute; z-index: 1; top: 12px; left: 12px;
+  font-family: var(--font-label); font-size: 10px; letter-spacing: 0.08em; color: var(--clr-text);
+  background: rgba(251, 250, 247, 0.9); padding: 3px 8px; line-height: 1.5;
+}
+
+/* Nour Hammour card text: small sans name, serif description, small price */
+.text { padding: 12px 2px 0; }
+.name { font-family: var(--font-label); font-size: 12px; font-weight: 500; letter-spacing: 0.04em; line-height: 1.5; }
+.desc { font-family: var(--font-display); font-size: 16px; line-height: 1.35; color: var(--clr-text); }
+.price { margin-top: 4px; font-family: var(--font-label); font-size: 12px; letter-spacing: 0.04em; color: var(--clr-text-2); line-height: 1.5; }
+.card:hover .name { color: var(--clr-primary); }
+
+@media (max-width: 767px) {
+  .actions button { display: none; }
+  .track > li { flex-basis: 64vw; }
+}

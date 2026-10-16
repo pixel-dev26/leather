@@ -1,0 +1,92 @@
+.trade { display: flex; flex-direction: column; align-items: center; padding: var(--section-gap-lg) var(--gutter) 0; text-align: center; }
+.text { max-width: 1040px; margin: 0 auto; font-size: var(--fs-statement); line-height: 1.1; text-wrap: balance; }
+
+/*
+ * One bordered grid on a 12-column track: the three trade benefits span 4 columns each (top row),
+ * the four service points span 3 each (bottom row). Hairlines come from the 1px gap over a line-coloured background.
+ */
+.grid {
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; width: 100%; margin: clamp(40px, 5vw, 72px) 0 44px;
+  background: var(--clr-line); border-top: 1px solid var(--clr-line); border-bottom: 1px solid var(--clr-line);
+}
+.card { display: flex; flex-direction: column; align-items: center; background: var(--clr-bg); color: var(--clr-text-2); transition: background-color 0.3s; }
+.card:hover { background: var(--clr-bg-2); }
+.card .icon [fill^="var"] { transition: fill 0.3s; }
+.card:hover .icon [fill^="var"] { fill: var(--clr-bg-2); }
+.cardLg { grid-column: span 4; padding: 44px 24px 40px; }
+.cardSm { grid-column: span 3; padding: 32px 20px 30px; }
+
+.cardTitle { margin: 20px 0 8px !important; font-size: var(--fs-h3); line-height: 1.2; color: var(--clr-text); }
+.cardLabel { margin: 14px 0 6px !important; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clr-text); }
+.cardText { font-size: 15px; line-height: 1.55; max-width: 30ch; }
+.cardSm .cardText { font-size: 14px; }
+
+/* ---------- animated line icons ---------- */
+.icon { color: var(--clr-text); overflow: visible; }
+.icon [pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s cubic-bezier(0.65, 0, 0.35, 1); }
+:global(.is-in) .icon [pathLength] { stroke-dashoffset: 0; }
+:global(.is-in) .icon .sw2 { transition-delay: 0.15s; }
+:global(.is-in) .icon .sw3 { transition-delay: 0.3s; }
+
+/* swatch box: the three swatches fan out of the box, then settle */
+.fan rect { transform-box: fill-box; transform-origin: 50% 100%; }
+:global(.is-in) .sw1 { animation: fanL 3.2s 1.4s ease-in-out infinite; }
+:global(.is-in) .sw3 { animation: fanR 3.2s 1.4s ease-in-out infinite; }
+:global(.is-in) .sw2 { animation: lift 3.2s 1.4s ease-in-out infinite; }
+@keyframes fanL { 0%, 100% { transform: rotate(0); } 40%, 60% { transform: rotate(-16deg); } }
+@keyframes fanR { 0%, 100% { transform: rotate(0); } 40%, 60% { transform: rotate(16deg); } }
+@keyframes lift { 0%, 100% { transform: translateY(0); } 40%, 60% { transform: translateY(-4px); } }
+
+/* hide: a running stitch travels round the edge */
+.stitch { stroke-dasharray: 2.5 3; opacity: 0; transition: opacity 0.6s 1.2s; }
+:global(.is-in) .stitch { opacity: 1; animation: run 2.4s linear infinite; }
+@keyframes run { to { stroke-dashoffset: -22; } }
+
+/* price tag: swings gently from its string */
+.swing { transform-origin: 20px 15px; }
+:global(.is-in) .swing { animation: swing 2.8s 1.4s ease-in-out infinite; }
+@keyframes swing { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-9deg); } 70% { transform: rotate(6deg); } }
+
+/* delivery van: bobs along while the road rolls past */
+:global(.is-in) .drive { animation: bob 0.9s 1.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-1.2px); } }
+.road { opacity: 0; transition: opacity 0.6s 1.2s; }
+:global(.is-in) .road { opacity: 1; animation: road 0.9s linear infinite; }
+@keyframes road { to { stroke-dashoffset: 11; } }
+
+/* returns: the arrow makes a slow turn every few seconds */
+.turn { transform-origin: 32px 32px; }
+:global(.is-in) .turn { animation: turn 4s 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@keyframes turn { 0%, 55% { transform: rotate(0); } 85%, 100% { transform: rotate(-360deg); } }
+
+/* repairs: the needle dips while the thread runs */
+:global(.is-in) .sew { animation: sew 1.6s 1.4s ease-in-out infinite; }
+@keyframes sew { 50% { transform: translate(-3px, 5px); } }
+.thread { opacity: 0; transition: opacity 0.6s 1.2s; }
+:global(.is-in) .thread { opacity: 1; animation: run 1.6s linear infinite; }
+
+/* contact: a letter rises out of the envelope */
+:global(.is-in) .letter { animation: letter 3s 1.4s ease-in-out infinite; }
+@keyframes letter { 0%, 100% { transform: translateY(6px); } 45%, 60% { transform: translateY(-2px); } }
+
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.button {
+  display: inline-block; padding: 12px 16px; border: 1px solid var(--clr-text); border-radius: var(--radius-btn);
+  font-size: 15px; line-height: 1; transition: background-color 0.2s, color 0.2s !important;
+}
+.button:hover { background: var(--clr-text); color: var(--clr-bg); }
+.buttonSolid { background: var(--clr-text); color: var(--clr-bg); }
+.buttonSolid:hover { background: transparent; color: var(--clr-text); }
+
+@media (max-width: 999px) {
+  .cardSm { grid-column: span 6; }
+}
+@media (max-width: 699px) {
+  .cardLg { grid-column: span 12; padding: 32px 12px; }
+  .cardSm { grid-column: span 6; padding: 24px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon [pathLength] { stroke-dashoffset: 0; transition: none; }
+  .icon * { animation: none !important; }
+  .stitch, .road, .thread { opacity: 1; }
+}

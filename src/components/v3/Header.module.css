@@ -1,0 +1,100 @@
+/* v3rule.md §7 Header + Promo strip */
+.header { position: relative; z-index: 20; background: #fff; border-bottom: 1px solid var(--clr-line-header); }
+.inner {
+  display: flex; align-items: center; height: var(--header-h);
+  padding-inline: var(--gutter-slider); max-width: var(--page-max); margin-inline: auto;
+}
+
+.logo { flex: none; display: block; height: 44px; }
+.logo img { height: 100%; width: auto; }
+
+.nav { display: flex; align-items: center; gap: 25px; margin-left: clamp(40px, 11vw, 172px); }
+.link {
+  position: relative; padding-block: 8px;
+  font-family: var(--font-head); font-weight: 700; font-size: var(--fs-nav); line-height: 1;
+  text-transform: uppercase; color: var(--clr-text-nav); white-space: nowrap;
+}
+.link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #000;
+  transform: scaleX(0); transform-origin: left; transition: transform var(--t);
+}
+.link:hover { color: #000; }
+.link:hover::after { transform: scaleX(1); }
+/* the one accented item, like DailyObjects' "GIFTING" */
+.accent::before {
+  content: ""; position: absolute; left: 50%; top: -3px; width: 18px; height: 2px; margin-left: -9px;
+  border-radius: 2px; background: var(--clr-action);
+}
+
+.icons { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.iconBtn {
+  position: relative; display: inline-grid; place-items: center; width: 36px; height: 36px; color: #000;
+}
+.iconBtn:hover { color: var(--clr-text-3); }
+.count {
+  position: absolute; top: 2px; right: 0; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px;
+  background: #000; color: #fff; font-size: 10px; line-height: 16px; font-weight: 500; text-align: center;
+  animation: pop 0.35s ease;
+}
+@keyframes pop { 0% { transform: scale(0.4); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+.mobileLeft { display: none; }
+
+/* ---------- promo strip ---------- */
+.strip {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  min-height: var(--strip-h); margin-bottom: 10px;
+  padding: 12px clamp(16px, 8vw, 120px);
+  background: var(--clr-promo); color: var(--clr-promo-ink);
+}
+.stripText {
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(28px, 3.9vw, 56px); line-height: 1; letter-spacing: -0.01em;
+}
+.pill {
+  flex: none; display: inline-flex; align-items: center; height: 28px; padding: 0 20px; border-radius: 999px;
+  background: var(--clr-promo-ink); color: var(--clr-promo);
+  font-family: var(--font-head); font-weight: 700; font-size: 15px; text-transform: uppercase; white-space: nowrap;
+  transition: background-color var(--t);
+}
+.strip:hover .pill { background: #fff; }
+
+/* ---------- drawer (below 1100px) ---------- */
+.scrim {
+  position: fixed; inset: 0; z-index: 40; background: rgba(0, 0, 0, 0.4);
+  opacity: 0; pointer-events: none; transition: opacity var(--t);
+}
+.scrimOn { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; inset: 0 auto 0 0; z-index: 50; width: min(86vw, 360px); overflow-y: auto;
+  background: #fff; padding: 0 16px 32px;
+  transform: translateX(-100%); transition: transform 0.35s ease; visibility: hidden;
+}
+.drawerOn { transform: none; visibility: visible; }
+.drawerTop { display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid var(--clr-line); }
+.drawerLogo { height: 32px; width: auto; }
+.drawerLink {
+  display: flex; align-items: center; justify-content: space-between; padding: 18px 0;
+  border-bottom: 1px solid var(--clr-line);
+  font-family: var(--font-head); font-weight: 700; font-size: 18px; text-transform: uppercase;
+}
+
+@media (max-width: 1279px) {
+  .nav { gap: 18px; margin-left: 40px; }
+  .link { font-size: 14px; }
+}
+
+@media (max-width: 1099px) {
+  .nav, .desktopOnly { display: none; }
+  .inner { display: grid; grid-template-columns: 1fr auto 1fr; padding-inline: 12px; }
+  .mobileLeft { display: flex; gap: 4px; }
+  .logo { justify-self: center; height: 40px; }
+  .icons { justify-self: end; gap: 4px; }
+}
+
+@media (max-width: 599px) {
+  .logo { height: 32px; }
+  .strip { flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; min-height: 82px; padding-block: 14px; }
+  .stripText { font-size: 30px; }
+  .pill { height: 24px; font-size: 13px; padding: 0 14px; }
+}

@@ -1,0 +1,43 @@
+.section { padding-top: var(--section-gap-lg); }
+
+.band { background: var(--clr-olive); padding: var(--gap) 0 24px; }
+
+.rail {
+  display: flex; gap: var(--gap); overflow-x: auto; padding: 0 var(--gap); scroll-snap-type: x mandatory;
+  scrollbar-width: none; outline-offset: -4px;
+}
+.rail::-webkit-scrollbar { display: none; }
+
+.card { flex: 0 0 calc((100% - 2 * var(--gap)) / 3); margin: 0; scroll-snap-align: start; display: grid; gap: 18px; }
+.media { aspect-ratio: 3 / 4; overflow: hidden; }
+.media img { transform: scale(1.06); transition: transform 1.6s var(--ease-zoom) !important; }
+.cardOn .media img { transform: none; }
+.caption { font-size: var(--fs-h3); line-height: 1.25; }
+
+.controls { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px var(--gap) 0; }
+
+.progress { display: flex; gap: 6px; flex: 1; max-width: 420px; }
+.progress span { position: relative; flex: 1; height: 2px; background: rgba(54, 54, 54, 0.22); overflow: hidden; }
+.progress i { position: absolute; inset: 0; background: var(--clr-text); transform-origin: left; transform: scaleX(0); }
+.progress .barDone i { transform: scaleX(1); }
+.progress .barOn i { animation: fill linear forwards; }
+@keyframes fill { to { transform: scaleX(1); } }
+
+.buttons { display: flex; gap: 8px; }
+.buttons button {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--clr-text);
+  font-size: 18px; transition: background-color 0.2s, color 0.2s;
+}
+.buttons button:hover { background: var(--clr-text); color: var(--clr-olive); }
+
+@media (max-width: 999px) {
+  .card { flex-basis: 60vw; }
+}
+@media (max-width: 699px) {
+  .card { flex-basis: 80vw; }
+  .progress { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media img { transform: none !important; }
+  .progress .barOn i { animation: none; transform: scaleX(1); }
+}

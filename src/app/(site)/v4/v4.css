@@ -1,0 +1,207 @@
+/* v4 design tokens and base styles, see v4rule.md §11. Everything is scoped under .v4 so v1 and v2 are untouched. */
+.v4 {
+  /* colour */
+  --clr-bg: #e9e9e7;
+  --clr-bg-2: #f4f4f3;
+  --clr-surface: #ffffff;
+  --clr-ink: #000000;
+  --clr-ink-2: #242627;
+  --clr-muted: #5f6567;
+  --clr-line: rgba(0, 0, 0, 0.15);
+  --clr-rule: #000000;
+  --clr-dark: #000000;
+  --clr-on-dark: #ffffff;
+  --clr-on-dark-2: #e9e9e7;
+  --clr-line-dark: rgba(255, 255, 255, 0.2);
+  --clr-scrim: rgba(0, 0, 0, 0.56);
+  --clr-brand: #c2010b; /* Morucha bull: logo only */
+
+  /* glow (imagery only): brown leather tones, v4.1 */
+  --glow-honey: #f2c58c;
+  --glow-amber: #d9924a;
+  --glow-cognac: #a8602c;
+  --glow-saddle: #7a4220;
+  --glow-umber: #4a2614;
+  --glow-espresso: #24130a;
+
+  /* type */
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-hero: var(--font-jost-light), "Jost", var(--font-sans);
+  --fs-hero: clamp(44px, 9.7vw, 180px);
+  --fs-hero-sub: clamp(22px, 2.3vw, 36px);
+  --fs-display: clamp(40px, 6vw, 120px);
+  --fs-title: clamp(40px, 4.9vw, 90px);
+  --fs-statement: clamp(36px, 4.9vw, 90px);
+  --fs-label: clamp(24px, 2.2vw, 50px);
+  --fs-h3: clamp(24px, 2.2vw, 50px);
+  --fs-h4: clamp(22px, 1.9vw, 40px);
+  --fs-lead: clamp(22px, 1.95vw, 30px);
+  --fs-h5: clamp(18px, 1.4vw, 28px);
+  --fs-menu: clamp(24px, 1.95vw, 32px);
+  --fs-body: clamp(16px, 0.8vw, 22px);
+  --fs-body-sm: 15px;
+  --fs-button: clamp(16px, 1.3vw, 19px);
+  --fs-small: clamp(14px, 0.6vw, 18px);
+  --fs-overline: 12px;
+  --lh-hero: 1;
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.4;
+
+  /* layout */
+  --gutter: 30px;
+  --gap: 30px;
+  --gap-slider: 40px;
+  --section-pad: clamp(48px, 8vh, 110px);
+  --space-l: min(6vh, 50px);
+  --space-m: calc(var(--space-l) * 0.4);
+  --space-xl: calc(var(--space-l) * 1.5);
+  --space-xxl: calc(var(--space-l) * 2);
+  --container: 2000px;
+  --container-text: 900px;
+  --header-h: 124px;
+  --header-h-scrolled: 84px;
+
+  /* motion */
+  --t-fast: 0.3s;
+  --t-card: 0.4s;
+
+  /* v1 globals read these, so point them at v4 values */
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+
+  min-height: 100vh;
+  background: var(--clr-bg);
+  color: var(--clr-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  letter-spacing: 0;
+  animation: v4-page-in 1s ease both;
+}
+
+@media (max-width: 767px) {
+  .v4 { --gutter: 20px; --header-h: 70px; --header-h-scrolled: 64px; }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .v4 { --header-h: 80px; --header-h-scrolled: 72px; }
+}
+
+@keyframes v4-page-in { from { opacity: 0; } to { opacity: 1; } }
+
+body:has(.v4) { background: #e9e9e7; background-image: none; }
+
+/* Element defaults use :where() so any component class overrides them. */
+:where(.v4) :where(h1, h2, h3, h4, h5) { margin: 0; font-family: var(--font-sans); font-weight: 400; line-height: var(--lh-heading); letter-spacing: 0; }
+:where(.v4) :where(p) { margin: 0; }
+:where(.v4) :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
+:where(.v4) :where(a) { color: inherit; transition: color var(--t-fast) ease, opacity var(--t-fast) ease; }
+.v4 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.v4 .tbc { color: inherit; border-bottom: 1px dashed currentColor; }
+
+/* ---------- layout helpers (v4rule.md §4, §5) ---------- */
+.v4 .v4-section { padding: var(--section-pad) var(--gutter); }
+.v4 .v4-rule { border-top: 1px solid var(--clr-rule); }
+.v4 .v4-inner { max-width: var(--container); margin: 0 auto; }
+
+/* Form A: side label 25% | content 75% */
+.v4 .v4-split { display: grid; grid-template-columns: minmax(260px, 25%) 1fr; column-gap: var(--gap); align-items: start; }
+.v4 .v4-label { font-size: var(--fs-label); font-weight: 600; line-height: var(--lh-heading); }
+@media (max-width: 767px) {
+  .v4 .v4-split { grid-template-columns: 1fr; row-gap: 24px; }
+}
+
+/* Form B: centred display word */
+.v4 .v4-display { margin: 0 0 var(--space-m); text-align: center; font-size: var(--fs-display); font-weight: 400; line-height: var(--lh-tight); }
+
+/* Form C: page title + rule */
+.v4 .v4-title { font-size: var(--fs-title); font-weight: 300; line-height: var(--lh-tight); }
+
+.v4 .v4-overline { font-size: var(--fs-overline); font-weight: 500; line-height: 1.2; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ---------- black glow bands (v4rule.md §2 Glow, §6, §8) ----------
+   A dim umber haze stays on the band's resting side; the brighter leather orb (<CursorGlow />)
+   follows the cursor across the band. */
+.v4 .v4-glow { position: relative; isolation: isolate; overflow: hidden; background: var(--clr-dark); color: var(--clr-on-dark); }
+.v4 .v4-glow::before {
+  content: ""; position: absolute; z-index: -2; pointer-events: none; inset: 0;
+}
+/* Very subtle leather grain (rev 4.3): an embossed pebble texture generated as a tiled SVG (turbulence +
+   diffuse light), painted above the glow and below the copy. It should be felt, not seen. */
+.v4 .v4-glow::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.13' numOctaves='4' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='3.2' diffuseConstant='1.1' lighting-color='%23c9a07a'%3E%3CfeDistantLight azimuth='225' elevation='42'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 320px 320px;
+  opacity: 0.075;
+  mix-blend-mode: screen;
+}
+.v4 .v4-glow--right::before { background: radial-gradient(40% 70% at 100% 50%, rgba(74, 38, 20, 0.85), transparent 75%); }
+.v4 .v4-glow--left::before { background: radial-gradient(38% 80% at 0% 65%, rgba(74, 38, 20, 0.85), transparent 75%); }
+
+.v4 .v4-glow-orb {
+  position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none;
+  width: min(58vw, 860px); aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 46% 44%, rgba(242, 197, 140, 0.75) 0%, rgba(242, 197, 140, 0.4) 9%, transparent 22%),
+    radial-gradient(circle at 50% 50%, var(--glow-amber) 0%, rgba(217, 146, 74, 0.7) 18%, transparent 40%),
+    radial-gradient(circle at 52% 52%, var(--glow-cognac) 0%, rgba(168, 96, 44, 0.6) 30%, transparent 56%),
+    radial-gradient(circle at 50% 50%, var(--glow-saddle) 0%, rgba(122, 66, 32, 0.45) 42%, transparent 70%);
+  filter: blur(30px); opacity: 0.9;
+  will-change: transform;
+}
+.v4 .v4-glow-orb--left { width: min(44vw, 640px); opacity: 0.85; }
+@media (max-width: 767px) {
+  .v4 .v4-glow-orb { width: 120vw; opacity: 0.6; }
+}
+
+/* ---------- buttons (v4rule.md §7) ---------- */
+.v4 .v4-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px 33px 15px; border: 1px solid var(--clr-ink); border-radius: 0;
+  background: transparent; color: var(--clr-ink);
+  font-size: var(--fs-button); font-weight: 600; line-height: 1.6;
+  transition: background-color var(--t-fast) ease, color var(--t-fast) ease, border-color var(--t-fast) ease;
+}
+.v4 .v4-btn:hover, .v4 .v4-btn:focus-visible { background: var(--clr-ink); color: #fff; }
+.v4 .v4-btn--light { border-color: #fff; color: #fff; }
+.v4 .v4-btn--light:hover, .v4 .v4-btn--light:focus-visible { background: #fff; color: #000; }
+.v4 .v4-btn--solid { background: var(--clr-ink); color: #fff; }
+.v4 .v4-btn--solid:hover, .v4 .v4-btn--solid:focus-visible { background: var(--clr-ink-2); color: #fff; }
+.v4 .v4-btn svg { width: 18px; height: 18px; flex: none; }
+
+/* Text link with a thin north-east arrow */
+.v4 .v4-link { display: inline-flex; align-items: center; gap: 10px; font-size: var(--fs-button); font-weight: 500; line-height: 1.2; }
+.v4 .v4-link svg { width: 14px; height: 14px; flex: none; transition: transform var(--t-fast) ease; }
+.v4 .v4-link:hover svg, .v4 .v4-link:focus-visible svg { transform: translate(3px, -3px); }
+.v4 .v4-link--muted { color: var(--clr-muted); }
+.v4 .v4-link--muted:hover { color: var(--clr-ink); }
+
+/* Pill pagination (Super Tannery slider dots) */
+.v4 .v4-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 15px; }
+.v4 .v4-dots button { width: 6px; height: 6px; border-radius: 6px; background: currentColor; opacity: 0.2; transition: width var(--t-fast) ease, opacity var(--t-fast) ease; }
+.v4 .v4-dots button[aria-current="true"] { width: 20px; opacity: 1; }
+
+/* Underline inputs (kit form styles) */
+.v4 .v4-field { display: grid; gap: 4px; }
+.v4 .v4-field label { font-size: var(--fs-body); }
+.v4 .v4-input {
+  width: 100%; padding: 1.1em 0 0.7em; border: 0; border-bottom: 1px solid var(--clr-line); border-radius: 0;
+  background: transparent; font-size: var(--fs-body); line-height: var(--lh-body); color: inherit; outline: none;
+  transition: border-color var(--t-fast) ease;
+}
+.v4 .v4-input:hover, .v4 .v4-input:focus { border-bottom-color: var(--clr-ink); }
+.v4 .v4-input::placeholder { color: var(--clr-muted); }
+.v4 textarea.v4-input { resize: vertical; min-height: 96px; }
+
+/* ---------- motion (v4rule.md §8) ---------- */
+.v4 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1.25s cubic-bezier(.2,.7,.2,1), transform 1.25s cubic-bezier(.2,.7,.2,1); }
+.v4 .reveal.is-in { opacity: 1; transform: none; }
+.v4 .v4-zoom { opacity: 0; transform: scale(0.3); transition: opacity 0.6s ease, transform 0.8s cubic-bezier(.2,.7,.2,1); }
+.v4 .is-in .v4-zoom, .v4 .v4-zoom.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v4 { animation: none; }
+  .v4 .reveal, .v4 .v4-zoom { transform: none; transition: opacity 0.4s ease; }
+}
