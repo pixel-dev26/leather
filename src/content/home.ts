@@ -8,7 +8,8 @@ import { img } from "./images";
 import { colourways, shop } from "./shop";
 
 // fit "contain" marks a studio packshot on white: shown whole, with the white blended into the tile colour.
-export type ImageSlot = { src?: string; alt: string; tone?: "dark" | "mid" | "light"; fit?: "contain" };
+// position is the photo's object-position in a cropped slot (e.g. "35% 50%"), when the default centre misses the subject.
+export type ImageSlot = { src?: string; alt: string; tone?: "dark" | "mid" | "light"; fit?: "contain"; position?: string };
 
 /** A product photo slot (studio shot on white). */
 export const pack = (src: string, alt: string): ImageSlot => ({ src, alt, fit: "contain" });
@@ -118,9 +119,10 @@ export const shopByCategory = {
 // Chesterfield-style trio of tall story cards
 export const discover = {
   items: [
-    { title: "Crafted by nature.\nRefined by hand.", link: { label: "Discover our leather", href: "#leathers" }, image: { src: img.tooling, alt: "Hands tooling a leather panel" } },
-    { title: "Tanned with patience.\nBuilt to last.", link: { label: "Meet our story", href: "#story" }, image: { src: img.workshopDesk, alt: "Leather goods on the workshop desk" } },
-    { title: "New season\ncollection.", link: { label: "Find your favourite", href: "#bestsellers" }, image: { src: img.heroSuit, alt: "Leather wallet slipped into a jacket pocket" } },
+    // Morucha's own photos: WebP copies (up to 1600px wide, as the tall cards enlarge wide photos) of public/images/banners/*.png
+    { title: "Crafted by nature.\nRefined by hand.", link: { label: "Discover our leather", href: "#leathers" }, image: { src: "/images/banners/w1600/crafted-with.webp", alt: "Craftsman finishing the edge of a burgundy Morucha leather wallet on a workbench" } },
+    { title: "Tanned with patience.\nBuilt to last.", link: { label: "Meet our story", href: "#story" }, image: { src: "/images/banners/w1600/tanned-with.webp", alt: "Eight Morucha leather wallets laid out on a wooden workshop table" } },
+    { title: "New season\ncollection.", link: { label: "Find your favourite", href: "#bestsellers" }, image: { src: "/images/banners/w1600/new-season.webp", alt: "Man in a blue suit holding a black and blue Morucha long wallet", position: "35% 50%" } },
   ] as { title: string; link: { label: string; href: string }; image: ImageSlot }[],
 };
 
@@ -165,8 +167,9 @@ export const story = {
     "Today we tan hides for makers across the UK and beyond, and craft our own wallets, purses and travel bags from the very same leather: tens of thousands of them, sent to customers worldwide.",
   ],
   cta: { label: "About us", href: "#" },
-  image: { src: img.workshopDesk, alt: "Leather goods laid out on a workshop desk" } as ImageSlot,
-  inset: { src: img.tooling, alt: "Hand tooling leather" } as ImageSlot,
+  // Morucha's own photos: 1600px WebP copies of public/images/banners/card-holder.png and tanned-with.png
+  image: { src: "/images/banners/w1600/card-holder.webp", alt: "Hands opening a black and tan Morucha leather wallet full of cards" } as ImageSlot,
+  inset: { src: "/images/banners/w1600/tanned-with.webp", alt: "Morucha leather wallets laid out on a wooden workshop desk" } as ImageSlot,
 };
 
 export const process = {
