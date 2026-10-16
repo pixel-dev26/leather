@@ -32,7 +32,8 @@ export const hero = {
   secondary: { label: "Explore our leather", href: "#leathers" },
   slides: [
     { src: img.heroHands, alt: "Hands holding a leather card wallet at a desk" },
-    { src: img.heroGrain, alt: "Close-up of pebbled leather panels in navy and mustard" },
+    // 1600px WebP copy of public/images/banners/v1-banner-1.png
+    { src: "/images/banners/w1600/v1-banner-1.webp", alt: "Black and tan Morucha leather bifold wallet on black leather" },
     { src: "/images/banners/v1-banner-3.webp", alt: "Man in a blue suit holding a navy Morucha leather wallet" },
   ] as ImageSlot[],
 };
@@ -40,9 +41,10 @@ export const hero = {
 export const statement = {
   label: "Since [YEAR TBC]",
   text: "Every hide is chosen, tanned and finished *by hand*. So the leather you work with is worth keeping for a lifetime.",
+  // Morucha's own photos: 960px WebP copies of public/images/banners/since-1.png and since-2.png
   images: [
-    { src: img.tooling, alt: "Craftsman tooling a leather panel" },
-    { src: img.swatchFan, alt: "A fan of leather swatches in many colours" },
+    { src: "/images/banners/w960/since-1.webp", alt: "Craftsman finishing a tan leather wallet with an edge tool" },
+    { src: "/images/banners/w960/since-2.webp", alt: "Six black Morucha leather wallets with tan, red, green and orange trims arranged in a circle" },
   ] as ImageSlot[],
 };
 
