@@ -14,7 +14,7 @@ export default function Collections() {
             <Reveal as="li" key={c.name} delay={i} className={styles.item}>
               <a href={c.href} className={`${styles.card} hover-zoom`}>
                 <Photo {...c.image} sizes="(max-width: 1023px) 50vw, 25vw" className={styles.photo} />
-                <span className={styles.overlay} aria-hidden />
+                <span className={`${styles.overlay} ${c.shade ? styles.shade : ""}`} aria-hidden />
                 <span className={styles.frame} aria-hidden />
                 <span className={styles.count}>{c.count}</span>
                 <span className={styles.name}>{c.name}</span>

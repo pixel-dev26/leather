@@ -9,6 +9,8 @@
   position: absolute; inset: 0; transition: opacity 0.6s ease-out;
   background: none;
 }
+/* only for light photos (collections item with shade: true), so the white name and link stay readable */
+.shade { background: linear-gradient(to top, rgba(20, 5, 7, 0.55) 0%, rgba(20, 5, 7, 0.3) 30%, rgba(20, 5, 7, 0) 55%); }
 .frame {
   position: absolute; inset: 14px; border: 1px solid rgba(247, 247, 247, 0.4); opacity: 0; transform: scale(1.03);
   transition: var(--transit); pointer-events: none;

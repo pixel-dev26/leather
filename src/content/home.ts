@@ -194,11 +194,13 @@ export const collections = {
   label: "Leather Goods",
   title: "The *Collections*",
   items: [
-    { name: "Men's Wallets", count: "[n] pieces", href: "#", image: { src: img.walletNavy, alt: "Men's wallet in hand" } },
-    { name: "Women's Purses", count: "[n] pieces", href: "#", image: { src: img.purseOpen1, alt: "Women's purse opened" } },
-    { name: "Cardholders", count: "[n] pieces", href: "#", image: { src: img.cardYellow, alt: "Leather cardholder" } },
+    // Men's Wallets, Women's Purses and Cardholders use Morucha's own photos (WebP copies of public/images/banners/*.png)
+    { name: "Men's Wallets", count: "[n] pieces", href: "#", image: { src: "/images/banners/w960/men-wallet.webp", alt: "Hand holding up a black Morucha leather wallet with a tan edge" } },
+    // shade: a soft dark fade behind the white text, as this photo is light (a cream blazer) where the name sits
+    { name: "Women's Purses", count: "[n] pieces", href: "#", shade: true, image: { src: "/images/banners/w1600/women-purse.webp", alt: "Woman in a cream blazer holding a blue, pink and red patchwork Morucha leather purse", position: "40% 50%" } },
+    { name: "Cardholders", count: "[n] pieces", href: "#", image: { src: "/images/banners/w1600/card-holder-new.webp", alt: "Hands taking a yellow leather card holder from an open tan Morucha wallet", position: "35% 50%" } },
     { name: "Travel Bags", count: "[n] pieces", href: "#", image: { src: img.flatlay, alt: "Leather goods flat-lay" } },
-  ] as { name: string; count: string; href: string; image: ImageSlot }[],
+  ] as { name: string; count: string; href: string; shade?: boolean; image: ImageSlot }[],
 };
 
 export const sustainability = {
@@ -211,8 +213,9 @@ export const sustainability = {
     { title: "Made to last", text: "The most sustainable product is the one you never need to replace." },
   ],
   cta: { label: "Our commitments", href: "#" },
-  image: { src: img.flatlay, alt: "Leather goods and belts laid flat" } as ImageSlot,
-  inset: { src: img.swatchFan, alt: "Leather swatches" } as ImageSlot,
+  // Morucha's own photos: WebP copies of public/images/banners/gifts-under.png (large) and since-2.png (inset)
+  image: { src: "/images/banners/w1600/gifts-under.webp", alt: "Grey Morucha leather wallet beside its gift box on a dark desk" } as ImageSlot,
+  inset: { src: "/images/banners/w960/since-2.webp", alt: "Six black Morucha leather wallets with tan, red, green and orange trims arranged in a circle" } as ImageSlot,
 };
 
 export const makers = {
@@ -221,13 +224,14 @@ export const makers = {
   text: "Follow us on Instagram [@handle TBC] and tag #MadeWithMorucha. Be part of our community of makers and leather lovers.",
   handle: "@morucha [TBC]",
   href: "#",
+  // Morucha's own photos: 960px WebP copies of public/images/banners/insta-1.png … insta-6.png
   items: [
-    { caption: "Small goods, [Maker TBC]", image: { src: img.tooling, alt: "Maker tooling leather" } },
-    { caption: "Bespoke wallets, [Maker TBC]", image: { src: img.walletBurgundy, alt: "Handmade wallet" } },
-    { caption: "Card cases, [Maker TBC]", image: { src: img.cardBlueTaupe, alt: "Card cases" } },
-    { caption: "Gifts, [Maker TBC]", image: { src: img.cardGift, alt: "Leather gift wallet" } },
-    { caption: "Accessories, [Maker TBC]", image: { src: img.flatlay, alt: "Leather accessories flat-lay" } },
-    { caption: "Purses, [Maker TBC]", image: { src: img.purseOpen2, alt: "Leather purse" } },
+    { caption: "Small goods, [Maker TBC]", image: { src: "/images/banners/w960/insta-1.webp", alt: "Hands opening a burgundy Morucha wallet full of cards", position: "43% 50%" } },
+    { caption: "Bespoke wallets, [Maker TBC]", image: { src: "/images/banners/w960/insta-2.webp", alt: "Four Morucha leather wallets on a wooden table" } },
+    { caption: "Card cases, [Maker TBC]", image: { src: "/images/banners/w960/insta-3.webp", alt: "Hands opening a brown distressed leather wallet with cards and notes" } },
+    { caption: "Gifts, [Maker TBC]", image: { src: "/images/banners/w960/insta-4.webp", alt: "Hands holding a black Morucha wallet beside its gift box" } },
+    { caption: "Accessories, [Maker TBC]", image: { src: "/images/banners/w960/insta-5.webp", alt: "Hands taking a card from a navy leather purse" } },
+    { caption: "Purses, [Maker TBC]", image: { src: "/images/banners/w960/insta-6.webp", alt: "Hands holding a red Morucha leather purse" } },
   ] as { caption: string; image: ImageSlot }[],
 };
 
