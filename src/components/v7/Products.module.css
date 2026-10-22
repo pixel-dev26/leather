@@ -1,0 +1,51 @@
+.section { --card-well: var(--well); overflow: hidden; }
+.warm { --card-well: var(--well-warm); }
+
+/* ---------------------------------------------------------------- rail */
+.track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 18px) / 4); gap: 6px;
+  /* sideways only: overflow-x alone would let the row scroll vertically too (cards rising in) */
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.track::-webkit-scrollbar { display: none; }
+.track > * { scroll-snap-align: start; }
+.track:focus-visible { outline-offset: -2px; }
+.dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.dragging a { pointer-events: none; }
+@media (max-width: 1100px) { .track { grid-auto-columns: calc((100% - 12px) / 2.4); } }
+@media (max-width: 760px) { .track { grid-auto-columns: 78%; padding-inline: 0; } }
+
+.foot { display: flex; align-items: center; gap: 28px; margin-top: 28px; }
+.progress { position: relative; flex: 1; height: 1px; background: var(--line-2); }
+/* no transition: the thumb follows the scroll frame by frame (a transition would trail behind it) */
+.progress > span { position: absolute; left: 0; top: -0.5px; width: 100%; height: 2px; background: var(--ink); will-change: transform; }
+.arrows { display: flex; gap: 2px; }
+.arrows button { display: grid; place-items: center; width: 40px; height: 40px; color: var(--ink); transition: opacity 0.25s, transform 0.3s var(--ease); }
+.arrows button:hover:not(:disabled) { transform: scale(1.12); }
+.arrows button:disabled { opacity: 0.25; cursor: default; }
+.cta { display: flex; justify-content: center; margin-top: clamp(28px, 3vw, 40px); padding-inline: var(--gutter); }
+
+/* ---------------------------------------------------------------- card */
+.card { position: relative; min-width: 0; display: flex; flex-direction: column; }
+.media { position: relative; display: block; aspect-ratio: 3 / 4; background: var(--card-well); overflow: hidden; isolation: isolate; }
+/* the store's photos are on white: multiply drops the white into the well */
+.main, .hover { object-fit: contain; padding: 14% 11%; mix-blend-mode: multiply; transition: opacity 0.7s var(--ease-soft), transform 1.3s var(--ease-soft); }
+.hover { opacity: 0; }
+.card:hover .main { transform: scale(1.04); }
+.card:hover .media:has(.hover) .main { opacity: 0; }
+.card:hover .hover { opacity: 1; transform: scale(1.02); }
+
+.info { display: grid; gap: 2px; padding: 14px 16px 4px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.maker { font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.model { font-size: 15px; line-height: 1.5; color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.price { margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.stock { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; color: var(--muted); }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--stock); }
+.out .dot { background: var(--line-2); }
+.colours { margin-right: 6px; padding-right: 10px; border-right: 1px solid var(--line-2); line-height: 1; }
+.heart { display: grid; place-items: center; width: 32px; height: 32px; margin: -4px -6px -4px 0; color: var(--ink); transition: transform 0.3s var(--ease), color 0.2s; }
+.heart:hover { transform: scale(1.12); }
+.saved { color: var(--red); }
+.saved svg { fill: currentColor; animation: beat 0.45s var(--ease); }
+@keyframes beat { 40% { transform: scale(1.25); } }

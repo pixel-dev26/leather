@@ -15,9 +15,9 @@ const clean = (title: string) => title.replace(/\s+/g, " ").trim();
 
 /**
  * Main and hover photo for each product, numbered like the files (1 = 01.jpg). The hover photo is left out where
- * the store's other photos are infographics.
+ * the store's other photos are infographics. v7's product cards use the same picks.
  */
-const picks: Record<string, [main: number, hover?: number]> = {
+export const picks: Record<string, [main: number, hover?: number]> = {
   "men-rfid-blocking-real-soft-leather-passcase-wallet-black-brown": [1, 3],
   "mens-rfid-blocking-real-distressed-hunter-leather-wallet-dark-brown": [1, 5],
   "mens-genuine-distressed-leather-biker-wallet-with-detachable-31cm-safety-chain-m100-dark-brown": [2, 5],

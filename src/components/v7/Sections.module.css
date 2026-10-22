@@ -1,0 +1,137 @@
+/* ---------------------------------------------------------------- category tiles */
+/* Phones: a row of tiles that scrolls sideways. From 761px: Bucherer's widening row. */
+.tiles { position: relative; display: flex; gap: 6px; height: clamp(440px, 40vw, 640px); margin-top: 6px; }
+.tile { position: relative; flex: 0 0 82%; min-width: 0; overflow: hidden; background: var(--mist); color: #fff; }
+.tileMedia { position: absolute; inset: 0; overflow: hidden; }
+.tileMedia img { object-fit: cover; transition: transform 1.8s var(--ease-soft); }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.12) 38%, transparent 60%); pointer-events: none; }
+.tileCopy { position: absolute; left: 24px; right: 24px; bottom: clamp(28px, 3vw, 44px); z-index: 2; display: grid; justify-items: center; text-align: center; }
+.tileTitle { font-family: var(--serif); font-size: clamp(26px, 2.4vw, 38px); font-weight: 400; line-height: 1.15; text-shadow: 0 1px 18px rgba(0, 0, 0, 0.3); }
+.tileBtn { margin-top: 18px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease !important; }
+
+@media (max-width: 760px) {
+  .tiles { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tile { aspect-ratio: 4 / 5; scroll-snap-align: start; }
+  .tileBtn { display: none !important; } /* beats .v7 .v7-btn's display, so the hidden button takes no room */
+}
+
+/* The widening row, built so nothing is laid out again while it moves. Every tile covers the whole row and is cut
+   down to its own strip with clip-path; its photo and title slide (transform) to stay centred on that strip. Pointing
+   at a tile changes only the shares below, so all that animates is the strip edges and those slides, never a width.
+   The photo is wider than the widest strip and the title narrower than the narrowest, so neither ever rescales. */
+@media (min-width: 761px) {
+  .tiles {
+    display: block; container-type: inline-size;
+    --a: 1; --b: 1; --c: 1; /* each tile's share of the row */
+    --unit: calc((100cqw - 12px) / (var(--a) + var(--b) + var(--c)));
+    --x1: calc(var(--unit) * var(--a)); /* right edge of tile 1 */
+    --x2: calc(var(--x1) + 6px + var(--unit) * var(--b)); /* right edge of tile 2 */
+    --media-w: 50cqw; /* widest strip ≈ 47.8cqw */
+    --copy-w: 24cqw; /* narrowest strip ≈ 25.9cqw */
+    --move: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --wait: 0.12s; /* going back to equal waits a beat, so crossing the 6px gap between tiles doesn't twitch */
+  }
+  .tiles:has(> .tile:nth-child(1):is(:hover, :focus-visible)) { --a: 1.5; --b: 0.82; --c: 0.82; --wait: 0s; }
+  .tiles:has(> .tile:nth-child(2):is(:hover, :focus-visible)) { --a: 0.82; --b: 1.5; --c: 0.82; --wait: 0s; }
+  .tiles:has(> .tile:nth-child(3):is(:hover, :focus-visible)) { --a: 0.82; --b: 0.82; --c: 1.5; --wait: 0s; }
+
+  .tile {
+    position: absolute; inset: 0;
+    --mid: calc((var(--l) + var(--r)) / 2);
+    clip-path: inset(0 calc(100cqw - var(--r)) 0 var(--l));
+    transition: clip-path var(--move) var(--wait);
+  }
+  .tile:nth-child(1) { --l: 0px; --r: var(--x1); }
+  .tile:nth-child(2) { --l: calc(var(--x1) + 6px); --r: var(--x2); }
+  .tile:nth-child(3) { --l: calc(var(--x2) + 6px); --r: 100cqw; }
+
+  .tileMedia {
+    right: auto; width: var(--media-w);
+    transform: translateX(calc(var(--mid) - var(--media-w) / 2));
+    transition: transform var(--move) var(--wait);
+  }
+  /* the title sits one button-height (18px gap + 52px button) low until its tile is pointed at, then rises */
+  .tileCopy {
+    left: 0; right: auto; width: var(--copy-w);
+    transform: translate(calc(var(--mid) - var(--copy-w) / 2), 70px);
+    transition: transform var(--move) var(--wait);
+  }
+  .tile:is(:hover, :focus-visible) .tileCopy { transform: translate(calc(var(--mid) - var(--copy-w) / 2), 0); }
+  .tileBtn { min-width: min(310px, calc(40cqw - 48px)); }
+  .tile:is(:hover, :focus-visible) .tileBtn { opacity: 1; transition: opacity 0.6s ease 0.15s !important; }
+}
+@media (hover: hover) and (min-width: 761px) {
+  .tile:hover .tileMedia img { transform: scale(1.04); }
+}
+
+/* ---------------------------------------------------------------- gift grid */
+.giftGrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 3.4vw, 52px) clamp(12px, 1.4vw, 20px); }
+.gift { display: grid; justify-items: start; gap: 6px; color: var(--ink); }
+.giftMedia { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; margin-bottom: 14px; background: var(--well); }
+.giftMedia img { object-fit: cover; transition: transform 1.4s var(--ease-soft); }
+.gift:hover .giftMedia img { transform: scale(1.04); }
+.giftTitle { font-family: var(--serif); font-size: var(--fs-h3); font-weight: 400; line-height: 1.25; }
+.gift:hover :global(.v7-link)::after { transform: scaleX(1); }
+@media (max-width: 640px) { .giftGrid { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------- journal */
+.journal { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(16px, 2vw, 28px); align-items: start; }
+.article { display: grid; justify-items: start; gap: 6px; color: var(--ink); }
+.articleMedia { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; margin-bottom: 14px; background: var(--well); }
+.feature .articleMedia { aspect-ratio: 4 / 3; }
+.articleMedia img { object-fit: cover; transition: transform 1.4s var(--ease-soft); }
+.article:hover .articleMedia img { transform: scale(1.04); }
+.article:hover :global(.v7-link)::after { transform: scaleX(1); }
+.articleLabel { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.articleTitle { font-family: var(--serif); font-size: var(--fs-h3); font-weight: 400; line-height: 1.25; }
+.feature .articleTitle { font-size: clamp(26px, 2.3vw, 34px); }
+.articleText { max-width: 62ch; margin-bottom: 8px; font-size: var(--fs-small); line-height: 1.65; color: var(--body); }
+.side { display: grid; gap: clamp(32px, 3vw, 44px); }
+.side > :global(.v7-btn) { width: 100%; }
+/* The feature stays put under the header while the articles beside it scroll past, and lets go when the column
+   ends. Its photo gives up height on short screens so the whole card stays in view while it is held. */
+@media (min-width: 901px) {
+  .feature { position: sticky; top: calc(var(--header-h) + 24px); }
+  .feature .articleMedia { max-height: max(300px, calc(100svh - var(--header-h) - 300px)); }
+}
+@media (max-width: 900px) { .journal { grid-template-columns: 1fr; gap: 44px; } }
+
+/* ---------------------------------------------------------------- world band */
+.world { background: var(--espresso); color: var(--on-dark); }
+.worldFeature { display: grid; gap: 0; color: var(--on-dark); }
+.worldMedia { position: relative; display: block; aspect-ratio: 21 / 9; overflow: hidden; background: var(--espresso-2); }
+.worldMedia img { object-fit: cover; object-position: 50% 62%; transition: transform 1.6s var(--ease); }
+.worldFeature:hover .worldMedia img { transform: scale(1.03); }
+.worldCaption { display: grid; justify-items: center; gap: 6px; padding: 26px 0 0; text-align: center; }
+.worldEyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--on-dark-2); }
+.worldTitle { margin-bottom: 10px; font-family: var(--serif); font-size: clamp(26px, 2.2vw, 32px); font-weight: 400; line-height: 1.2; }
+.worldCards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.4vw, 20px); margin-top: clamp(48px, 5vw, 72px); }
+.worldCard { display: grid; justify-items: start; gap: 6px; color: var(--on-dark); }
+.worldCardMedia { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3.4; overflow: hidden; margin-bottom: 14px; background: var(--espresso-2); }
+.worldCardMedia img { object-fit: cover; transition: transform 1.4s var(--ease-soft); }
+.worldCard:hover .worldCardMedia img { transform: scale(1.04); }
+.worldCard:hover :global(.v7-link)::after { transform: scaleX(1); }
+.worldCardTitle { margin-bottom: 8px; font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.25; }
+@media (max-width: 760px) {
+  .worldMedia { aspect-ratio: 4 / 3; }
+  .worldCards { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ---------------------------------------------------------------- service split */
+.service { display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); color: var(--on-dark); }
+.serviceCopy { display: grid; align-content: center; gap: 14px; padding: clamp(56px, 6vw, 96px) clamp(var(--gutter), 7vw, 120px); }
+.serviceTitle { font-family: var(--serif); font-size: var(--fs-h2); font-weight: 400; line-height: 1.18; }
+.serviceText { max-width: 46ch; font-size: var(--fs-small); line-height: 1.65; color: var(--on-dark-2); }
+.points { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; margin: 22px 0 14px; }
+.points li { display: flex; gap: 14px; align-items: flex-start; font-size: 13px; line-height: 1.5; color: var(--on-dark-2); }
+.points svg { flex: none; color: var(--on-dark); }
+.points strong { display: block; margin-bottom: 1px; font-size: 14px; font-weight: 500; color: var(--on-dark); }
+.serviceBtns { display: grid; gap: 14px; max-width: 340px; margin-top: 18px; }
+.serviceMedia { position: relative; min-height: 420px; overflow: hidden; }
+.serviceMedia img { object-fit: cover; }
+@media (max-width: 900px) {
+  .service { grid-template-columns: 1fr; }
+  .serviceMedia { min-height: 0; aspect-ratio: 16 / 10; order: -1; }
+}
+@media (max-width: 480px) { .points { grid-template-columns: 1fr; } }

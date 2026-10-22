@@ -1,0 +1,145 @@
+/* v7 design tokens, base styles and shared pieces (section heads, buttons, links, reveal). Everything is scoped under
+   .v7 so the other versions are untouched. Reference: bucherer.com (white pages, one geometric sans in sentence case,
+   small tracked eyebrows, black rectangular buttons, products on pale wells, a split "world of" story with a
+   vertical index, a deep colour band and a black footer). Bucherer's navy band becomes espresso leather, and its
+   Rolex-green pill becomes the red of the Morucha bull. Its one sans is split in two here: a Caslon display serif
+   for headings and Manrope for the rest. */
+.v7 {
+  /* colour */
+  --ink: #000000;
+  --text: #1a202c;
+  --body: #485461;
+  --muted: #6a747f;
+  --line: #e2e4e8;
+  --line-2: #c9ced4;
+  --paper: #ffffff;
+  --well: #f4f4f5;
+  --well-warm: #f1ebe5;
+  --mist: #e8eaeb;
+  --espresso: #241915; /* Bucherer's navy band, in leather */
+  --espresso-2: #33241e;
+  --on-dark: #f4f4f5;
+  --on-dark-2: rgba(244, 244, 245, 0.7);
+  --line-dark: rgba(255, 255, 255, 0.18);
+  --red: #c1000a; /* the Morucha bull */
+  --red-dark: #9a0008;
+  --stock: #31a56d;
+
+  /* type: a display serif for headings (one weight, 400), a sans for the rest */
+  --serif: var(--font-v7-serif), "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  --sans: var(--font-v7-sans), "Manrope", Helvetica, Arial, sans-serif;
+  --fs-hero: clamp(34px, 3.4vw, 54px);
+  --fs-h2: clamp(30px, 2.6vw, 42px);
+  --fs-h3: 24px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-eyebrow: 13px;
+  --fs-btn: 13px;
+
+  /* layout */
+  --gutter: clamp(16px, 2.6vw, 40px);
+  --container: 1200px;
+  --wide: 1440px;
+  --section: clamp(56px, 6.5vw, 104px);
+  --header-h: 88px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1); /* long, gentle settle: reveals, fades, photo zooms */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* panels: quick start, no bounce */
+
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--text);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+@media (max-width: 1023px) { .v7 { --header-h: 64px; } }
+
+/* Resets have zero specificity (:where), so any component class overrides them. Headings only take the family here:
+   the site-wide stylesheet gives h1–h4 a serif. */
+:where(.v7) *, :where(.v7) *::before, :where(.v7) *::after { box-sizing: border-box; }
+:where(.v7) :where(h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote) { margin: 0; }
+:where(.v7) :where(ul, ol) { padding: 0; list-style: none; }
+:where(.v7) :where(a) { color: inherit; text-decoration: none; }
+:where(.v7) :where(img) { display: block; max-width: 100%; }
+:where(.v7) :where(button, input, select) { font: inherit; color: inherit; letter-spacing: inherit; }
+:where(.v7) :where(button) { cursor: pointer; background: none; border: 0; padding: 0; }
+.v7 :where(h1, h2, h3, h4) { font-family: inherit; }
+.v7 :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+/* menu and anchor links glide to a section and stop just under the sticky header */
+.v7 [id] { scroll-margin-top: calc(var(--header-h) + 8px); }
+.v7 ::selection { background: var(--text); color: var(--paper); }
+
+/* ------------------------------------------------------------------ layout helpers */
+.v7-wrap { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.v7-wide { width: 100%; max-width: calc(var(--wide) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.v7-section { padding-block: var(--section); }
+.v7-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* centred section head: eyebrow, title, one or two lines of intro */
+.v7-head { display: grid; justify-items: center; gap: 10px; max-width: 760px; margin: 0 auto clamp(28px, 3vw, 44px); padding-inline: var(--gutter); text-align: center; }
+.v7-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.v7-h2 { font-family: var(--serif); font-size: var(--fs-h2); font-weight: 400; line-height: 1.18; letter-spacing: 0; color: var(--ink); text-wrap: balance; }
+.v7-intro { font-size: var(--fs-small); line-height: 1.65; color: var(--body); }
+.v7-dark .v7-eyebrow { color: var(--on-dark-2); }
+.v7-dark .v7-h2 { color: var(--on-dark); }
+.v7-dark .v7-intro { color: var(--on-dark-2); }
+
+/* ------------------------------------------------------------------ buttons */
+/* black rectangle with tracked caps: VIEW ALL, DISCOVER NOW, FIND OUT MORE */
+.v7 .v7-btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-width: min(100%, 310px); min-height: 52px; padding: 0 28px; overflow: hidden; isolation: isolate;
+  background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
+  font-size: var(--fs-btn); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.2;
+  transition: color 0.35s var(--ease), border-color 0.35s;
+}
+/* a lighter fill rises from the bottom on hover */
+.v7 .v7-btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: #2d3340;
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.45s var(--ease);
+}
+.v7 .v7-btn:hover::before { transform: scaleY(1); }
+.v7 .v7-btn--light { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.v7 .v7-btn--light::before { background: var(--mist); }
+.v7 .v7-btn--outline { background: transparent; color: var(--on-dark); border-color: var(--on-dark); }
+.v7 .v7-btn--outline::before { background: var(--on-dark); }
+.v7 .v7-btn--outline:hover { color: var(--ink); }
+.v7 .v7-btn--outline-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
+.v7 .v7-btn--outline-dark::before { background: var(--ink); }
+.v7 .v7-btn--outline-dark:hover { color: var(--paper); }
+
+/* red pill (Bucherer's partner-green "Discover" pill in the hero) */
+.v7 .v7-pill {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 22px; border-radius: 999px;
+  background: var(--red); color: #fff; font-size: var(--fs-small); font-weight: 500; letter-spacing: 0.01em;
+  transition: background 0.3s, transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.v7 .v7-pill:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.5); }
+
+/* text link with an arrow; the underline draws in from the left on hover */
+.v7 .v7-link {
+  position: relative; display: inline-flex; align-items: center; gap: 10px; padding-bottom: 5px;
+  font-size: var(--fs-small); font-weight: 400; color: inherit;
+}
+.v7 .v7-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.45s var(--ease);
+}
+.v7 .v7-link:hover::after, .v7 .v7-link:focus-visible::after, .v7 .v7-link--on::after { transform: scaleX(1); }
+.v7 .v7-link svg { width: 14px; height: 10px; flex: none; transition: transform 0.35s var(--ease); }
+.v7 .v7-link:hover svg { transform: translateX(3px); }
+
+/* ------------------------------------------------------------------ reveal (Motion.tsx adds .is-in) */
+.v7 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 1.1s var(--ease-soft), transform 1.3s var(--ease-soft); transition-delay: calc(var(--d, 0) * 1ms); }
+.v7 [data-reveal="fade"] { transform: none; }
+.v7 [data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v7 *, .v7 *::before, .v7 *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+  .v7 [data-reveal] { opacity: 1; transform: none; }
+}
