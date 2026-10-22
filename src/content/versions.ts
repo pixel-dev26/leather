@@ -1,7 +1,7 @@
-// Every homepage version, in the order the version list (src/app/(home)/page.tsx) shows them, numbered 01–06.
+// Every homepage version, in the order the version list (src/app/(home)/page.tsx) shows them, numbered 01–09.
 // The list shows only the number, the name and a View button; the other fields are kept as notes.
 export type Version = {
-  id: string; // the route: /v1/ … /v6/
+  id: string; // the route: /v1/ … /v9/
   name: string;
   reference: string;
   secondary?: string;
@@ -62,5 +62,30 @@ export const versions: Version[] = [
     summary: "Bold condensed uppercase type, black label tags and arrow buttons, a product-led hero on soft colour stages, tabbed product rails and the full 31-product range with live names and prices.",
     type: "Barlow Condensed · Barlow",
     swatches: ["#FFFFFF", "#111111", "#C1000A", "#ECE5DA", "#F1F0EE"],
+  },
+  {
+    id: "v7",
+    name: "Refined luxury retail",
+    reference: "bucherer.com",
+    summary: "White pages with Caslon display headings over a clean sans, category tiles that widen on hover, products on pale wells in edge-to-edge rails, a half-and-half story with a vertical index, an espresso leather band and a black footer.",
+    type: "Libre Caslon Display · Manrope",
+    swatches: ["#FFFFFF", "#000000", "#F4F4F5", "#241915", "#C1000A"],
+  },
+  {
+    id: "v8",
+    name: "Outdoor lifestyle editorial",
+    reference: "finisterre.com",
+    summary: "A light grey page and one regular-weight grotesque, a sand announcement bar and sand buttons, a full-screen photo sequence under a clear header with mega menus, navy underlined links, full-bleed banners with a white card and round stamp, a three-column journal and a light footer.",
+    type: "Instrument Sans",
+    swatches: ["#F6F6F6", "#010B13", "#E7DDBB", "#384972", "#C1000A"],
+  },
+  {
+    id: "v9",
+    name: "Performance heritage",
+    reference: "rapha.cc",
+    secondary: "finisterre.com, bucherer.com",
+    summary: "Bold condensed capitals over a reading serif in black and white: a scrolling offers bar, mega menus, a full-bleed campaign hero, products on pale wells with round quick adds, tall category and story cards, a brand statement on sand under a turning stamp, a 2×2 gift edit and a promise row.",
+    type: "Archivo (condensed) · Newsreader",
+    swatches: ["#FFFFFF", "#0B0B0B", "#F2F2F2", "#ECE4D2", "#C1000A"],
   },
 ];
