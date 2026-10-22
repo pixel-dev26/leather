@@ -24,9 +24,9 @@ export const nav = {
 
 export const hero = {
   slides: [
-    { word: "HIDE", caption: "British leather, tanned with care", image: { src: ocImg.coverWide, alt: "Leather wallets and card holders laid out on a dark surface" } },
-    { word: "MADE", caption: "Wallets, purses and bags from our own hides", image: { src: ocImg.laptopDesk, alt: "A leather wallet resting on a laptop" } },
-    { word: "2026", caption: "The new season collection", image: { src: ocImg.blackCollection, alt: "The black leather collection side by side" } },
+    { word: "HIDE", caption: "British leather, tanned with care", image: { src: "/images/banners/v2-banner-1.webp", alt: "An open tan leather trifold wallet with card slots, an ID window and a zip pocket" } },
+    { word: "MADE", caption: "Wallets, purses and bags from our own hides", image: { src: "/images/banners/v2-banner-2.webp", alt: "An open grey and tan leather bifold wallet with a coin pocket" } },
+    { word: "2026", caption: "The new season collection", image: { src: "/images/banners/v2-banner-3.webp", alt: "Three black Morucha leather wallets, one with an olive band and one with an orange stripe" } },
   ] as { word: string; caption: string; image: ImageSlot }[],
 };
 
@@ -106,7 +106,6 @@ export const collectionSlider = {
     { name: "Wallets", href: collections.items[0].href, image: { src: ocImg.manCafe, alt: "Man holding a leather wallet at a café" } },
     { name: "Purses", href: collections.items[1].href, image: { src: ocImg.walletPhoneTable, alt: "Leather purse on a table" } },
     { name: "Cardholders", href: collections.items[2].href, image: { src: ocImg.greenCardPortrait, alt: "Green leather card holder" } },
-    { name: "Travel bags", href: collections.items[3].href, image: { src: ocImg.toteBag, alt: "Black leather tote bag" } },
   ],
 };
 
