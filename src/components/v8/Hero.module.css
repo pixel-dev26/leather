@@ -1,0 +1,37 @@
+.hero { position: relative; height: calc(100svh - var(--bar-h)); min-height: 520px; max-height: 1100px; overflow: hidden; background: var(--ink); color: var(--white); }
+
+.frames, .frame { position: absolute; inset: 0; }
+.frame { opacity: 0; transition: opacity 1.6s var(--ease-in-out); }
+.frame img { object-fit: cover; transform: scale(1.09); }
+.on { opacity: 1; }
+/* each photo drifts in while it is showing, like a slow camera push */
+.on img { animation: drift 8.5s linear forwards; }
+@keyframes drift { from { transform: scale(1.09); } to { transform: scale(1); } }
+.paused .on img { animation-play-state: paused; }
+
+/* shade the top (so the clear header reads) and the bottom left (for the title) */
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(1, 11, 19, 0.45), transparent 26%),
+    linear-gradient(to top right, rgba(1, 11, 19, 0.62), rgba(1, 11, 19, 0.12) 52%, transparent 75%);
+}
+
+.content { position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(40px, 7vh, 72px); z-index: 2; }
+.title { max-width: 16ch; font-size: var(--fs-hero); line-height: 1.15; letter-spacing: 0.03em; animation: rise 1.2s var(--ease) both 0.2s; }
+.ctas { display: flex; flex-wrap: wrap; gap: clamp(12px, 1.4vw, 20px); margin-top: clamp(20px, 2.4vw, 32px); animation: rise 1.2s var(--ease) both 0.4s; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+.toggle {
+  position: absolute; right: var(--gutter); bottom: clamp(40px, 7vh, 72px); z-index: 2; width: 44px; height: 44px; display: grid; place-items: center;
+  color: var(--white); border: 1px solid rgba(255, 255, 255, 0.55); transition: background 0.3s, color 0.3s;
+}
+.toggle:hover { background: var(--white); color: var(--ink); }
+.toggle svg { width: 18px; height: 18px; }
+
+@media (max-width: 640px) {
+  .hero { min-height: 560px; }
+  .title { max-width: 12ch; }
+  .ctas { flex-direction: column; align-items: stretch; max-width: 260px; }
+  .toggle { top: calc(var(--nav-h) + 16px); bottom: auto; }
+}

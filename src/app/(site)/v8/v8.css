@@ -1,0 +1,104 @@
+/* v8 design tokens, base styles and shared pieces (headings, sand buttons, navy links, tags, reveal). Everything is
+   scoped under .v8 so the other versions are untouched. Reference: finisterre.com (a light grey page, near-black navy
+   ink, one regular-weight grotesque, sand rectangular buttons and tags, navy underlined links and prices, full-bleed
+   photography and a light footer). The reference's orange sale link becomes the red of the Morucha bull. */
+.v8 {
+  /* colour */
+  --ink: #010b13;
+  --ink-2: #3a434b;
+  --muted: #6b7279;
+  --paper: #f6f6f6;
+  --white: #ffffff;
+  --sand: #e7ddbb;
+  --sand-2: #dccf9f;
+  --navy: #384972; /* links and prices */
+  --navy-2: #405174; /* tags and the newsletter tab */
+  --line: rgba(1, 11, 19, 0.14);
+  --red: #c1000a; /* the Morucha bull */
+  --scrim: rgba(1, 11, 19, 0.55);
+
+  /* type */
+  --sans: var(--font-v8-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --track: 0.03em;
+  --fs-hero: clamp(34px, 3.5vw, 52px);
+  --fs-h2: clamp(30px, 3.2vw, 46px);
+  --fs-statement: clamp(28px, 3.2vw, 46px);
+  --fs-h3: clamp(22px, 1.8vw, 26px);
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-tag: 13px;
+
+  /* layout */
+  --gutter: clamp(16px, 2.8vw, 40px);
+  --rail-gap: clamp(16px, 2.8vw, 40px);
+  --section: clamp(56px, 6vw, 96px);
+  --bar-h: 32px;
+  --nav-h: 72px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: var(--track);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+@media (max-width: 1023px) { .v8 { --nav-h: 60px; } }
+
+/* Resets have zero specificity (:where), so any component class overrides them. Headings only take the family and
+   weight here: the site-wide stylesheet gives h1–h4 a serif. */
+:where(.v8) *, :where(.v8) *::before, :where(.v8) *::after { box-sizing: border-box; }
+:where(.v8) :where(h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote) { margin: 0; }
+:where(.v8) :where(ul, ol) { padding: 0; list-style: none; }
+:where(.v8) :where(a) { color: inherit; text-decoration: none; }
+:where(.v8) :where(img) { display: block; max-width: 100%; }
+:where(.v8) :where(button, input, select) { font: inherit; color: inherit; letter-spacing: inherit; }
+:where(.v8) :where(button) { cursor: pointer; background: none; border: 0; padding: 0; }
+.v8 :where(h1, h2, h3, h4) { font-family: inherit; font-weight: 400; }
+.v8 :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+.v8 ::selection { background: var(--sand); color: var(--ink); }
+
+/* ------------------------------------------------------------------ layout helpers */
+.v8-wrap { width: 100%; padding-inline: var(--gutter); }
+.v8-section { padding-block: var(--section); }
+.v8-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.v8-h2 { font-size: var(--fs-h2); line-height: 1.17; letter-spacing: 0.03em; margin-bottom: clamp(20px, 2.2vw, 32px); }
+
+/* ------------------------------------------------------------------ buttons and links */
+/* sand rectangle: "Shop Men's", "Discover More", "Join Now" */
+.v8 .v8-btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 200px; min-height: 64px;
+  padding: 0 28px; background: var(--sand); color: var(--ink); overflow: hidden; isolation: isolate;
+  font-size: var(--fs-body); letter-spacing: 0.06em; line-height: 1.2; text-align: center;
+}
+/* a deeper sand slides across on hover */
+.v8 .v8-btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--sand-2);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease);
+}
+.v8 .v8-btn:hover::before { transform: scaleX(1); }
+@media (max-width: 640px) { .v8 .v8-btn { min-width: 0; min-height: 52px; padding: 0 22px; } }
+
+/* navy underlined link: category titles, journal titles, the statement's phrase */
+.v8 .v8-link {
+  color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, var(--navy) 55%, transparent); transition: text-decoration-color 0.3s, color 0.3s;
+}
+.v8 .v8-link:hover { color: var(--ink); text-decoration-color: currentColor; }
+
+/* small label boxes on product photos */
+.v8-tag { display: inline-block; padding: 4px 12px; background: var(--sand); color: var(--ink); font-size: var(--fs-tag); line-height: 1.4; letter-spacing: 0.04em; }
+.v8-tag--navy { background: var(--navy-2); color: var(--white); }
+
+/* ------------------------------------------------------------------ reveal (Motion.tsx adds .is-in) */
+.v8 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 1s var(--ease); transition-delay: calc(var(--d, 0) * 1ms); }
+.v8 [data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v8 *, .v8 *::before, .v8 *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+  .v8 [data-reveal] { opacity: 1; transform: none; }
+}

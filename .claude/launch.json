@@ -8,6 +8,11 @@
       "port": 3000
     },
     {
+      "name": "morucha-dev-attach",
+      "port": 3000,
+      "url": "http://localhost:3000"
+    },
+    {
       "name": "review-out",
       "runtimeExecutable": "node",
       "runtimeArgs": ["scripts/serve-out.mjs"],
