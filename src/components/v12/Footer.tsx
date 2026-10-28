@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { footer, logo } from "@/content/home-v12";
+import { contact, footer, logo } from "@/content/home-v12";
 import styles from "./Footer.module.css";
 
 /**
@@ -15,6 +15,10 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
+        <div className={styles.contact}>
+          <h2 className={styles.head}>{contact.title}</h2>
+          {contact.lines.map((l) => <p key={l}>{l}</p>)}
+        </div>
         {footer.columns.map((c) => (
           <div key={c.title}>
             <h2 className={styles.head}>{c.title}</h2>

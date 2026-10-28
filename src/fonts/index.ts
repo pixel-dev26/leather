@@ -86,8 +86,10 @@ export const figtree = localFont({
 
 /* v12 */
 export const newsreader = localFont({
-  src: "./files/newsreader-200-800.woff2",
-  weight: "200 800",
+  src: [
+    { path: "./files/newsreader-200-800.woff2", weight: "200 800", style: "normal" },
+    { path: "./files/newsreader-200-800-italic.woff2", weight: "200 800", style: "italic" },
+  ],
   variable: "--font-newsreader",
   display: "swap",
   adjustFontFallback: "Times New Roman",

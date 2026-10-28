@@ -75,8 +75,22 @@ Ghurka uses Reckless Neue and Suisse Intl (paid). v12 uses the closest free face
 - Products, prices, colours and photos come from `src/content/products.json` via v11’s card records (`src/content/home-v12.ts`).
 - “New In” lists the products created in the newest year; the hero line counts them.
 - “Our Bestsellers” is the same list as v11.
-- Still [TBC]: founding year and story, Instagram handle, newsletter offer. The short shape names are drafts for Morucha to confirm.
+- Still [TBC]: founding year and story, Instagram handle, newsletter offer, customer reviews, contact details. The short shape names and the two banner lines are drafts for Morucha to confirm.
 
 ## 8. Section order
 
-1. Announcement · 2. Header · 3. Hero · 4. New In rail · 5. Men / Women pair · 6. Our Bestsellers rail · 7. Card Holders / Gifts pair · 8. Choose Your Leather · 9. Story · 10. Footer
+1. Announcement · 2. Header · 3. Hero · 4. Brand facts strip · 5. New In rail · 6. Shop by Style · 7. Men / Women pair · 8. The Detail (No. 2028) · 9. Our Bestsellers rail · 10. Hunter Leather banner · 11. Card Holders / Gifts pair · 12. Choose Your Leather · 13. In Hand lookbook · 14. Behind Every Wallet banner · 15. Story · 16. Reviews · 17. Promises · 18. Footer
+
+## 9. Revision 2 sections (premium pass)
+
+Section types from **cuero.in** (measured 28 Oct 2026), plus The Detail and In Hand for more photography. Approved board: https://claude.ai/artifact/MdpdB9VTRzafnRGCGCSS6g. No Cuero photo, logo or wording is used.
+
+- **Display type** (`.v12-display`): Newsreader 300, 56px / 1.04 (phone 38px), for the hero title, The Detail and both banners.
+- **Brand facts strip:** 76px ink band (56px phone), Newsreader 300 italic 28px (21px phone), small diamonds between the five promises. Loops over 60s, pauses on hover, still for reduced motion.
+- **Shop by Style:** six 4:5 lifestyle tiles, three across (two on phones), serif name and live count on the photo with the standard fade.
+- **The Detail:** No. 2028 on the well (820px tall), facts list with hairlines, two close-ups on white squares, dark outlined button. Facts come only from the product's store title and options.
+- **Editorial banners:** 760px (Hunter Leather) and 820px (Behind Every Wallet). Text 96px from the left over a dark wash from the left; a 48px white rule, display title, one line, light outlined button. On phones the text drops to the bottom.
+- **In Hand:** one tall photo with three to its right (1.6 : 1 : 1 columns, two 460px rows), 13px white captions.
+- **Reviews:** photo left, stone panel (`#EFEBE7`) right, one light italic quote at a time with dots. Real, verified reviews only; until then every field is [TBC].
+- **Promises:** four white cells split by 1px hairlines, 34px line icons, serif 22px titles, one grey line each.
+- **Footer:** a Morucha contact column first (address, email, phone [TBC]).

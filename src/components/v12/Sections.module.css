@@ -30,7 +30,7 @@
 .matImg img { object-fit: cover; transition: transform 1.2s var(--ease); }
 .mat:hover .matImg img { transform: scale(1.03); }
 
-.story { padding-top: 110px; }
+.story { padding-block: 110px 104px; }
 .tbc { color: var(--clr-ink-2); font-style: italic; }
 .storyBtn { height: 46px; padding-inline: 34px; margin-top: 4px; }
 

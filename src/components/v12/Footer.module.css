@@ -1,6 +1,7 @@
 /* v12rule.md §6 footer */
-.footer { margin-top: 96px; }
-.top { border-top: 1px solid var(--clr-ink); padding: 30px var(--gutter) 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.25fr); gap: 24px; }
+.footer { margin-top: 0; }
+.top { border-top: 1px solid var(--clr-ink); padding: 40px var(--gutter) 0; display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) minmax(0, 1.25fr); gap: 24px; }
+.contact p { color: var(--clr-ink-2); font-weight: 400; line-height: 1.7; }
 .head { font-family: var(--font-serif); font-weight: 400; font-size: 20px; line-height: 1.2; margin-bottom: 18px; }
 .top ul { list-style: none; padding: 0; display: grid; gap: 12px; font-weight: 400; }
 .top ul a:hover { color: var(--clr-ink-2); }

@@ -143,8 +143,7 @@ export const footer = {
   columns: [
     { title: "Help", links: ["Delivery", "Returns", "Contact Us", "FAQs"] },
     { title: "Shop", links: ["Men", "Women", "Card Holders", "Gifts"] },
-    { title: "About Us", links: ["Our Story", "Our Leather", "Hunter Leather"] },
-    { title: "Follow", links: ["Instagram [TBC]"] },
+    { title: "About Us", links: ["Our Story", "Our Leather", "Instagram [TBC]"] },
   ],
   newsletter: {
     title: "Sign Up for Our Newsletter",
@@ -153,3 +152,95 @@ export const footer = {
   region: "United Kingdom (GBP £)",
   copyright: `© ${new Date().getFullYear()} Morucha`,
 };
+
+/* ------------------------------------------------------------------ revision 2 (cuero.in section types) */
+// Board: https://claude.ai/artifact/MdpdB9VTRzafnRGCGCSS6g. Section types and sizes follow cuero.in; every photo,
+// product and promise is Morucha's own.
+
+export const factsStrip = ["Free UK delivery", "Same-day dispatch before 3.30pm", "30-day returns", "Gift boxed", "RFID blocking"];
+
+const styleCount = (style: Card["style"] | Card["style"][]) =>
+  v11Cards.filter((c) => (Array.isArray(style) ? style.includes(c.style) : c.style === style)).length;
+
+export const styles = {
+  title: "Shop by Style",
+  all: { label: "All styles", href: "#bestsellers" },
+  items: [
+    { title: "Bifold Wallets", count: styleCount("bifold"), image: { src: img("insta-2"), alt: "Bifold leather wallets on a wooden table", position: "50% 50%" } },
+    { title: "Passcase Wallets", count: styleCount("passcase"), image: { src: img("since-2"), alt: "Passcase wallets with tab closures laid out together", position: "50% 50%" } },
+    { title: "Slim & Tap and Go", count: styleCount("slim"), image: { src: img("men-wallet"), alt: "Hand holding a slim black and orange leather wallet", position: "50% 40%" } },
+    { title: "Card Holders", count: styleCount("card holder"), image: { src: img("insta-5"), alt: "Navy leather card holder held open with a card", position: "40% 50%" } },
+    { title: "Clutch Wallets", count: styleCount("clutch"), image: { src: img("women-wallet"), alt: "Red leather clutch wallet held in both hands", position: "50% 50%" } },
+    { title: "Purses", count: styleCount("purse"), image: { src: img("banner-image-1"), alt: "Woman holding a colourful leather purse", position: "50% 40%" } },
+  ].map((s) => ({ ...s, href: "#bestsellers" })),
+};
+
+// One product up close: the M-2028 soft bifold, with facts taken from its store title and options
+const detailHandle = "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028";
+const detailProduct = getProduct(detailHandle);
+const detailCard = byHandle.get(detailHandle);
+if (!detailProduct || !detailCard) throw new Error(`Product not available in products.json: ${detailHandle}`);
+const photo = (n: number) => detailProduct.images[n - 1]?.src ?? detailProduct.images[0].src;
+export const detail = {
+  label: "The Detail",
+  title: numbered(detailCard).name,
+  facts: [
+    { label: "Leather", value: "Soft leather, two-tone" },
+    { label: "Inside", value: "Coin pocket, ID windows" },
+    { label: "Protection", value: "RFID blocking" },
+    { label: "Colours", value: String(detailCard.swatches.length) },
+    { label: "Price", value: detailCard.price },
+  ],
+  main: { src: photo(11), alt: "Soft Bifold No. 2028 in black and tan, closed" },
+  thumbs: [
+    { src: photo(18), alt: "No. 2028 open with cards, notes and coins" },
+    { src: photo(10), alt: "The zipped coin pocket of No. 2028" },
+  ],
+  cta: { label: "Shop No. 2028", href: detailCard.href },
+};
+
+export const hunterBanner = {
+  title: "Hunter Leather",
+  text: "Distressed leather that shows every year it’s carried. Wallets and trifolds, all with RFID blocking inside.",
+  cta: { label: "Shop Hunter Leather", href: "#bestsellers" },
+  image: { src: img("since-1"), alt: "Open hunter leather wallet on a workbench", position: "60% 50%" },
+};
+
+export const lookbook = {
+  title: "In Hand",
+  text: "Morucha wallets and purses, carried.",
+  items: [
+    { caption: "Burgundy leather", image: { src: img("insta-1"), alt: "Burgundy leather wallet held open with cards", position: "45% 50%" } },
+    { caption: "Clutch wallet", image: { src: img("insta-6"), alt: "Red leather clutch on a wooden table", position: "50% 50%" } },
+    { caption: "Tan leather", image: { src: img("card-holder-new"), alt: "Tan leather wallet held open with a card", position: "50% 50%" } },
+    { caption: "Two-tone bifold", image: { src: img("new-season"), alt: "Man in a blue suit holding a black and blue wallet", position: "50% 45%" } },
+  ],
+};
+
+export const craftBanner = {
+  title: "Behind Every Wallet",
+  text: "Leather chosen, cut and stitched into wallets made for daily use.",
+  cta: { label: "Our Story", href: "#story" },
+  image: { src: img("crafted-with"), alt: "Hands working leather at a workbench", position: "50% 45%" },
+};
+
+// Must be real, verified customer reviews before launch; nothing here is invented.
+export const reviews = {
+  title: "What customers say",
+  rating: "[TBC: rating and number of reviews]",
+  image: { src: img("insta-3"), alt: "Brown leather wallet held open with notes and cards" },
+  items: [
+    { quote: "[A real, verified customer review, no more than 30 words, quoted exactly.]", name: "[First name, town]", product: "[product name and No.]" },
+    { quote: "[A second verified review: TBC.]", name: "[First name, town]", product: "[product]" },
+    { quote: "[A third verified review: TBC.]", name: "[First name, town]", product: "[product]" },
+  ],
+};
+
+export const promises = [
+  { icon: "van", title: "Free UK Delivery", text: "On every order, however small." },
+  { icon: "clock", title: "Same-Day Dispatch", text: "Order before 3.30pm and it leaves today." },
+  { icon: "return", title: "30-Day Returns", text: "Not right? Send it back within 30 days." },
+  { icon: "gift", title: "Gift Boxed", text: "Every wallet ships in a gift box." },
+] as const;
+
+export const contact = { title: "Morucha", lines: ["[TBC: business address]", "[TBC: customer email]", "[TBC: phone, if listed]"] };

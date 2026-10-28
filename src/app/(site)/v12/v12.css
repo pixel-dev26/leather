@@ -39,6 +39,10 @@
 /* serif titles (§3): one size, never bold or uppercase */
 .v12-title { font-family: var(--font-serif); font-weight: 400; font-size: 32px; line-height: 1.15; text-wrap: balance; }
 
+/* large light serif for hero and banner statements (§9) */
+.v12-display { font-family: var(--font-serif); font-weight: 300; font-size: 56px; line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; }
+@media (max-width: 599px) { .v12-display { font-size: 38px; } }
+
 /* outlined button (§5) */
 .v12-btn {
   display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 40px; border: 1px solid currentColor;

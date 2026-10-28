@@ -8,7 +8,7 @@ export function Hero() {
     <section className={styles.hero} aria-labelledby="v12-hero-title">
       <Image src={hero.image.src} alt={hero.image.alt} fill priority sizes="100vw" />
       <div className={styles.heroText}>
-        <h1 id="v12-hero-title" className="v12-title">{hero.title}</h1>
+        <h1 id="v12-hero-title" className="v12-display">{hero.title}</h1>
         <p>{hero.text}</p>
         <a href={hero.cta.href} className={`v12-btn ${styles.heroBtn}`}>{hero.cta.label}</a>
       </div>

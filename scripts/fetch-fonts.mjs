@@ -22,7 +22,7 @@ const FAMILIES = {
   "Funnel Sans": "wght@400;500",
   "Libre Baskerville": "wght@400",
   Figtree: "wght@400;500;600",
-  Newsreader: "opsz,wght@6..72,200..800",
+  Newsreader: "ital,opsz,wght@0,6..72,200..800;1,6..72,200..800",
   "Hanken Grotesk": "wght@100..900",
 };
 
