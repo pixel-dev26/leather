@@ -5,6 +5,7 @@ type IconProps = { size?: number; className?: string };
 const PATHS = {
   search: <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></>,
   heart: <path d="M12 20s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z" />,
+  account: <><circle cx="12" cy="8.5" r="4" /><path d="M4.5 20.5c.9-4 3.9-6 7.5-6s6.6 2 7.5 6" /></>,
   basket: <><path d="M5 8h14l-1 12.5H6z" /><path d="M9 8V6.5a3 3 0 0 1 6 0V8" /></>,
   menu: <path d="M3.5 7h17M3.5 12h17M3.5 17h11" />,
   close: <path d="m5.5 5.5 13 13M18.5 5.5l-13 13" />,

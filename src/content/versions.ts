@@ -1,7 +1,7 @@
 // Every homepage version, in the order the version list (src/app/(home)/page.tsx) shows them, numbered 01–06.
 // Each card shows the number, name, summary, type, reference, swatches and a screenshot (public/images/previews/<id>.webp).
 export type Version = {
-  id: string; // the route: /fittingbelt/, /v2/, /v3/, /morucha/, /hologramme/ or /v11/
+  id: string; // the route: /fittingbelt/, /v2/, /v3/, /morucha/, /hologramme/, /v11/ or /v12/
   name: string;
   /** The site shown in the card's browser frame; Morucha's own versions leave it out (morucha.co.uk). */
   domain?: string;
@@ -66,5 +66,13 @@ export const versions: Version[] = [
     summary: "Bone pages broken up by near-black bands, a Baskerville serif over Figtree, a three-panel hero, white product cards, a collection bento, a wallet finder and one brass accent.",
     type: "Libre Baskerville · Figtree",
     swatches: ["#F7F4EF", "#EDE8E0", "#FFFFFF", "#1C1B19", "#AE9362"],
+  },
+  {
+    id: "v12",
+    name: "Numbered",
+    reference: "ghurka.com",
+    summary: "A white, photo-led page where every wallet is named by its model number: 720px photo pairs, product rails that run off the edge, a soft serif over a plain grotesk, and no capitals anywhere.",
+    type: "Newsreader · Hanken Grotesk",
+    swatches: ["#FFFFFF", "#F4F2F1", "#140D0A", "#776E6E", "#20202C"],
   },
 ];

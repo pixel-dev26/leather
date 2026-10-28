@@ -1,0 +1,40 @@
+/* v12rule.md §6 announcement band, header and drawer */
+.bar { position: relative; min-height: 32px; display: flex; align-items: center; justify-content: center; padding: 6px 48px; background: var(--clr-band); color: #fff; font-size: 12px; text-align: center; }
+.barClose { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: grid; place-items: center; opacity: 0.8; }
+.barClose:hover { opacity: 1; }
+
+.header {
+  position: sticky; top: 0; z-index: 30; height: 64px; background: #fff; border-bottom: 1px solid var(--clr-hair);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding-inline: var(--gutter);
+}
+.header ul { list-style: none; padding: 0; display: flex; gap: 28px; }
+.header nav a { white-space: nowrap; }
+.header nav a:hover { color: var(--clr-ink-2); }
+.left, .right { display: flex; align-items: center; gap: 22px; min-width: 0; }
+.right { justify-content: flex-end; }
+.right > a, .right > button, .left > button { width: 30px; height: 30px; display: grid; place-items: center; }
+.right > a:hover, .right > button:hover { opacity: 0.6; }
+.logo { display: block; }
+.logo img { height: 30px; width: auto; display: block; }
+.menuBtn, .searchSm { display: none !important; }
+
+.scrim { position: fixed; inset: 0; z-index: 40; background: rgba(20, 13, 10, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.drawer { position: fixed; inset: 0 auto 0 0; z-index: 41; width: min(380px, 100%); background: #fff; padding: 14px 24px 32px; transform: translateX(-100%); transition: transform 0.4s var(--ease); overflow-y: auto; }
+.open.scrim { opacity: 1; pointer-events: auto; }
+.open.drawer { transform: none; }
+.close { width: 38px; height: 38px; display: grid; place-items: center; margin-left: -10px; }
+.drawer ul { list-style: none; padding: 18px 0 0; display: grid; }
+.drawer li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--clr-hair); font-family: var(--font-serif); font-size: 22px; }
+
+@media (max-width: 959px) {
+  .header { height: 60px; gap: 12px; }
+  .header nav { display: none; }
+  .menuBtn, .searchSm { display: grid !important; }
+  .searchLg { display: none !important; }
+  .left { gap: 10px; }
+  .right { gap: 10px; }
+  .logo img { height: 26px; }
+}
+@media (max-width: 599px) {
+  .bar { font-size: 11px; min-height: 26px; padding-inline: 40px; }
+}

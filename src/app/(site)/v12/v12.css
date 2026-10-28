@@ -1,0 +1,63 @@
+/* v12 design tokens and base styles, see v12rule.md. Everything is scoped under .v12 so other versions are untouched. */
+.v12 {
+  /* colour (§2), measured on ghurka.com */
+  --clr-bg: #ffffff;
+  --clr-ink: #140d0a;
+  --clr-ink-2: #776e6e;
+  --clr-well: #f4f2f1;
+  --clr-band: #20202c;
+  --clr-btn: #13142a;
+  --clr-field: #e9ecef;
+  --clr-hair: #ece8e5;
+  --clr-fade: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.42) 100%);
+
+  /* type (§3) */
+  --font-serif: var(--font-newsreader), Newsreader, Georgia, serif;
+  --font-sans: var(--font-hanken), "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+
+  /* layout (§4) */
+  --gutter: 32px;
+  --edge: 16px;
+  --block: 720px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  background: var(--clr-bg);
+  color: var(--clr-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.v12 *, .v12 *::before, .v12 *::after { box-sizing: border-box; }
+.v12 :where(h1, h2, h3, h4, p, ul, figure) { margin: 0; }
+.v12 a { color: inherit; text-decoration: none; }
+.v12 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.v12 img { max-width: 100%; }
+.v12 :focus-visible { outline: 1px solid var(--clr-ink); outline-offset: 3px; }
+
+/* serif titles (§3): one size, never bold or uppercase */
+.v12-title { font-family: var(--font-serif); font-weight: 400; font-size: 32px; line-height: 1.15; text-wrap: balance; }
+
+/* outlined button (§5) */
+.v12-btn {
+  display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 40px; border: 1px solid currentColor;
+  border-radius: 5px; font-size: 15px; font-weight: 400; transition: background-color 0.25s ease, color 0.25s ease;
+}
+.v12-btn:hover { background: var(--clr-ink); color: #fff; border-color: var(--clr-ink); }
+
+.v12-link { font-size: 15px; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.v12-link:hover { color: var(--clr-ink-2); }
+
+.v12-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 959px) {
+  .v12 { --gutter: 20px; --block: 560px; }
+}
+@media (max-width: 599px) {
+  .v12 { --gutter: 16px; --block: 390px; }
+  .v12-title { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v12 *, .v12 *::before, .v12 *::after { transition: none !important; scroll-behavior: auto !important; }
+}
