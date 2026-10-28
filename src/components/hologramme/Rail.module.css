@@ -1,0 +1,21 @@
+/* hologramme-rule.md §5 rails, §7 rail controls */
+.wrap { --cols: var(--n); min-width: 0; }
+.row {
+  display: flex; gap: var(--rail-gap); margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.row::-webkit-scrollbar { display: none; }
+.card { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--rail-gap)) / var(--cols)); min-width: 0; scroll-snap-align: start; }
+
+.controls { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+.arrow {
+  flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-arrow);
+  background: var(--clr-action); color: var(--clr-white); transition: background-color var(--t), opacity var(--t);
+}
+.arrow:hover { background: var(--clr-action-hover); }
+.arrow:disabled { opacity: 0.35; cursor: default; }
+.track { position: relative; flex: 1; height: 2px; background: var(--clr-line); }
+.track span { position: absolute; top: -1px; height: 4px; border-radius: 2px; background: var(--clr-text); transition: left 0.1s linear; }
+
+@media (max-width: 959px) { .wrap { --cols: var(--n-md); } }
+@media (max-width: 599px) { .wrap { --cols: var(--n-sm); } }

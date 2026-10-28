@@ -6,7 +6,7 @@
 
 import { ocImg } from "./images-v2";
 import { colourways, hex, shop } from "./shop";
-import { bestsellers, collections, leathers, makers, process, story, sustainability, trade, type ImageSlot } from "./home";
+import { bestsellers, collections, leathers, makers, process, story, sustainability, trade, type ImageSlot } from "./home-morucha";
 
 export const announcement = "Free UK delivery over £75 · Order before 3:30pm for same-day dispatch";
 

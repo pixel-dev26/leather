@@ -1,0 +1,113 @@
+/* Hologramme design tokens and base styles, see hologramme-rule.md. Everything is scoped under .hologramme so other versions are untouched. */
+.hologramme {
+  /* colour (§2) */
+  --clr-bg: #fafff4;
+  --clr-well: #f1f5ec;
+  --clr-band: #dfead6;
+  --clr-line: #c9d8be;
+  --clr-action: #754025;
+  --clr-action-hover: #5e321d;
+  --clr-leather: #7a382a;
+  --clr-text: #404040;
+  --clr-text-2: rgba(64, 64, 64, 0.7);
+  --clr-text-3: rgba(64, 64, 64, 0.45);
+  --clr-outline-word: #c2cfb6;
+  --clr-white: #ffffff;
+  --clr-shade: rgba(20, 14, 10, 0.6);
+
+  /* type (§3) */
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-funnel), "Funnel Sans", "Helvetica Neue", Arial, sans-serif;
+  --fs-hero: 54px;
+  --fs-h2: 34px;
+  --fs-story: 38px;
+  --fs-collection: 26px;
+  --fs-caption: 17px;
+  --fs-nav: 16px;
+  --fs-body: 16px;
+  --fs-card: 15px;
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+  --fs-label: 11px;
+
+  /* layout (§5) */
+  --page-max: 1800px;
+  --gutter: 40px;
+  --section-gap: 72px;
+  --head-gap: 28px;
+  --rail-gap: 16px;
+
+  /* shape */
+  --radius-btn: 9px;
+  --radius-well: 8px;
+  --radius-panel: 10px;
+  --radius-arrow: 6px;
+
+  /* motion */
+  --t: 0.3s ease;
+
+  /* v1 globals read these, so point them at Hologramme values */
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+
+  min-height: 100vh;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 599px) {
+  .hologramme {
+    --fs-hero: 34px;
+    --fs-h2: 28px;
+    --fs-story: 28px;
+    --fs-collection: 22px;
+    --gutter: 16px;
+    --section-gap: 48px;
+    --head-gap: 20px;
+  }
+}
+
+body:has(.hologramme) { background: #fafff4; background-image: none; }
+
+.hologramme h1, .hologramme h2, .hologramme h3, .hologramme h4 {
+  font-family: var(--font-serif); font-weight: 400; line-height: 1.15; letter-spacing: 0.01em;
+  text-transform: none; text-wrap: balance; color: var(--clr-text);
+}
+/* :where() keeps these resets at zero specificity so component modules can set colours and fills */
+:where(.hologramme) a { color: inherit; text-decoration: none; transition: color var(--t), background-color var(--t), opacity var(--t); }
+:where(.hologramme) button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.hologramme :focus-visible { outline: 2px solid var(--clr-action); outline-offset: 3px; }
+.hologramme ::selection { background: var(--clr-action); color: var(--clr-white); }
+
+.hologramme main > * + * { margin-top: var(--section-gap); }
+.hologramme main { padding-bottom: var(--section-gap); }
+
+.hologramme .holo-wrap { max-width: calc(var(--page-max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.hologramme .holo-h2 { font-size: var(--fs-h2); text-align: center; margin-bottom: var(--head-gap); }
+.hologramme .holo-label { font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.14em; }
+
+/* buttons (§7) */
+.hologramme .holo-btn {
+  display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 18px;
+  border-radius: var(--radius-btn); font-size: var(--fs-sm); border: 1px solid var(--clr-action);
+  background: var(--clr-action); color: var(--clr-white); justify-self: start; align-self: start;
+}
+.hologramme .holo-btn:hover { background: var(--clr-action-hover); border-color: var(--clr-action-hover); }
+.hologramme .holo-btn--line { background: transparent; color: var(--clr-action); }
+.hologramme .holo-btn--line:hover { background: var(--clr-action); color: var(--clr-white); }
+.hologramme .holo-btn--light { background: var(--clr-bg); border-color: var(--clr-bg); color: var(--clr-text); }
+.hologramme .holo-btn--light:hover { background: var(--clr-band); border-color: var(--clr-band); }
+.hologramme .holo-link { text-decoration: underline; text-underline-offset: 5px; font-size: var(--fs-body); }
+.hologramme .holo-link:hover { color: var(--clr-action); }
+
+/* text that still needs real copy from the client */
+.hologramme .tbc { color: inherit; border-bottom: 1px dashed currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hologramme .reveal { opacity: 1; transform: none; transition: none; }
+}

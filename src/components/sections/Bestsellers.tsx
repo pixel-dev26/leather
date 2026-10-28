@@ -1,49 +1,63 @@
-"use client";
-
-import { useRef } from "react";
-import { shopByCategory } from "@/content/home";
+import { shopByCategory as c } from "@/content/home";
 import Photo from "@/components/ui/Photo";
 import { rich } from "@/components/ui/rich";
 import styles from "./Bestsellers.module.css";
 
-/** Chesterfield "Shop by category": italic serif title, a row of tall lifestyle photos with the name overlaid. */
+/** "Category Atelier" (Coach / Bellroy / Thursday): shortcuts, then a bento of one tall hero category,
+ *  captioned product tiles, an RFID band and a gift tile. */
 export default function Bestsellers() {
-  const track = useRef<HTMLUListElement>(null);
-  const move = (dir: 1 | -1) => {
-    const el = track.current;
-    const card = el?.querySelector("li");
-    if (el && card) el.scrollBy({ left: dir * (card.getBoundingClientRect().width + 6) * 2, behavior: "smooth" });
-  };
-
   return (
     <section id="bestsellers" className={`bg-paper ${styles.section}`} aria-label="Shop by category">
       <div className={styles.head}>
-        <h2 className={styles.title}>{rich(shopByCategory.title)}</h2>
-        <div className={styles.arrows}>
-          <button onClick={() => move(-1)} aria-label="Previous categories">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden><path d="m15 5-7 7 7 7" /></svg>
-          </button>
-          <button onClick={() => move(1)} aria-label="Next categories">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden><path d="m9 5 7 7-7 7" /></svg>
-          </button>
+        <div>
+          <p className={styles.label}>{c.label}</p>
+          <h2 className={styles.title}>{rich(c.title)}</h2>
         </div>
+        <nav className={styles.shortcuts} aria-label="Shop by customer">
+          {c.shortcuts.map((s) => (
+            <a key={s.label} href={s.href}>
+              {s.label}
+            </a>
+          ))}
+        </nav>
       </div>
 
-      <ul ref={track} className={styles.track}>
-        {shopByCategory.items.map((c) => (
-          <li key={c.name}>
-            <a href={c.href} className={`${styles.card} ${c.image.fit === "contain" ? styles.pack : ""} hover-zoom`}>
-              <Photo {...c.image} sizes="(max-width: 767px) 60vw, 20vw" className={styles.photo} />
-              <span className={styles.shade} aria-hidden />
-              <span className={styles.name}>{c.name}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.bento}>
+        <a href={c.hero.href} className={`${styles.hero} hover-zoom`}>
+          <Photo {...c.hero.image} sizes="(max-width: 767px) 100vw, 30vw" className={styles.fill} />
+          <span className={styles.shadeUp} aria-hidden />
+          <span className={styles.heroText}>
+            <span className={styles.heroName}>{c.hero.name}</span>
+            <span className={styles.heroMeta}>{c.hero.meta} →</span>
+          </span>
+        </a>
 
-      <div className={styles.foot}>
-        <a href={shopByCategory.link.href} className={styles.all}>
-          {shopByCategory.link.label}
+        {c.tiles.map((t) => (
+          <a key={t.name} href={t.href} className={`${styles.tile} hover-zoom`}>
+            <span className={styles.tileMedia}>
+              <Photo {...t.image} sizes="(max-width: 767px) 50vw, 20vw" className={styles.fill} />
+            </span>
+            <span className={styles.caption}>
+              <span className={styles.tileName}>{t.name}</span>
+              <span className={styles.count}>{t.count} →</span>
+            </span>
+          </a>
+        ))}
+
+        <a href={c.band.link.href} className={`${styles.band} hover-zoom`}>
+          <Photo {...c.band.image} sizes="(max-width: 767px) 100vw, 40vw" className={styles.fill} />
+          <span className={styles.shadeSide} aria-hidden />
+          <span className={styles.bandText}>
+            <span className={styles.bandLabel}>{c.band.label}</span>
+            <span className={styles.bandTitle}>{rich(c.band.title)}</span>
+            <span className={styles.bandLink}>{c.band.link.label}</span>
+          </span>
+        </a>
+
+        <a href={c.gift.href} className={`bg-dark ${styles.gift}`}>
+          <span className={styles.bandLabel}>{c.gift.label}</span>
+          <span className={styles.giftTitle}>{rich(c.gift.title)}</span>
+          <span className={styles.giftText}>{c.gift.text}</span>
         </a>
       </div>
     </section>

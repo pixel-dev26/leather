@@ -6,7 +6,7 @@ import styles from "./DiscoverCards.module.css";
 /** Chesterfield-style trio: three tall photo cards, italic two-line headline and an underlined link. */
 export default function DiscoverCards() {
   return (
-    <section id="discover" className={`bg-paper ${styles.discover}`} aria-label="Discover Morucha">
+    <section id="discover" className={`bg-paper ${styles.discover}`} aria-label="Discover Fitting Belt">
       <ul className={styles.grid}>
         {discover.items.map((d, i) => (
           <Reveal as="li" key={d.link.label} delay={i}>

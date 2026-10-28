@@ -1,0 +1,85 @@
+/* hologramme-rule.md §4 heading patterns, §7 components for the static sections */
+
+/* marquee band */
+.marquee { background: var(--clr-band); overflow: hidden; padding-block: 18px; margin-top: 0 !important; }
+.marqueeTrack { display: flex; width: max-content; animation: slide 40s linear infinite; }
+.marqueeRun { display: flex; align-items: center; gap: 40px; padding-right: 40px; font-family: var(--font-serif); font-size: 20px; white-space: nowrap; }
+.marqueeRun svg { flex: none; stroke-width: 1.2; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* round categories */
+.cats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.cat { display: grid; justify-items: center; gap: 12px; font-family: var(--font-serif); font-size: var(--fs-caption); text-align: center; }
+/* the ring sits 9% outside the photo; it turns slowly on hover and darkens to saddle */
+.ringed { position: relative; display: grid; place-items: center; width: 100%; max-width: 170px; aspect-ratio: 1; }
+.ring {
+  position: absolute; inset: 0; width: 100%; height: 100%; stroke: var(--clr-line); stroke-width: 1.2;
+  transition: stroke 0.4s ease, transform 0.6s ease;
+}
+.ring .ringSoft { stroke: var(--clr-action); stroke-opacity: 0.35; }
+.cat:hover .ring { stroke: var(--clr-action); animation: turn 9s linear infinite; }
+@keyframes turn { to { transform: rotate(360deg); } }
+.circle { position: relative; width: 82%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--clr-well); }
+.circle img { object-fit: cover; transition: transform 0.5s ease; }
+.cat:hover .circle img { transform: scale(1.06); }
+.cat:hover { color: var(--clr-action); }
+
+/* B. rail with side copy */
+.split { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; align-items: center; }
+.splitCopy { display: grid; gap: 16px; }
+.splitCopy h2 { font-size: var(--fs-h2); margin: 0; }
+.splitCopy p { margin: 0; color: var(--clr-text-2); font-size: 15px; }
+
+/* craft story */
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.storyImg { position: relative; aspect-ratio: 5 / 4; border-radius: var(--radius-panel); overflow: hidden; }
+.storyImg img { object-fit: cover; }
+.storyCopy { display: grid; gap: 18px; max-width: 460px; }
+.storyCopy h2 { font-size: var(--fs-story); line-height: 1.12; margin: 0; }
+.storyCopy p { margin: 0; color: var(--clr-text-2); }
+.storyCopy .holo-label { color: var(--clr-text-2); }
+
+/* promise rows */
+.promises { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; list-style: none; text-align: center; }
+.promises li { display: grid; justify-items: center; align-content: start; gap: 12px; padding: 8px 16px; font-family: var(--font-serif); font-size: var(--fs-caption); }
+.promises li + li { border-left: 1px solid var(--clr-line); }
+.promises small { font-family: var(--font-sans); font-size: var(--fs-xs); color: var(--clr-text-2); margin-top: -6px; }
+
+/* collections triptych */
+.tri { display: grid; grid-template-columns: repeat(3, 1fr); }
+.triItem { position: relative; aspect-ratio: 3 / 4; overflow: hidden; color: var(--clr-white); }
+/* no zoom here: the pixel canvas (PixelHover) must sit exactly over the photo */
+.triItem img { object-fit: cover; }
+.triItem::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--clr-shade), transparent 45%); }
+.triItem span { position: absolute; z-index: 1; inset: auto 0 28px; display: grid; justify-items: center; gap: 6px; }
+.triItem b { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-collection); }
+.triItem u { font-size: var(--fs-sm); text-underline-offset: 4px; }
+
+
+/* visit our showrooms (Inside) */
+.inside { grid-template-columns: 240px minmax(0, 1fr); }
+.reels { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.reels a { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: var(--radius-well); overflow: hidden; }
+.reels img { object-fit: cover; transition: transform 0.5s ease; }
+.reels a:hover img { transform: scale(1.05); }
+.reels a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--clr-shade), transparent 40%); }
+.tileLabel { position: absolute; z-index: 1; left: 12px; right: 12px; bottom: 12px; font-family: var(--font-serif); font-size: 15px; color: var(--clr-white); }
+
+@media (max-width: 959px) {
+  .split, .inside, .story { grid-template-columns: 1fr; gap: 24px; }
+  .storyCopy { max-width: none; }
+  .reels { grid-template-columns: repeat(3, 1fr); }
+  .reels li:nth-child(n + 4) { display: none; }
+}
+@media (max-width: 599px) {
+  .cats { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+  .cats > li { flex: 0 0 96px; }
+  .cat { font-size: 14px; }
+  .promises { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+  .promises li:nth-child(3) { border-left: 0; }
+  .tri { grid-template-columns: 1fr; }
+  .triItem { aspect-ratio: 4 / 3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack { animation: none; }
+}

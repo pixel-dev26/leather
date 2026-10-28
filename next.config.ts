@@ -1,11 +1,11 @@
 import type { NextConfig } from "next";
 
-// Static review export (npm run export → ./out), hosted at https://pixelstreet.host/l/.
+// Static review export (npm run export → ./out), hosted at the site root (/morucha/, /fittingbelt/, /hologramme/).
 // Only active when MORUCHA_EXPORT=1 (set by scripts/export.mjs), so `next dev` and `next build` behave as before.
 const isExport = process.env.MORUCHA_EXPORT === "1";
 // Normalised to "/a/b" (one or more folders; "/" means the site root). Git Bash on Windows can rewrite the argument
 // into a drive path: "/l" becomes "L:/" and "/l/website" becomes "C:/Program Files/Git/l/website"; both are undone here.
-const rawBase = (process.env.MORUCHA_BASE_PATH ?? "/l").replace(/\\/g, "/");
+const rawBase = (process.env.MORUCHA_BASE_PATH ?? "/").replace(/\\/g, "/");
 const meantBase = /^[A-Za-z]:\/?$/.test(rawBase) ? rawBase[0] : rawBase.replace(/^[A-Za-z]:\/.*?\/Git\//i, "");
 const baseSegments = meantBase.split("/").filter(Boolean).map((s) => s.toLowerCase());
 const basePath = isExport && baseSegments.length ? `/${baseSegments.join("/")}` : "";
@@ -17,8 +17,14 @@ const nextConfig: NextConfig = {
   ...(isExport && {
     output: "export",
     basePath,
-    trailingSlash: true, // /l/v2/ → /l/v2/index.html on a plain web host
+    trailingSlash: true, // /morucha/ → /morucha/index.html on a plain web host
     distDir: "out", // the static site lands here; its build files go to .next
+  }),
+  // The old /v5/ address (now /morucha/) still works under next dev; the static export writes a redirect page instead
+  ...(!isExport && {
+    async redirects() {
+      return [{ source: "/v5/:path*", destination: "/morucha/:path*", permanent: false }];
+    },
   }),
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
   images: {
@@ -32,8 +38,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.spica-inc.jp" },
       { protocol: "https", hostname: "olivercompanylondon.com" },
       { protocol: "https", hostname: "images.dailyobjects.com" },
-      { protocol: "https", hostname: "images.unsplash.com" }, // v4 (Unsplash License), see src/content/images-v4.ts
+      { protocol: "https", hostname: "images.unsplash.com" }, // /morucha/ (Unsplash License)
       { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "hologrammeparis.com" }, // /hologramme/: the client's own photos, see src/content/home-hologramme.ts
     ],
   },
 };

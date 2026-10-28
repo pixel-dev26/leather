@@ -34,7 +34,7 @@ export default function StatementBanner() {
                 <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" strokeWidth="0.5" />
                 <g className={styles.ring}>
                   <text fontSize="8.6" letterSpacing="3.2" fill="currentColor">
-                    <textPath href="#ring">MORUCHA · BRITISH LEATHER · TANNED WITH CARE ·</textPath>
+                    <textPath href="#ring">FITTING BELT · GENUINE LEATHER · MADE TO FIT ·</textPath>
                   </text>
                 </g>
                 <text x="60" y="67" textAnchor="middle" fontSize="22" fontStyle="italic" fill="currentColor" className={styles.m}>

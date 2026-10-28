@@ -1,5 +1,6 @@
-// The folder the static export is served from: https://pixelstreet.host/leather/ by default.
-export const DEFAULT_BASE = '/leather';
+// The folder the static export is served from: the site root by default, so the sites are at
+// /morucha/, /fittingbelt/ and /hologramme/ with no folder in front.
+export const DEFAULT_BASE = '';
 
 // Any folder, normalised to "/a/b" ("" for a site root).
 // Git Bash on Windows rewrites a path argument for node: "/l" can arrive as "L:/" and "/l/x" as

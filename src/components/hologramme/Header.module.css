@@ -1,0 +1,108 @@
+/* hologramme-rule.md §5 header sizes, §7 announcement bar and header, §8 header icon motion */
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: 36px; padding-inline: var(--gutter); background: var(--clr-band); font-size: var(--fs-xs); letter-spacing: 0.04em;
+}
+.bar button { display: grid; place-items: center; width: 28px; height: 28px; }
+.msg { flex: 1; min-width: 0; margin: 0; text-align: center; animation: msgIn 0.5s ease-out; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@keyframes msgIn { from { opacity: 0; transform: translateY(6px); } }
+
+.header { position: sticky; top: 0; z-index: 30; background: var(--clr-bg); }
+.inner {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+  height: 76px; max-width: calc(var(--page-max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter);
+}
+
+/* one-row serif nav with an underline that grows from the centre */
+.nav { display: flex; gap: 24px; font-family: var(--font-serif); font-size: var(--fs-nav); white-space: nowrap; min-width: 0; }
+.link { position: relative; line-height: 1.3; padding-block: 4px; }
+.link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--clr-action);
+  transform: scaleX(0); transition: transform 0.35s ease;
+}
+.link:hover { color: var(--clr-action); }
+.link:hover::after { transform: scaleX(1); }
+.pill {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font: 500 8px/1.4 var(--font-sans); background: var(--clr-line);
+  color: var(--clr-text); border-radius: 999px; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+
+.logo { grid-column: 2; display: block; }
+.logo img { height: 34px; width: auto; display: block; }
+
+.icons { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.currency { font-size: var(--fs-xs); margin-right: 8px; }
+
+/* icon buttons: a sage disc grows in behind the icon, a tooltip drops in below, each icon has its own motion */
+.iconBtn { position: relative; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; }
+.iconBtn::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--clr-band);
+  transform: scale(0); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.iconBtn:hover::before, .iconBtn:focus-visible::before { transform: scale(1); }
+.iconBtn svg { position: relative; transition: color var(--t); }
+.iconBtn:hover svg { color: var(--clr-action); }
+.icons .iconBtn { animation: iconIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.icons .iconBtn:nth-of-type(2) { animation-delay: 0.08s; }
+.icons .iconBtn:nth-of-type(3) { animation-delay: 0.16s; }
+.icons .iconBtn:nth-of-type(4) { animation-delay: 0.24s; }
+@keyframes iconIn { from { opacity: 0; transform: translateY(-10px) scale(0.6); } }
+
+.iconBtn[data-tip]::after {
+  content: attr(data-tip); position: absolute; top: calc(100% + 6px); left: 50%; transform: translate(-50%, -4px);
+  font: 400 11px/1 var(--font-sans); letter-spacing: 0.04em; white-space: nowrap; color: var(--clr-white);
+  background: var(--clr-action); padding: 5px 8px; border-radius: 4px; opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.iconBtn[data-tip]:hover::after, .iconBtn[data-tip]:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+
+.search:hover svg { animation: seek 0.7s ease-in-out; }
+@keyframes seek { 25% { transform: translate(-2px, -2px) rotate(-12deg); } 60% { transform: translate(2px, 1px) rotate(8deg); } }
+
+.account:hover svg { animation: nod 0.6s ease-in-out; }
+@keyframes nod { 30% { transform: translateY(-3px); } 55% { transform: translateY(1px); } 75% { transform: translateY(-1px); } }
+
+.heart:hover svg { animation: beat 0.9s ease-in-out infinite; }
+@keyframes beat { 15% { transform: scale(1.22); } 30% { transform: scale(0.96); } 45% { transform: scale(1.14); } 60% { transform: none; } }
+.liked svg { color: var(--clr-action); fill: var(--clr-action); }
+.burst { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; }
+.liked .burst { animation: burst 0.5s ease-out; }
+@keyframes burst { from { box-shadow: 0 0 0 0 rgba(117, 64, 37, 0.45); } to { box-shadow: 0 0 0 14px rgba(117, 64, 37, 0); } }
+
+.basket:hover svg { animation: swing 0.7s ease-in-out; transform-origin: 50% 20%; }
+@keyframes swing { 20% { transform: rotate(12deg); } 45% { transform: rotate(-9deg); } 70% { transform: rotate(4deg); } }
+
+.menuBtn { display: none; }
+
+.scrim { position: fixed; inset: 0; z-index: 40; background: rgba(20, 14, 10, 0.35); opacity: 0; pointer-events: none; transition: opacity var(--t); }
+.scrimOn { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; inset: 0 auto 0 0; z-index: 41; width: min(340px, 86vw); background: var(--clr-bg);
+  padding: 16px 20px; transform: translateX(-100%); transition: transform 0.35s ease; overflow-y: auto;
+}
+.drawerOn { transform: none; }
+.drawerTop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.drawerLogo { height: 24px; width: auto; }
+.drawerLink {
+  display: flex; justify-content: space-between; align-items: center; padding: 14px 0;
+  border-bottom: 1px solid var(--clr-line); font-family: var(--font-serif); font-size: 18px;
+}
+
+/* the one-row nav needs ~555px at 15px (~610px at 16px); below 1400px it moves into the drawer */
+@media (max-width: 1499px) {
+  .nav { gap: 16px; font-size: 15px; }
+  .currency { display: none; }
+}
+@media (max-width: 1399px) {
+  .inner { grid-template-columns: auto 1fr auto; height: 60px; gap: 12px; }
+  .nav, .desktopOnly { display: none; }
+  .menuBtn { display: grid; }
+  .logo { justify-self: center; }
+  .logo img { height: 26px; }
+}
+@media (max-width: 599px) {
+  .bar { font-size: 12px; letter-spacing: 0.02em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iconBtn svg, .icons .iconBtn, .liked .burst { animation: none !important; }
+}

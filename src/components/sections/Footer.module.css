@@ -1,8 +1,8 @@
-/* Footer sits on the exact logo maroon (--clr-brand, #C2010B) with the light paper grain. */
+/* Footer sits on the darkest maroon (--clr-dark-2), which suits the black-and-white fb logo, with the light paper grain. */
 .footer {
   --ft-line: rgba(248, 245, 242, 0.24);
   --ft-soft: rgba(248, 245, 242, 0.95);
-  background-color: var(--clr-brand); background-image: var(--paper-dark); background-size: var(--paper-dark-size);
+  background-color: var(--clr-dark-2); background-image: var(--paper-dark); background-size: var(--paper-dark-size);
   color: var(--clr-text-light); padding: 64px 0 28px;
 }
 

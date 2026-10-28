@@ -1,0 +1,126 @@
+/* v11 design tokens and base styles, see v11rule.md. Everything is scoped under .v11 so other versions are untouched. */
+.v11 {
+  /* colour (§2) */
+  --clr-bg: #f7f4ef;
+  --clr-stone: #ede8e0;
+  --clr-well: #efeae2;
+  --clr-card: #ffffff;
+  --clr-ink: #1c1b19;
+  --clr-ink-2: #6b655c;
+  --clr-line: #ddd6cb;
+  --clr-hair: #e4ddd2;
+  --clr-brass: #ae9362;
+  --clr-on-ink: rgba(255, 255, 255, 0.85);
+  --clr-on-ink-2: rgba(255, 255, 255, 0.65);
+  --clr-fade: linear-gradient(to top, rgba(28, 27, 25, 0.72), rgba(28, 27, 25, 0) 60%);
+
+  /* type (§3) */
+  --font-serif: var(--font-baskerville), "Libre Baskerville", Georgia, serif;
+  --font-sans: var(--font-figtree), Figtree, "Helvetica Neue", Arial, sans-serif;
+  --fs-hero: 32px;
+  --fs-h2: 42px;
+  --fs-statement: 30px;
+  --fs-body: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+  --fs-label: 10px;
+
+  /* layout (§4) */
+  --page-max: 1440px;
+  --gutter: 40px;
+  --section-gap: 112px;
+  --gap: 20px;
+  --radius: 5px;
+  --radius-sm: 3px;
+  --t: 0.3s ease;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* v1 globals read these, so point them at v11 values */
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+
+  min-height: 100vh;
+  background: var(--clr-bg);
+  color: var(--clr-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+@media (max-width: 959px) { .v11 { --fs-h2: 34px; --section-gap: 88px; --gutter: 28px; } }
+@media (max-width: 599px) {
+  .v11 {
+    --fs-hero: 28px;
+    --fs-h2: 28px;
+    --fs-statement: 22px;
+    --gutter: 16px;
+    --section-gap: 64px;
+    --gap: 12px;
+  }
+}
+
+body:has(.v11) { background: #f7f4ef; background-image: none; }
+
+.v11 h1, .v11 h2, .v11 h3, .v11 h4 {
+  font-family: var(--font-serif); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em;
+  text-transform: none; text-wrap: balance; color: inherit; margin: 0;
+}
+:where(.v11) :where(p, ul, ol) { margin: 0; }
+/* :where() keeps these resets at zero specificity so component modules can set colours and fills */
+:where(.v11) a { color: inherit; text-decoration: none; transition: color var(--t), background-color var(--t), opacity var(--t); }
+:where(.v11) button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.v11 :focus-visible { outline: 2px solid var(--clr-brass); outline-offset: 3px; }
+.v11 ::selection { background: var(--clr-ink); color: var(--clr-bg); }
+
+.v11 main > * + * { margin-top: var(--section-gap); }
+.v11 main { padding-bottom: var(--section-gap); }
+
+.v11 .v11-wrap { max-width: calc(var(--page-max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* section heading pattern (§4); .v11-eyebrow is also used alone, so it resets the heading serif */
+.v11 .v11-eyebrow { font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.2em; color: var(--clr-ink-2); }
+.v11 .v11-h2 { font-size: var(--fs-h2); line-height: 1.1; letter-spacing: -0.015em; }
+.v11 .v11-sub { color: var(--clr-ink-2); font-size: 15px; font-weight: 300; max-width: 50ch; }
+.v11 .v11-sh { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.v11 .v11-sh > div { display: grid; gap: 12px; justify-items: start; }
+.v11 .v11-sh--center { justify-content: center; text-align: center; }
+.v11 .v11-sh--center > div { justify-items: center; }
+.v11 .v11-sh--dark .v11-eyebrow { color: var(--clr-on-ink-2); }
+.v11 .v11-sh--dark .v11-h2 { color: #fff; }
+.v11 .v11-sh--dark .v11-sub { color: var(--clr-on-ink-2); }
+
+/* buttons and link CTAs */
+.v11 .v11-btn {
+  display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 28px;
+  border-radius: var(--radius); font-size: 15px; font-weight: 600; border: 1px solid var(--clr-ink);
+  background: var(--clr-ink); color: #fff; white-space: nowrap;
+}
+.v11 .v11-btn:hover { background: #3a3732; border-color: #3a3732; }
+.v11 .v11-btn--white { background: #fff; border-color: #fff; color: var(--clr-ink); }
+.v11 .v11-btn--white:hover { background: var(--clr-bg); border-color: var(--clr-bg); }
+.v11 .v11-link {
+  display: inline-block; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em;
+  border-bottom: 1px solid currentColor; padding-bottom: 4px; white-space: nowrap; line-height: 1.4;
+}
+.v11 .v11-link:hover { opacity: 0.6; }
+
+/* hand-drawn icons (Drawn.tsx): drawn once as their group enters the screen, again on hover */
+.v11 .v11-hd { fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.v11 .v11-hd .ghost { stroke-width: 0.8; opacity: 0.3; }
+.v11 .v11-hd .acc { stroke: var(--clr-brass); }
+.v11 .v11-hd > * { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.v11 .v11-drawing .v11-hd > * { animation: v11-draw 1.6s cubic-bezier(0.45, 0.05, 0.25, 1) both; }
+.v11 .v11-drawing .v11-hd .ghost { animation-delay: 0.3s; }
+.v11 .v11-drawing .v11-hd .acc { animation-delay: 0.7s; animation-duration: 1s; }
+@keyframes v11-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* text that still needs real copy from the client */
+.v11 .tbc { border-bottom: 1px dashed currentColor; }
+
+.v11 .v11-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v11 *, .v11 *::before, .v11 *::after { transition-duration: 0.01ms !important; animation: none !important; scroll-behavior: auto !important; }
+}

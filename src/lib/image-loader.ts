@@ -1,6 +1,6 @@
 // next/image loader (next.config.ts → images.loaderFile). Nothing is resized at request time, same as the
 // previous `unoptimized: true`. Local files ("/brand/…") get the base path so they resolve under the static
-// review export at /l/. The width only goes into a URL fragment, which servers ignore; it keeps srcset
+// review export's base path, if any. The width only goes into a URL fragment, which servers ignore; it keeps srcset
 // entries distinct, so Next doesn't warn that the loader ignores width.
 //
 // Product photos (/images/products/<handle>/NN.webp) have smaller WebP copies made by

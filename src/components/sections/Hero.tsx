@@ -32,7 +32,7 @@ export default function Hero() {
       </div>
 
       <p className={styles.side} aria-hidden>
-        Est. [TBC] <span /> United Kingdom
+        Est. [TBC] <span /> Australia
       </p>
 
       <div className={styles.content}>

@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { announcement, nav } from "@/content/home";
+import { announcement, brand, nav } from "@/content/home";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -15,15 +14,6 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  const solid = scrolled || open;
 
   return (
     <>
@@ -38,11 +28,11 @@ export default function Header() {
         </p>
       </div>
 
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${solid ? styles.solid : ""}`}>
+      <header className={`${styles.header} ${scrolled ? `${styles.scrolled} ${styles.solid}` : ""}`}>
         <div className={styles.inner}>
-          <a href="#top" className={styles.logo} aria-label="Morucha home">
-            <Image src="/brand/morucha-logo-light.webp" alt="Morucha" width={667} height={256} priority className={styles.logoLight} />
-            <Image src="/brand/morucha-logo.webp" alt="" width={667} height={256} priority className={styles.logoDark} aria-hidden />
+          <a href="#top" className={styles.logo} aria-label={`${brand.name} home`}>
+            <Image src={brand.logoLight} alt={brand.name} {...brand.logoSize} priority className={styles.logoLight} />
+            <Image src={brand.logo} alt="" {...brand.logoSize} priority className={styles.logoDark} aria-hidden />
           </a>
 
           <nav className={styles.nav} aria-label="Main">
@@ -62,33 +52,9 @@ export default function Header() {
                 <path d="M9 8V6a3 3 0 0 1 6 0v2" />
               </svg>
             </a>
-            <button
-              className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              aria-controls="site-menu"
-              onClick={() => setOpen((v) => !v)}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
           </div>
         </div>
       </header>
-
-      <div id="site-menu" className={`${styles.menu} ${open ? styles.menuOpen : ""}`} aria-hidden={!open}>
-        <ul>
-          {nav.map((item, i) => (
-            <li key={item.label} style={{ transitionDelay: open ? `${0.1 + i * 0.06}s` : "0s" }}>
-              <a href={item.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className={styles.menuFoot}>sales@morucha.co.uk</p>
-      </div>
     </>
   );
 }

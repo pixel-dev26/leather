@@ -12,9 +12,9 @@ export default function TradeWholesale() {
         <Reveal className={`${styles.media} hover-zoom`}>
           <Photo {...trade.image} sizes="(max-width: 1023px) 100vw, 40vw" />
           <span className={styles.badge}>
-            Free
+            Over 400
             <br />
-            <em>swatch box</em>
+            <em>stores</em>
           </span>
         </Reveal>
 
