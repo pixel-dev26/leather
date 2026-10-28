@@ -83,7 +83,7 @@ body:has(.v11) { background: #f7f4ef; background-image: none; }
 .v11 .v11-eyebrow { font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.2em; color: var(--clr-ink-2); }
 .v11 .v11-h2 { font-size: var(--fs-h2); line-height: 1.1; letter-spacing: -0.015em; }
 .v11 .v11-sub { color: var(--clr-ink-2); font-size: 15px; font-weight: 300; max-width: 50ch; }
-.v11 .v11-sh { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.v11 .v11-sh { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
 .v11 .v11-sh > div { display: grid; gap: 12px; justify-items: start; }
 .v11 .v11-sh--center { justify-content: center; text-align: center; }
 .v11 .v11-sh--center > div { justify-items: center; }

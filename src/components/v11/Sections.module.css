@@ -40,7 +40,7 @@
 .naPhoto img { object-fit: cover; transition: transform 1.2s var(--ease); }
 .naPhoto:hover img { transform: scale(1.03); }
 .naPhoto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28, 27, 25, 0.6), transparent 45%); }
-.naCaption { position: absolute; z-index: 1; left: 28px; right: 28px; bottom: 26px; display: flex; justify-content: space-between; align-items: end; gap: 12px; font-family: var(--font-serif); font-size: 18px; }
+.naCaption { position: absolute; z-index: 1; left: 28px; right: 28px; bottom: 26px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-family: var(--font-serif); font-size: 18px; }
 .naSide { display: grid; gap: 0; min-width: 0; padding-top: 24px; }
 .naSide :global(.v11-sh) { margin-bottom: 36px; }
 .count { display: flex; gap: 16px; align-items: baseline; margin-bottom: 40px; }
