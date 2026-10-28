@@ -18,7 +18,7 @@ export default function OurStory() {
           </Reveal>
           <div className={styles.stamp} aria-hidden>
             <span>
-              Est.<b>[TBC]</b>United Kingdom
+              Est.<b>[TBC]</b>Australia
             </span>
           </div>
         </div>

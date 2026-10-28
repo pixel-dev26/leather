@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { footer } from "@/content/home";
+import { brand, footer } from "@/content/home";
 import styles from "./Footer.module.css";
 
 const socialIcons: Record<(typeof footer.socials)[number], React.ReactNode> = {
@@ -37,8 +37,8 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
-          <Image src="/brand/morucha-logo-white.webp" alt="Morucha" width={667} height={256} className={styles.logo} />
-          <p className={styles.tagline}>British Leather · Tanned with Care</p>
+          <Image src={brand.logoLight} alt={brand.name} {...brand.logoSize} className={styles.logo} />
+          <p className={styles.tagline}>Genuine leather belts, bags and wallets</p>
         </div>
 
         <div className={styles.main}>
@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {year} Morucha. All rights reserved.</p>
+          <p>© {year} {brand.legal}. All rights reserved.</p>
           <p className={styles.payments}>{footer.payments}</p>
           <ul className={styles.legal}>
             {footer.legal.map((l) => (

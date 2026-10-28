@@ -1,0 +1,27 @@
+/* v11rule.md §6 tabs and rail (premium pass) */
+.tabs { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 6px; }
+.tabs button { font-size: var(--fs-xs); letter-spacing: 0.02em; color: var(--clr-ink-2); padding-bottom: 6px; border-bottom: 1px solid transparent; white-space: nowrap; }
+.tabs button:hover { color: var(--clr-ink); }
+.tabs button.on { color: var(--clr-ink); border-bottom-color: var(--clr-ink); }
+
+.rail { display: grid; gap: 32px; min-width: 0; }
+.row {
+  list-style: none; padding: 0; display: grid; grid-auto-flow: column; gap: var(--gap);
+  grid-auto-columns: calc((100% - var(--gap) * (var(--n) - 1)) / var(--n));
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.row::-webkit-scrollbar { display: none; }
+.row > li { scroll-snap-align: start; min-width: 0; }
+
+.ctrl { display: flex; align-items: center; gap: 18px; }
+.ctrl button { width: 32px; height: 32px; display: grid; place-items: center; transition: opacity var(--t); }
+.ctrl button:disabled { opacity: 0.25; cursor: default; }
+.count { font-size: 11px; letter-spacing: 0.16em; color: var(--clr-ink-2); font-variant-numeric: tabular-nums; }
+.track { flex: 1; height: 1px; background: var(--clr-hair); position: relative; }
+.track i { position: absolute; left: 0; top: 0; height: 1px; background: var(--clr-ink); transition: width 0.3s ease; }
+
+@media (max-width: 959px) { .row { --n: var(--n-md); } }
+@media (max-width: 599px) {
+  .row { --n: var(--n-sm); }
+  .tabs { flex-wrap: nowrap; gap: 20px; overflow-x: auto; scrollbar-width: none; max-width: calc(100vw - 32px); }
+}

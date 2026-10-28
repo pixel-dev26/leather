@@ -1,11 +1,10 @@
-// All home page copy lives here. Anything wrapped in [TBC] needs confirming by Morucha
-// before launch: no claims below are verified facts unless marked otherwise.
+// All v1 home page copy lives here, for The Fitting Belt Company (fittingbelt.com.au). Facts about the company
+// come from its own About page; anything wrapped in [TBC] needs confirming by the client before launch.
 // Headings support *italic accents* and \n line breaks.
-// Product photos are Morucha's own (./shop.ts, saved locally). Every other photo comes from ./images.ts:
-// temporary reference images that must be replaced.
+// Product names, prices and photos are the client's own (./fittingbelt.ts, saved locally). Lifestyle photos are
+// Pexels stock (free licence), saved in /public/images/fittingbelt/lifestyle/, until the client supplies its own.
 
-import { img } from "./images";
-import { colourways, shop } from "./shop";
+import { fb, fbColourways, fbHex } from "./fittingbelt";
 
 // fit "contain" marks a studio packshot on white: shown whole, with the white blended into the tile colour.
 // position is the photo's object-position in a cropped slot (e.g. "35% 50%"), when the default centre misses the subject.
@@ -14,263 +13,278 @@ export type ImageSlot = { src?: string; alt: string; tone?: "dark" | "mid" | "li
 /** A product photo slot (studio shot on white). */
 export const pack = (src: string, alt: string): ImageSlot => ({ src, alt, fit: "contain" });
 
-export const announcement = "Free UK delivery  ·  Order before 3:30pm for same-day dispatch";
+/** A Pexels lifestyle photo, by its Pexels id. */
+const px = (id: number, alt: string, position?: string): ImageSlot => ({ src: `/images/fittingbelt/lifestyle/pexels-${id}.webp`, alt, position });
+
+export const brand = {
+  name: "Fitting Belt",
+  legal: "The Fitting Belt Company",
+  email: "sales@fbco.com.au",
+  logo: "/brand/fittingbelt-logo.webp",
+  logoLight: "/brand/fittingbelt-logo-light.webp",
+  logoSize: { width: 1240, height: 459 },
+};
+
+export const announcement = "Genuine leather belts, bags and wallets  ·  Wholesale accounts available";
 
 export const nav = [
-  { label: "Leather", href: "#leathers" },
-  { label: "Leather Goods", href: "#collections" },
-  { label: "The Process", href: "#process" },
-  { label: "Sustainability", href: "#sustainability" },
-  { label: "Trade", href: "#trade" },
+  { label: "New In", href: "#leathers" },
+  { label: "Shop", href: "#bestsellers" },
+  { label: "How It's Made", href: "#process" },
+  { label: "Collections", href: "#collections" },
+  { label: "Wholesale", href: "#trade" },
   { label: "About", href: "#story" },
 ];
 
 export const hero = {
-  label: "British Leather · Tanned with Care",
-  title: "Leather that\nages *with you*",
-  text: "From our tannery to your workbench, and into the wallets and bags we make ourselves.",
-  primary: { label: "Shop leather goods", href: "#collections" },
-  secondary: { label: "Explore our leather", href: "#leathers" },
+  label: "Genuine Leather · Made to Fit",
+  title: "Belts that\n*fit for life*",
+  text: "Men's, women's and children's genuine leather belts, bags and wallets from The Fitting Belt Company.",
+  primary: { label: "Shop belts", href: "#bestsellers" },
+  secondary: { label: "Wholesale enquiries", href: "#trade" },
   slides: [
-    { src: img.heroHands, alt: "Hands holding a leather card wallet at a desk" },
-    // 1600px WebP copy of public/images/banners/v1-banner-1.png
-    { src: "/images/banners/w1600/v1-banner-1.webp", alt: "Black and tan Morucha leather bifold wallet on black leather" },
-    { src: "/images/banners/v1-banner-3.webp", alt: "Man in a blue suit holding a navy Morucha leather wallet" },
+    px(1023937, "A wall of colourful leather belts hanging in a shop"),
+    px(35392727, "Brown leather belt with a silver buckle held in a gloved hand"),
+    px(7679660, "Rolled leather belts laid out on a rustic wooden table"),
   ] as ImageSlot[],
 };
 
 export const statement = {
-  label: "Since [YEAR TBC]",
-  text: "Every hide is chosen, tanned and finished *by hand*. So the leather you work with is worth keeping for a lifetime.",
-  // Morucha's own photos: 960px WebP copies of public/images/banners/since-1.png and since-2.png
+  label: "Over 18 years of belts",
+  text: "We make and supply genuine leather belts *for every fit*: dress, casual, reversible, canvas and kids.",
   images: [
-    { src: "/images/banners/w960/since-1.webp", alt: "Craftsman finishing a tan leather wallet with an edge tool" },
-    { src: "/images/banners/w960/since-2.webp", alt: "Six black Morucha leather wallets with tan, red, green and orange trims arranged in a circle" },
+    px(31367059, "Two brown leather belts with brushed buckles on a warm background"),
+    px(31959215, "Black leather belts with silver buckles on a dark surface"),
   ] as ImageSlot[],
 };
 
-export const leathers = {
-  label: "Our Leathers",
-  title: "Shop the *Hides*",
-  subtitle: "By the hide, half-hide or swatch, with no minimum order",
-  link: { label: "View all leathers", href: "#" },
-  // Main photos are Morucha's own (WebP copies of public/images/banners/new-leather-1.png … 6.png); hover photos are still references
+// "The New Edit" (Smythson / Bellroy / Coach / Mismo): filter pills, one wide campaign tile, then product cards
+// on sand tiles with colour swatches that switch the photo.
+export type EditColour = { name: string; swatch: string; image: ImageSlot };
+export type EditItem = { name: string; meta: string; price: string; tag?: "New" | "Limited" | "Bestseller"; category: "Men's belts" | "Women's belts" | "Bags & wallets"; colours: EditColour[] };
+const editColours = (list: { name: string; swatch: string; images: string[] }[], product: string): EditColour[] =>
+  list.map((c) => ({ name: c.name, swatch: c.swatch, image: pack(c.images[0], `${product} in ${c.name}`) }));
+const one = (name: string, swatch: string, src: string, alt: string): EditColour[] => [{ name, swatch, image: pack(src, alt) }];
+
+export const newEdit = {
+  label: "Just landed",
+  title: "The New *Edit*",
+  tabs: ["All", "Men's belts", "Women's belts", "Bags & wallets"] as const,
+  link: { label: "Shop all new", href: "https://www.fittingbelt.com.au/collections/all" },
+  campaign: {
+    label: "The reversible edit",
+    title: "One belt,\n*two ways to wear it*",
+    link: { label: "See the Cameron", href: "#spotlight" },
+    image: px(31367058, "Brown leather belt coiled beside a spare buckle on a warm background"),
+  },
   items: [
-    { name: "Vegetable Tanned Side", note: "Firm, natural, ages to a rich patina", meta: "Natural · 3.0–3.5mm", price: "From £XX / sq ft", tag: "Bestseller", image: { src: "/images/banners/w960/new-leather-1.webp", alt: "Fan of coloured leather swatches beside Morucha wallets" }, hover: { src: img.tooling, alt: "Vegetable-tanned leather being tooled" } },
-    { name: "Full Grain Calf", note: "The strongest, most honest cut of the hide", meta: "Ink & Mustard · 1.2mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-2.webp", alt: "Navy and mustard full-grain leather panels beside a black Morucha wallet", position: "30% 50%" }, hover: { src: img.walletNavy, alt: "Full-grain calf made into a wallet" } },
-    { name: "Pebble Grain", note: "Textured, hard-wearing, beautifully even", meta: "12 colours · 1.4mm", price: "From £XX / sq ft", tag: "New", image: { src: "/images/banners/w960/new-leather-3.webp", alt: "Cut pebble-grain wallet pieces and tools on a green cutting mat" }, hover: { src: img.cardYellow, alt: "Pebble-grain card case" } },
-    { name: "Smooth Calf", note: "Smooth, fine and soft for small goods", meta: "Sky & Taupe · 1.0mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-4.webp", alt: "Open navy and mustard leather trifold wallet with card slots", position: "55% 50%" }, hover: { src: img.heroHands, alt: "Smooth calf card wallet in hand" } },
-    { name: "Nappa Lining", note: "Supple and luxurious for linings", meta: "Raspberry · 0.8mm", price: "From £XX / sq ft", image: { src: "/images/banners/w1600/new-leather-5.webp", alt: "Red leather lining and zip pocket inside an open purse", position: "55% 50%" }, hover: { src: img.purseOpen1, alt: "Nappa-lined purse" } },
-    { name: "Swatch Box", note: "Feel the leathers before you order", meta: "20 leathers · posted free", price: "Free", tag: "Trade", image: { src: "/images/banners/w960/new-leather-6.webp", alt: "Flat lay of Morucha leather wallets, purses and belts" }, hover: { src: img.swatchFan, alt: "Swatches fanned out" } },
-  ] as { name: string; note: string; meta: string; price: string; tag?: string; image: ImageSlot; hover?: ImageSlot }[],
+    { name: "Cameron reversible belt", meta: "Genuine leather · 33mm strap", price: fb.cameron.priceLabel, tag: "Bestseller", category: "Men's belts", colours: editColours(fbColourways.cameron, "Cameron reversible belt") },
+    { name: "Marina knot waist belt", meta: "Genuine leather · 20mm strap", price: fb.marina.priceLabel, tag: "New", category: "Women's belts", colours: [...one("Tan", fbHex.tan, fb.marina.photo(1), "Tan Marina knot waist belt"), ...one("Brown", fbHex.brown, fb.indigo.photo(1), "Brown knot waist belt")] },
+    { name: "Lucy soft handle bag", meta: "Vegan pebbled leather", price: fb.lucy.priceLabel, category: "Bags & wallets", colours: editColours(fbColourways.lucy, "Lucy bag") },
+    { name: "Paulo canvas belt", meta: "Canvas · silver buckle", price: fb.paulo.priceLabel, category: "Men's belts", colours: editColours(fbColourways.paulo, "Paulo canvas belt") },
+    { name: "Deaneen leather belt", meta: "Genuine leather · skinny", price: fb.deaneenRed.priceLabel, category: "Women's belts", colours: [...one("Red", fbHex.red, fb.deaneenRed.photo(1), "Red Deaneen leather belt"), ...one("Black", fbHex.black, fb.deaneenBlack.photo(1), "Black Deaneen leather belt")] },
+    { name: "Centennial Park clutch", meta: "Pebbled leather", price: fb.centennial.priceLabel, category: "Bags & wallets", colours: editColours(fbColourways.centennial, "Centennial Park clutch") },
+    { name: "Justin leather wallet", meta: "Genuine leather · gift box", price: fb.justin.priceLabel, tag: "Limited", category: "Bags & wallets", colours: one("Grey", fbHex.grey, fb.justin.photo(1), "Grey Justin leather wallet with its gift box") },
+    { name: "Lacey patent belt", meta: "Patent leather · skinny", price: fb.lacey.priceLabel, category: "Women's belts", colours: one("Off-white", fbHex.white, fb.lacey.photo(1), "Off-white Lacey patent leather belt") },
+    { name: "Romeo reversible belt", meta: "Genuine leather · reversible", price: fb.romeo.priceLabel, category: "Men's belts", colours: one("Black / Chocolate", `linear-gradient(135deg, ${fbHex.black} 50%, ${fbHex.chocolate} 50%)`, fb.romeo.photo(1), "Romeo black and chocolate reversible belt") },
+  ] as EditItem[],
 };
 
-export type Product = {
-  name: string;
-  meta: string;
-  price: string;
-  tag?: "New" | "Bestseller" | "Limited";
-  category: "Wallets" | "Purses" | "Cardholders" | "Gifts";
-  image: ImageSlot;
-  hover?: ImageSlot;
-};
-
-export const bestsellers = {
-  label: "Bestsellers",
-  title: "Our *Bestsellers*",
-  categories: ["All", "Wallets", "Purses", "Cardholders", "Gifts"] as const,
-  link: { label: "Shop all leather goods", href: "#" },
-  // Real Morucha products (./shop.ts), photographed on white, so every slot is a packshot.
-  items: [
-    { name: shop.bifoldCoin.name, meta: "Soft leather · 4 colours", price: shop.bifoldCoin.priceLabel, tag: "Bestseller", category: "Wallets", image: pack(shop.bifoldCoin.photo(11), "Black and tan leather bifold wallet"), hover: pack(shop.bifoldCoin.photo(13), "Bifold wallet open, showing its card slots") },
-    { name: shop.longClutch.name, meta: "Genuine leather · 6 colours", price: shop.longClutch.priceLabel, tag: "Bestseller", category: "Purses", image: pack(shop.longClutch.photo(1), "Burgundy leather long clutch wallet"), hover: pack(shop.longClutch.photo(3), "Long clutch wallet open, full of cards") },
-    { name: shop.verticalCoin.name, meta: "Soft leather · 2 colours", price: shop.verticalCoin.priceLabel, tag: "New", category: "Wallets", image: pack(shop.verticalCoin.photo(5), "Tan and black vertical leather wallet"), hover: pack(shop.verticalCoin.photo(2), "Vertical wallet open with notes and cards") },
-    { name: shop.cardHolder.name, meta: "Genuine leather · Black", price: shop.cardHolder.priceLabel, category: "Cardholders", image: pack(shop.cardHolder.photo(2), "Black leather card holder wallet, open"), hover: pack(shop.cardHolder.photo(3), "Card holder with cards and notes") },
-    { name: shop.flapClutch.name, meta: "Genuine leather · 5 colours", price: shop.flapClutch.priceLabel, category: "Purses", image: pack(shop.flapClutch.photo(1), "Burgundy leather flap clutch purse"), hover: pack(shop.flapClutch.photo(2), "Flap clutch purse open, showing its card slots") },
-    { name: shop.slimCard.name, meta: "Genuine leather · Tan", price: shop.slimCard.priceLabel, category: "Cardholders", image: pack(shop.slimCard.photo(1), "Tan slim leather card wallet with its gift box") },
-    { name: shop.hunterBifold.name, meta: "Distressed hunter leather · Dark brown", price: shop.hunterBifold.priceLabel, category: "Wallets", image: pack(shop.hunterBifold.photo(1), "Dark brown distressed leather bifold wallet"), hover: pack(shop.hunterBifold.photo(5), "Hunter bifold open with coins and cards") },
-    { name: shop.giftPasscase.name, meta: "Soft leather · Burgundy · Gift box", price: shop.giftPasscase.priceLabel, category: "Gifts", image: pack(shop.giftPasscase.photo(5), "Burgundy leather passcase wallet"), hover: pack(shop.giftPasscase.photo(8), "Passcase wallet with its Morucha gift box") },
-  ] as Product[],
-};
-
-// Our Leathers, Nour Hammour "New" style: small italic title + "View all", then a full-bleed row
-export const newLeathers = {
-  title: "New *leathers*",
-  link: { label: "View all", href: "#" },
-};
-
-// Bestsellers, Chesterfield "Shop by category" style
+// "Category Atelier" (Coach / Bellroy / Thursday): shortcuts, then a bento of one tall hero category, captioned
+// product tiles with style counts, a reversible band and a gift tile.
 export const shopByCategory = {
+  label: "Find your fit",
   title: "Shop by *category*",
-  link: { label: "Shop all leather goods", href: "#" },
-  // The ranges Morucha sells, each shown by one of its own products.
-  items: [
-    { name: "Bifold wallets", href: "#", image: pack(shop.twoToneBifold.photo(1), "Black and tan leather bifold wallet") },
-    { name: "Clutch purses", href: "#", image: pack(shop.flapClutch.photo(1), "Burgundy leather flap clutch purse") },
-    { name: "Card holders", href: "#", image: pack(shop.cardHolder.photo(2), "Black leather card holder, open") },
-    { name: "Coin wallets", href: "#", image: pack(shop.twoToneBifold.photo(4), "Bifold wallet open with notes and coins") },
-    { name: "Long purses", href: "#", image: pack(shop.zipPurse.photo(1), "Navy leather zip-around purse") },
-    { name: "Trifold wallets", href: "#", image: pack(shop.hunterTrifold.photo(1), "Brown hunter leather trifold wallet") },
-    { name: "Biker wallets", href: "#", image: pack(shop.bikerChain.photo(2), "Brown leather biker wallet with its chain") },
-    { name: "Gift boxed", href: "#", image: pack(shop.giftPasscase.photo(8), "Burgundy wallet with its Morucha gift box") },
-    { name: "Leather hides", href: "#leathers", image: { src: img.swatchFan, alt: "Fan of leather swatches" } },
-  ] as { name: string; href: string; image: ImageSlot }[],
+  shortcuts: [
+    { label: "For him", href: "#" },
+    { label: "For her", href: "#" },
+    { label: "Kids", href: "#" },
+  ],
+  hero: { name: "Men's belts", meta: "[n] styles · Dress, casual, canvas", href: "#", image: px(27045991, "Young man in a white polo shirt and grey trousers wearing a black leather belt", "50% 40%") },
+  tiles: [
+    { name: "Women's belts", count: "[n]", href: "#", image: pack(fb.marina.photo(1), "Tan genuine leather knot waist belt") },
+    { name: "Wallets", count: "[n]", href: "#", image: pack(fb.justin.photo(1), "Grey leather wallet with its gift box") },
+    { name: "Bags", count: "[n]", href: "#", image: pack(fb.lucy.photo(3), "Tan pebbled leather handle bag") },
+  ] as { name: string; count: string; href: string; image: ImageSlot }[],
+  band: {
+    label: "Two looks, one belt",
+    title: "Reversible *belts*",
+    link: { label: "Shop reversible", href: "#" },
+    image: px(31959214, "Black, brown and tan leather belts with silver buckles on a dark surface"),
+  },
+  gift: { label: "Gift ideas", title: "Gifts\nunder *A$25*", text: "Gift-boxed belts and wallets →", href: "#" },
 };
 
 // Chesterfield-style trio of tall story cards
 export const discover = {
   items: [
-    // Morucha's own photos: WebP copies (up to 1600px wide, as the tall cards enlarge wide photos) of public/images/banners/*.png
-    { title: "Crafted by nature.\nRefined by hand.", link: { label: "Discover our leather", href: "#leathers" }, image: { src: "/images/banners/w1600/crafted-with.webp", alt: "Craftsman finishing the edge of a burgundy Morucha leather wallet on a workbench" } },
-    { title: "Tanned with patience.\nBuilt to last.", link: { label: "Meet our story", href: "#story" }, image: { src: "/images/banners/w1600/tanned-with.webp", alt: "Eight Morucha leather wallets laid out on a wooden workshop table" } },
-    { title: "New season\ncollection.", link: { label: "Find your favourite", href: "#bestsellers" }, image: { src: "/images/banners/w1600/new-season.webp", alt: "Man in a blue suit holding a black and blue Morucha long wallet", position: "35% 50%" } },
+    { title: "Made to fit.\nMade to last.", link: { label: "Shop men's belts", href: "#bestsellers" }, image: px(10915255, "Man in a black shirt adjusting a black leather belt", "50% 60%") },
+    { title: "Two belts.\nOne buckle.", link: { label: "Meet the reversible", href: "#spotlight" }, image: px(31959216, "Four leather belts in tan, olive, grey and brown laid on a black surface") },
+    { title: "Dressed for\nthe occasion.", link: { label: "Find a gift", href: "#bestsellers" }, image: px(19272491, "Two men in tailored suits and hats walking through a city", "50% 30%") },
   ] as { title: string; link: { label: string; href: string }; image: ImageSlot }[],
 };
 
-// Morucha's M-2028 bifold. Features, details and specs are from its store listing; each colour has its own photos.
-const spotlightProduct = shop.bifoldCoin;
-const spotlightColours = colourways.bifoldCoin.map((c) => ({
+// The Cameron reversible belt. Description, strap width and materials are from its store listing.
+const spotlightProduct = fb.cameron;
+const spotlightColours = fbColourways.cameron.map((c) => ({
   name: c.name,
   hex: c.swatch,
-  sku: spotlightProduct.variants.find((v) => v.title === c.name.replace(" / ", " "))?.sku ?? "M-2028",
-  images: c.images.map((src, i) => pack(src, `${spotlightProduct.name} in ${c.name}, view ${i + 1}`)),
+  sku: "Cameron",
+  images: c.images.map((src, i) => pack(src, `Cameron reversible belt in ${c.name}, view ${i + 1}`)),
 }));
 
 export const spotlight = {
   label: "Featured Piece",
-  name: spotlightProduct.name,
-  sku: "M-2028",
+  // "Anatomy of" (Von Baer / Red Wing / Ghurka): numbered hotspots on the photo match the feature list.
+  title: "Anatomy of the *Cameron*",
+  intro: "A classic, stylish dress belt for formal and informal occasions: tan genuine leather with black on the reverse.",
+  short: "Cameron reversible belt",
+  meta: "Genuine leather · 33mm strap",
+  link: { label: "See full details", href: spotlightProduct.href },
+  name: spotlightProduct.title,
+  sku: "Cameron",
   price: spotlightProduct.priceLabel,
   compareAt: undefined as string | undefined, // not on sale
-  note: "Free UK delivery · Order before 3:30pm for same-day dispatch",
+  note: "[Delivery and returns line TBC]",
   colours: spotlightColours,
+  sizes: spotlightProduct.sizes.map((s) => s.split("/")[0].trim()),
+  // x / y: where each hotspot sits on the main photo, in % (tuned to the first photo).
   features: [
-    { icon: "compact", title: "RFID blocking", text: "Shields contactless cards from skimming" },
-    { icon: "storage", title: "Smart storage", text: "8 card slots, 3 ID windows, 2 note sections" },
-    { icon: "leather", title: "Soft distressed leather", text: "Takes on a vintage patina with use" },
-    { icon: "zip", title: "Zipped coin pocket", text: "Loose change stays where you put it" },
+    { icon: "leather", title: "100% genuine leather", text: "Tan on the face, black on the reverse", x: 28, y: 46 },
+    { icon: "compact", title: "Reversible strap", text: "Twist the buckle to change colour", x: 74, y: 44 },
+    { icon: "storage", title: "Nickel buckle", text: "Polished nickel, made to last", x: 60, y: 54 },
+    { icon: "zip", title: "33mm strap", text: "A dress width that suits suits and jeans", x: 44, y: 58 },
   ],
-  details: [
-    { title: "Product details", text: "A classic bifold in genuine soft, distressed hunter leather with built-in RFID blocking. Inside are 8 card slots, 3 clear ID windows, 2 full-length note compartments, 2 slip-in pouches, a zipped coin pocket and a snap-button flap compartment." },
-    { title: "Specifications", text: "Material: genuine leather · Dimensions: 12 × 9.5 cm closed · RFID protected · Presented in a branded Morucha gift box." },
-    { title: "Delivery & returns", text: "Free UK delivery. Orders placed before 3:30pm are dispatched the same working day. [Returns policy TBC.]" },
-  ],
-  /** Photos of the first colour; the colour swatches switch to that colour's own photos. */
+  /** Photos of the first colour. */
   images: spotlightColours[0].images,
 };
 
 export const story = {
   label: "Our Story",
   display: "Our *Story*",
-  title: "A tannery built on patience",
+  title: "Fitting belts for over 18 years",
   paragraphs: [
-    "Morucha began with a simple belief: good leather can't be rushed. [Founding story, year and location TBC.]",
-    "Today we tan hides for makers across the UK and beyond, and craft our own wallets, purses and travel bags from the very same leather: tens of thousands of them, sent to customers worldwide.",
+    "The Fitting Belt Company was established over 18 years ago and is now one of the market leaders in its industry. We make and wholesale men's, women's and children's genuine leather belts, bags, satchels and wallets.",
+    "Today we supply major retail outlets across Australia, New Zealand, the UK and Canada, and more than 400 independent stores Australia-wide.",
   ],
-  cta: { label: "About us", href: "#" },
-  // Morucha's own photos: 1600px WebP copies of public/images/banners/card-holder.png and tanned-with.png
-  image: { src: "/images/banners/w1600/card-holder.webp", alt: "Hands opening a black and tan Morucha leather wallet full of cards" } as ImageSlot,
-  inset: { src: "/images/banners/w1600/tanned-with.webp", alt: "Morucha leather wallets laid out on a wooden workshop desk" } as ImageSlot,
+  cta: { label: "About us", href: "https://www.fittingbelt.com.au/pages/about-us" },
+  image: px(4443831, "Man in a blue dotted shirt wearing a black leather belt and a watch", "50% 70%"),
+  inset: px(31432650, "Black leather belt with a polished silver buckle"),
 };
 
+// "The Workshop Reel" (Red Wing Heritage / Ghurka): a short film told in five chapters, one clip each, played back
+// to back in the frame. The clips are Pexels stock (free licence) in /public/video/fittingbelt/ until the client
+// supplies its own footage: swap src and poster per chapter. start / length pick the part of each clip to play (s).
+const clip = (id: number, start: number, length: number) => ({ src: `/video/fittingbelt/pexels-${id}.mp4`, poster: `/video/fittingbelt/pexels-${id}.webp`, start, length });
+
+export type ReelChapter = { title: string; text: string; clip: ReturnType<typeof clip> };
+
 export const process = {
-  label: "The Process",
-  title: "Discover a slower way. Leather tanned *by hand*, from hide to finished piece.",
-  cta: { label: "Discover the process", href: "#" },
-  band: { src: img.tooling, alt: "A craftsman's hands tooling a leather panel" } as ImageSlot,
-  // The play button opens this film. Leave src empty until Morucha has a video: the lightbox then shows
-  // the poster with a "coming soon" note. Accepts an .mp4 path (e.g. "/video/process.mp4") or a
-  // YouTube/Vimeo embed URL (e.g. "https://www.youtube.com/embed/<id>").
-  film: { label: "Watch the film", title: "Inside the tannery", duration: "[1:30 TBC]", src: "" },
-  steps: [
-    { title: "Selection", text: "Each raw hide is graded by eye and touch before it enters the tannery.", image: { src: img.swatchFan, alt: "Grading leather" } },
-    { title: "Preparation", text: "Hides are soaked, cleaned and fleshed to open the fibres.", image: { src: img.swatchGreen, alt: "Prepared leather pieces" } },
-    { title: "Tanning", text: "[Tanning method TBC, e.g. vegetable tannins over several weeks.]", image: { src: img.grainPanels, alt: "Tanned leather" } },
-    { title: "Drying", text: "Hung and dried slowly, then staked to soften the leather.", image: { src: img.cardBlueTaupe, alt: "Dried leather pieces" } },
-    { title: "Finishing", text: "Oiled, dyed and finished by hand to bring out the grain.", image: { src: img.tooling, alt: "Hand-finishing leather" } },
-  ] as { title: string; text: string; image: ImageSlot }[],
+  label: "How It's Made",
+  film: { label: "Watch the film", title: "From hide to belt" },
+  reel: {
+    title: "From hide to *belt*",
+    text: "A short look at how a genuine leather belt comes together, in five steps.",
+    // The muted loop that plays in the frame before the film starts.
+    intro: clip(35144728, 0, 20),
+  },
+  chapters: [
+    { title: "Choosing the leather", text: "The hide is checked for colour, grain and strength before a single cut is made.", clip: clip(35144731, 4, 12) },
+    { title: "Cutting the strap", text: "A steel rule and a sharp blade cut each strap to width, from skinny waist belts to 33mm dress belts.", clip: clip(35144725, 2, 12) },
+    { title: "Stitching", text: "Heavy-duty machines stitch the edges for a clean, strong line that holds its shape.", clip: clip(35144735, 6, 12) },
+    { title: "Finishing the edges", text: "Edges are buffed smooth so the belt feels as good as it looks.", clip: clip(40318164, 0, 7.3) },
+    { title: "Fitting the hardware", text: "Buckles and fittings go on last, set by hand and checked before the belt is sized.", clip: clip(34740043, 0, 12) },
+  ] as ReelChapter[],
 };
 
 export const collections = {
-  label: "Leather Goods",
+  label: "The Range",
   title: "The *Collections*",
   items: [
-    // Men's Wallets, Women's Purses and Cardholders use Morucha's own photos (WebP copies of public/images/banners/*.png)
-    { name: "Men's Wallets", count: "[n] pieces", href: "#", image: { src: "/images/banners/w960/men-wallet.webp", alt: "Hand holding up a black Morucha leather wallet with a tan edge" } },
-    // shade: a soft dark fade behind the white text, as this photo is light (a cream blazer) where the name sits
-    { name: "Women's Purses", count: "[n] pieces", href: "#", shade: true, image: { src: "/images/banners/w1600/women-purse.webp", alt: "Woman in a cream blazer holding a blue, pink and red patchwork Morucha leather purse", position: "40% 50%" } },
-    { name: "Cardholders", count: "[n] pieces", href: "#", image: { src: "/images/banners/w1600/card-holder-new.webp", alt: "Hands taking a yellow leather card holder from an open tan Morucha wallet", position: "35% 50%" } },
-    { name: "Travel Bags", count: "[n] pieces", href: "#", image: { src: img.flatlay, alt: "Leather goods flat-lay" } },
+    { name: "Men's Belts", count: "[n] styles", href: "#", shade: true, image: px(11263067, "Brown leather belt coiled around a watch beside leather shoes") },
+    // shade: a soft dark fade behind the white text, as this photo is light where the name sits
+    { name: "Women's Belts", count: "[n] styles", href: "#", shade: true, image: px(34519173, "Woman in a white shirt, tie and dark trousers with a belt") },
+    { name: "Braces & Kids", count: "[n] styles", href: "#", shade: true, image: pack(fb.ronald.photo(2), "Brown fashion braces worn over a white T-shirt") },
+    { name: "Bags & Wallets", count: "[n] styles", href: "#", image: px(7952556, "Leather wallets and card holders on a coloured table") },
   ] as { name: string; count: string; href: string; shade?: boolean; image: ImageSlot }[],
 };
 
 export const sustainability = {
-  label: "Sustainability",
-  display: "Responsibly\n*Made*",
-  title: "Leather is a by-product. We treat it as a gift.",
+  label: "Quality",
+  display: "Genuine\n*Leather*",
+  title: "Real leather, sized properly and made to last.",
   points: [
-    { title: "Traceable hides", text: "[Hide sourcing details TBC, e.g. by-products of the UK food industry.]" },
-    { title: "Less water, fewer chemicals", text: "[Water and chemistry claims TBC.]" },
-    { title: "Made to last", text: "The most sustainable product is the one you never need to replace." },
+    { title: "Genuine leather", text: "Our leather belts are 100% genuine leather. [Leather sourcing details TBC.]" },
+    { title: "A size for everyone", text: "Belts from 28\" to 56\", with every size listed in inches and centimetres." },
+    { title: "Made to last", text: "The most sustainable belt is the one you never need to replace." },
   ],
-  cta: { label: "Our commitments", href: "#" },
-  // Morucha's own photos: WebP copies of public/images/banners/gifts-under.png (large) and since-2.png (inset)
-  image: { src: "/images/banners/w1600/gifts-under.webp", alt: "Grey Morucha leather wallet beside its gift box on a dark desk" } as ImageSlot,
-  inset: { src: "/images/banners/w960/since-2.webp", alt: "Six black Morucha leather wallets with tan, red, green and orange trims arranged in a circle" } as ImageSlot,
+  cta: { label: "Size guide", href: "#" },
+  image: px(11263089, "Brown leather belt and watch beside polished brown shoes"),
+  inset: px(31367060, "Black, grey, brown and tan leather belts on fabric"),
 };
 
 export const makers = {
-  label: "Made with Morucha",
-  title: "In the Hands of *Makers*",
-  text: "Follow us on Instagram [@handle TBC] and tag #MadeWithMorucha. Be part of our community of makers and leather lovers.",
-  handle: "@morucha [TBC]",
+  label: "Worn with Fitting Belt",
+  // "Carried by You" (Popov / Thursday / Mismo): a photo mosaic mixed with verified review cards.
+  hashtag: "#FittingBelt",
+  display: "Worn by *you*",
+  rating: "[★ rating] from [n] verified reviews [TBC]",
+  share: { label: "Share yours", href: "#" },
+  // The large first photo is pinned to the product it shows.
+  featured: { name: "Cameron reversible belt", price: fb.cameron.priceLabel, handle: "@[handle TBC]", href: "#spotlight", image: pack(fb.cameron.photo(1), "Cameron reversible belt") },
+  // Must be real, verified customer reviews before launch.
+  reviews: [
+    { quote: "[A real customer quote from a verified review, no more than 25 words: TBC.]", name: "[First name], [town]", product: "[product]" },
+    { quote: "[Short verified review: TBC.]", name: "[Name]", product: "[product]" },
+  ],
+  title: "Worn by *You*",
+  text: "Follow us on Instagram [@handle TBC] and tag #FittingBelt.",
+  handle: "@[handle TBC]",
   href: "#",
-  // Morucha's own photos: 960px WebP copies of public/images/banners/insta-1.png … insta-6.png
+  // Pexels stock until the client supplies customer photos.
   items: [
-    { caption: "Small goods, [Maker TBC]", image: { src: "/images/banners/w960/insta-1.webp", alt: "Hands opening a burgundy Morucha wallet full of cards", position: "43% 50%" } },
-    { caption: "Bespoke wallets, [Maker TBC]", image: { src: "/images/banners/w960/insta-2.webp", alt: "Four Morucha leather wallets on a wooden table" } },
-    { caption: "Card cases, [Maker TBC]", image: { src: "/images/banners/w960/insta-3.webp", alt: "Hands opening a brown distressed leather wallet with cards and notes" } },
-    { caption: "Gifts, [Maker TBC]", image: { src: "/images/banners/w960/insta-4.webp", alt: "Hands holding a black Morucha wallet beside its gift box" } },
-    { caption: "Accessories, [Maker TBC]", image: { src: "/images/banners/w960/insta-5.webp", alt: "Hands taking a card from a navy leather purse" } },
-    { caption: "Purses, [Maker TBC]", image: { src: "/images/banners/w960/insta-6.webp", alt: "Hands holding a red Morucha leather purse" } },
+    { caption: "Dress belts", image: px(27045991, "Young man in a white polo shirt wearing a black leather belt", "50% 45%") },
+    { caption: "Everyday leather", image: px(10915255, "Man in a black shirt wearing a black leather belt", "50% 60%") },
+    { caption: "Brown leather", image: px(11263067, "Brown leather belt coiled around a watch") },
+    { caption: "Gift ideas", image: px(31517345, "Bow tie, belt and shoes laid out on a lace tablecloth") },
+    { caption: "The range", image: px(31959216, "Four leather belts in tan, olive, grey and brown") },
   ] as { caption: string; image: ImageSlot }[],
 };
 
 export const trade = {
-  label: "Trade & Wholesale",
-  title: "Supply Your *Workshop*",
-  text: "Whether you make one bag a month or stock a shop full of leather goods, we'll help you find the right hide.",
+  label: "Wholesale",
+  title: "Stock *Fitting Belt*",
+  text: "We supply major retail outlets across Australia, New Zealand, the UK and Canada, and more than 400 independent stores Australia-wide.",
   benefits: [
-    { n: "01", title: "Free swatch box", text: "Feel the leather before you commit. Swatches posted free across the UK." },
-    { n: "02", title: "No minimum order", text: "Buy a single hide, a half-hide, or a pallet." },
-    { n: "03", title: "Trade pricing", text: "Account pricing for makers, retailers and manufacturers." },
+    { n: "01", title: "Wholesale access account", text: "Register to see the full range and wholesale prices." },
+    { n: "02", title: "Over 400 styles", text: "Men's, women's and kids' belts, braces, bags and wallets." },
+    { n: "03", title: "Also on Faire", text: "Order through our wholesale page on Faire." },
   ],
-  primary: { label: "Open a trade account", href: "mailto:sales@morucha.co.uk?subject=Trade%20account" },
-  secondary: { label: "Request a swatch box", href: "mailto:sales@morucha.co.uk?subject=Swatch%20box" },
-  email: "sales@morucha.co.uk",
-  // Morucha's own photo: a WebP copy of public/images/banners/leather-pieces.png
-  image: { src: "/images/banners/w1600/leather-pieces.webp", alt: "Cut black and tan leather wallet pieces and finished Morucha wallets with tools on a green cutting mat" } as ImageSlot,
+  primary: { label: "Register for wholesale", href: "https://www.fittingbelt.com.au/pages/wholesale" },
+  secondary: { label: "Email the sales team", href: "mailto:sales@fbco.com.au?subject=Wholesale%20enquiry" },
+  email: brand.email,
+  image: px(37483619, "Man at an outdoor market stall with leather belts hanging behind him", "50% 35%"),
 };
 
 export const newsletter = {
   label: "Newsletter",
-  title: "Letters from\nthe *Tannery*",
-  text: "New leathers, limited runs and stories from the workshop. A few times a year, never more.",
+  title: "News from\n*Fitting Belt*",
+  text: "New styles, gift ideas and wholesale news. A few times a year, never more.",
 };
 
 export const footer = {
   columns: [
-    { title: "My Account", links: ["Profile", "Track Order", "My Orders", "Return an Order", "Trade Account"] },
-    { title: "Still Curious?", links: ["Our Story", "The Process", "Sustainability", "Leather Care", "Made with Morucha", "Reach Out to Us"] },
-    { title: "Quick Links", links: ["Leather Hides", "Swatch Box", "Delivery", "Returns & Refunds", "FAQs", "Become a Stockist"] },
+    { title: "My Account", links: ["Profile", "Track Order", "My Orders", "Return an Order", "Wholesale Account"] },
+    { title: "Still Curious?", links: ["Our Story", "How It's Made", "Size Guide", "Leather Care", "Contact Us"] },
+    { title: "Quick Links", links: ["Men's Belts", "Women's Belts", "Kids & Braces", "Bags & Wallets", "Delivery", "FAQs"] },
   ],
   newsletter: {
     title: "Newsletter",
-    text: "New leathers, limited runs and stories from the workshop. A few times a year, never more.",
-    consent: "I agree to receive emails from Morucha. You can unsubscribe at any time.",
+    text: "New styles, gift ideas and wholesale news. A few times a year, never more.",
+    consent: "I agree to receive emails from The Fitting Belt Company. You can unsubscribe at any time.",
   },
   socials: ["Instagram", "Facebook", "Pinterest", "YouTube"] as const,
-  email: "sales@morucha.co.uk",
+  email: brand.email,
   payments: "Visa · Mastercard · Amex · Apple Pay · Google Pay · Shop Pay",
   legal: ["Privacy Policy", "Refund Policy", "Terms of Service"],
 };

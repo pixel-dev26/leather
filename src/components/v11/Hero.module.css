@@ -1,0 +1,24 @@
+/* v11rule.md §6 three-panel hero */
+.hero { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); height: min(calc(100vh - 110px), 768px); min-height: 560px; background: var(--clr-ink); }
+/* .hero .h1 outranks the global .v11 h1 serif rule */
+.hero .h1 {
+  position: absolute; z-index: 2; top: 28px; left: var(--gutter); right: var(--gutter);
+  font-family: var(--font-sans); font-size: var(--fs-label); font-weight: 600; line-height: 1.4;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--clr-on-ink);
+}
+.panel { position: relative; overflow: hidden; color: #fff; }
+.panel img { object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.panel:hover img { transform: scale(1.03); }
+.panel::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28, 27, 25, 0.8), rgba(28, 27, 25, 0) 55%), linear-gradient(to bottom, rgba(28, 27, 25, 0.45), rgba(28, 27, 25, 0) 30%);
+}
+.text { position: absolute; z-index: 1; left: var(--gutter); right: var(--gutter); bottom: 48px; display: grid; gap: 10px; justify-items: start; }
+.text h2 { font-size: var(--fs-hero); line-height: 1.12; color: #fff; }
+.text p { font-size: var(--fs-sm); color: var(--clr-on-ink); margin-bottom: 14px; }
+
+@media (max-width: 599px) {
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .panel { height: 70vh; min-height: 420px; }
+  .text { bottom: 32px; }
+}

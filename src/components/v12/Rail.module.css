@@ -1,0 +1,37 @@
+/* v12rule.md §6 product rails: 388 × 466 cards at 1440px, 12px apart, the next card cut off at the page edge */
+.section { padding-block: 56px 72px; }
+.head { position: relative; display: grid; justify-items: center; gap: 14px; margin-bottom: 30px; padding-inline: var(--gutter); text-align: center; }
+.arrows { position: absolute; right: var(--gutter); bottom: 0; display: flex; gap: 6px; }
+.arrows button { width: 30px; height: 30px; display: grid; place-items: center; }
+.arrows button:disabled { opacity: 0.3; cursor: default; }
+
+.row {
+  list-style: none; margin: 0; padding: 0 var(--edge); display: grid; grid-auto-flow: column; grid-auto-columns: min(388px, 27vw); gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); scrollbar-width: none;
+}
+.row::-webkit-scrollbar { display: none; }
+.row > li { scroll-snap-align: start; min-width: 0; }
+
+.card { display: grid; }
+.well { position: relative; display: block; aspect-ratio: 388 / 466; background: var(--clr-well); overflow: hidden; }
+.well img { object-fit: contain; padding: 14% 11%; mix-blend-mode: multiply; transition: opacity 0.5s ease; }
+.well .alt { opacity: 0; }
+.card:hover .well .alt { opacity: 1; }
+.card:hover .well:has(.alt) img:not(.alt) { opacity: 0; }
+.tag { position: absolute; top: 12px; left: 14px; font-size: 13px; font-weight: 400; color: var(--clr-ink-2); }
+.meta { display: flex; justify-content: space-between; gap: 12px; padding: 14px 6px 0; font-variant-numeric: tabular-nums; }
+.meta a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 6px 4px; }
+.swatches button { width: 16px; height: 16px; border-radius: 1px; position: relative; }
+.swatches button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: var(--clr-ink); }
+
+@media (max-width: 959px) {
+  .row { grid-auto-columns: 40vw; }
+  .arrows { display: none; }
+}
+@media (max-width: 599px) {
+  .section { padding-block: 24px 44px; }
+  .row { grid-auto-columns: 57vw; gap: 16px; }
+  .meta { display: grid; gap: 4px; padding-inline: 4px; }
+  .swatches { padding-inline: 4px; }
+}

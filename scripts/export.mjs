@@ -1,9 +1,9 @@
-// Builds the static site into ./out for https://pixelstreet.host/leather/ (the version list + every homepage version),
+// Builds the static site into ./out for the site root (the version list + every homepage version),
 // then checks that every page link and asset in it resolves to a file in ./out.
-// Usage: npm run export            → base path /leather
-//        npm run export -- /other  → another folder ("/" for a site root)
-// Upload the *contents* of ./out into the /leather/ folder on the server.
-// Preview it first, exactly as the host serves it: node scripts/serve-out.mjs → http://localhost:4300/leather/
+// Usage: npm run export            → site root: /morucha/, /fittingbelt/, /hologramme/
+//        npm run export -- /other  → under another folder
+// Upload the *contents* of ./out to the root of the server.
+// Preview it first, exactly as the host serves it: node scripts/serve-out.mjs → http://localhost:4300/
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -24,7 +24,7 @@ const build = spawnSync(process.execPath, [nextBin, "build"], {
 });
 if (build.status !== 0) process.exit(build.status ?? 1);
 
-// 2. Addresses from the earlier two-project review site keep working: website/vN/ → vN/, next/v1/ (Heritage) → v5/
+// 2. Addresses from the earlier two-project review site keep working: website/vN/ → vN/, next/v1/ (Heritage) → morucha/
 const redirect = (url) => `<!doctype html>
 <html lang="en-GB">
 <head>
@@ -38,8 +38,13 @@ const redirect = (url) => `<!doctype html>
 </body>
 </html>
 `;
-const legacy = { "website": "../", "next": "../", "next/v1": "../../v5/" };
-for (const v of ["v1", "v2", "v3", "v4", "v5", "v6"]) if (fs.existsSync(path.join(OUT, v, "index.html"))) legacy[`website/${v}`] = `../../${v}/`;
+// v1 became the Fitting Belt client version at /fittingbelt/, and v5 (Heritage editorial) became Morucha at /morucha/.
+const legacy = {
+  "website": "../", "next": "../", "next/v1": "../../morucha/",
+  "v1": "../fittingbelt/", "website/v1": "../../fittingbelt/",
+  "v5": "../morucha/", "website/v5": "../../morucha/",
+};
+for (const v of ["v2", "v3"]) if (fs.existsSync(path.join(OUT, v, "index.html"))) legacy[`website/${v}`] = `../../${v}/`;
 for (const [from, to] of Object.entries(legacy)) {
   fs.mkdirSync(path.join(OUT, from), { recursive: true });
   fs.writeFileSync(path.join(OUT, from, "index.html"), redirect(to));

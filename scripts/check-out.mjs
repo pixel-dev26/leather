@@ -1,9 +1,9 @@
 // Checks that every local link and asset in the static export (npm run export) resolves to a file in ./out:
 //   - href / src / srcset / poster / imagesrcset attributes in every HTML page,
 //   - url(...) in every stylesheet,
-//   - root paths to /images/… written into the pages' own scripts (e.g. v5/main.js), including the
+//   - root paths to /images/… written into the pages' own scripts (e.g. morucha/main.js), including the
 //     w320/w640/w960 WebP copies those scripts ask for.
-// Usage: node scripts/check-out.mjs [base]   (same base the export was built for, default /leather)
+// Usage: node scripts/check-out.mjs [base]   (same base the export was built for, default: the site root)
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -21,7 +21,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-/** URL path ("/leather/website/v1/") of a file in outDir. */
+/** URL path ("/morucha/") of a file in outDir. */
 function urlPathOf(outDir, base, file) {
   const rel = path.relative(outDir, file).split(path.sep).join('/');
   return `${base}/${rel.replace(/(^|\/)index\.html$/, '$1')}`;
@@ -62,7 +62,7 @@ export function checkOut(outDir, base) {
       const cssUrl = urlPathOf(outDir, base, file);
       for (const [, value] of css.matchAll(/url\(\s*['"]?([^'")]+)['"]?\s*\)/g)) check(file, value, cssUrl);
     } else if (ext === '.js' && !file.includes(`${path.sep}_next${path.sep}`)) {
-      // Hand-written page scripts: root paths get the export's base at runtime (see BASE in public/v5/main.js)
+      // Hand-written page scripts: root paths get the export's base at runtime (see BASE in public/morucha/main.js)
       const js = fs.readFileSync(file, 'utf8');
       const scriptBase = urlPathOf(outDir, base, path.dirname(path.dirname(file))).replace(/\/$/, '');
       for (const [, value] of js.matchAll(/['"`](\/images\/[^'"`$]+\.(?:jpe?g|png|webp|svg))['"`]/gi)) {

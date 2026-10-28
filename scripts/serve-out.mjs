@@ -1,4 +1,4 @@
-// Serves ./out the way a plain web host will: at http://localhost:4300<base>/ (default /leather).
+// Serves ./out the way a plain web host will: at http://localhost:4300<base>/ (default: the site root).
 // Folders without a trailing slash redirect to it, folders serve their index.html, misses get out/404.html.
 // Usage: node scripts/serve-out.mjs [base]   (PORT=… to change the port)
 import { createServer } from 'node:http';

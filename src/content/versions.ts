@@ -1,8 +1,10 @@
-// Every homepage version, in the order the version list (src/app/(home)/page.tsx) shows them, numbered 01–09.
-// The list shows only the number, the name and a View button; the other fields are kept as notes.
+// Every homepage version, in the order the version list (src/app/(home)/page.tsx) shows them, numbered 01–06.
+// Each card shows the number, name, summary, type, reference, swatches and a screenshot (public/images/previews/<id>.webp).
 export type Version = {
-  id: string; // the route: /v1/ … /v9/
+  id: string; // the route: /fittingbelt/, /v2/, /v3/, /morucha/, /hologramme/, /v11/ or /v12/
   name: string;
+  /** The site shown in the card's browser frame; Morucha's own versions leave it out (morucha.co.uk). */
+  domain?: string;
   reference: string;
   secondary?: string;
   summary: string;
@@ -12,8 +14,8 @@ export type Version = {
 
 export const versions: Version[] = [
   {
-    id: "v5", // Heritage editorial, moved here from morucha-next (where it was /v1/); listed first, as before
-    name: "Heritage editorial",
+    id: "morucha", // first called Heritage editorial at /v5/ (and /v1/ in morucha-next); listed first, as before
+    name: "Morucha",
     reference: "soletrader.co.uk",
     secondary: "nappadori.co.uk",
     summary: "Ivory paper with oxblood and the logo red, a full-screen slideshow with split-text animation, a vertical leather guide carousel and a stitched, leather-textured footer.",
@@ -21,11 +23,12 @@ export const versions: Version[] = [
     swatches: ["#F6F1E9", "#1B1714", "#C1000A", "#5B1A1E", "#A0673A"],
   },
   {
-    id: "v1",
-    name: "Quiet editorial luxury",
+    id: "fittingbelt", // client version for The Fitting Belt Company (was /v1/)
+    name: "The Fitting Belt Company",
+    domain: "fittingbelt.com.au",
     reference: "spica-inc.jp",
-    secondary: "hidesign.com, olivercompanylondon.com, dailyobjects.com",
-    summary: "Warm off-white paper with a fine grain, EB Garamond display type, gold labels and maroon from the bull logo. Layered, staggered photography with generous, calm spacing.",
+    secondary: "fittingbelt.com.au (client products and logo), Pexels (photos and film)",
+    summary: "The Fitting Belt Company's own belts, bags and wallets, with its fb logo, in the quiet editorial layout: warm paper, EB Garamond, gold labels and maroon accents.",
     type: "EB Garamond · Montserrat",
     swatches: ["#F7F4F0", "#2A1718", "#A8020C", "#A88B58", "#5C0A10"],
   },
@@ -47,45 +50,29 @@ export const versions: Version[] = [
     swatches: ["#FFFFFF", "#000000", "#F7F7F7", "#20A87E", "#E66B55"],
   },
   {
-    id: "v4",
-    name: "Industrial monochrome",
-    reference: "supertannery.com",
-    summary: "Greige and black, light display type against heavy statements, a tannery video seen through a halftone burst, and brown leather glows that follow the cursor.",
-    type: "Plus Jakarta Sans · Jost",
-    swatches: ["#E9E9E7", "#000000", "#5F6567", "#A8602C", "#F2C58C"],
+    id: "hologramme", // client version for Hologramme Paris (was /v10/)
+    name: "Hologramme Paris",
+    domain: "hologrammeparis.com",
+    reference: "adamis.in",
+    secondary: "hologrammeparis.com (client products, photos and logo)",
+    summary: "The Sage & Saddle design for Hologramme Paris: pale sage pages, one saddle-brown action colour, Playfair over Funnel Sans, and the client's own hats, leather goods, banners and logo.",
+    type: "Playfair Display · Funnel Sans",
+    swatches: ["#FAFFF4", "#F1F5EC", "#C9D8BE", "#754025", "#404040"],
   },
   {
-    id: "v6",
-    name: "Urban everyday carry",
-    reference: "chromeindustries.com",
-    secondary: "adidas.co.in",
-    summary: "Bold condensed uppercase type, black label tags and arrow buttons, a product-led hero on soft colour stages, tabbed product rails and the full 31-product range with live names and prices.",
-    type: "Barlow Condensed · Barlow",
-    swatches: ["#FFFFFF", "#111111", "#C1000A", "#ECE5DA", "#F1F0EE"],
+    id: "v11",
+    name: "Bone & Brass",
+    reference: "harberlondon.com",
+    summary: "Bone pages broken up by near-black bands, a Baskerville serif over Figtree, a three-panel hero, white product cards, a collection bento, a wallet finder and one brass accent.",
+    type: "Libre Baskerville · Figtree",
+    swatches: ["#F7F4EF", "#EDE8E0", "#FFFFFF", "#1C1B19", "#AE9362"],
   },
   {
-    id: "v7",
-    name: "Refined luxury retail",
-    reference: "bucherer.com",
-    summary: "White pages with Caslon display headings over a clean sans, category tiles that widen on hover, products on pale wells in edge-to-edge rails, a half-and-half story with a vertical index, an espresso leather band and a black footer.",
-    type: "Libre Caslon Display · Manrope",
-    swatches: ["#FFFFFF", "#000000", "#F4F4F5", "#241915", "#C1000A"],
-  },
-  {
-    id: "v8",
-    name: "Outdoor lifestyle editorial",
-    reference: "finisterre.com",
-    summary: "A light grey page and one regular-weight grotesque, a sand announcement bar and sand buttons, a full-screen photo sequence under a clear header with mega menus, navy underlined links, full-bleed banners with a white card and round stamp, a three-column journal and a light footer.",
-    type: "Instrument Sans",
-    swatches: ["#F6F6F6", "#010B13", "#E7DDBB", "#384972", "#C1000A"],
-  },
-  {
-    id: "v9",
-    name: "Performance heritage",
-    reference: "rapha.cc",
-    secondary: "finisterre.com, bucherer.com",
-    summary: "Bold condensed capitals over a reading serif in black and white: a scrolling offers bar, mega menus, a full-bleed campaign hero, products on pale wells with round quick adds, tall category and story cards, a brand statement on sand under a turning stamp, a 2×2 gift edit and a promise row.",
-    type: "Archivo (condensed) · Newsreader",
-    swatches: ["#FFFFFF", "#0B0B0B", "#F2F2F2", "#ECE4D2", "#C1000A"],
+    id: "v12",
+    name: "Numbered",
+    reference: "ghurka.com",
+    summary: "A white, photo-led page where every wallet is named by its model number: 720px photo pairs, product rails that run off the edge, a soft serif over a plain grotesk, and no capitals anywhere.",
+    type: "Newsreader · Hanken Grotesk",
+    swatches: ["#FFFFFF", "#F4F2F1", "#140D0A", "#776E6E", "#20202C"],
   },
 ];

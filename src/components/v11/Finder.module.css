@@ -1,0 +1,36 @@
+/* v11rule.md §6 wallet finder */
+.finder { background: var(--clr-ink); color: #fff; padding-block: 112px; }
+
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.steps button {
+  width: 100%; display: flex; align-items: center; gap: 10px; padding-bottom: 12px; text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.45);
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.steps button:disabled { cursor: default; }
+.steps i { font-style: normal; flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid currentColor; display: grid; place-items: center; font-size: 10px; letter-spacing: 0; }
+.steps .on button { color: #fff; border-color: var(--clr-brass); }
+.steps .on i { background: var(--clr-brass); border-color: var(--clr-brass); color: var(--clr-ink); }
+.steps .done button { color: var(--clr-on-ink); }
+.steps .done button:hover { color: #fff; }
+
+.question { margin-top: 32px; display: grid; gap: 16px; }
+.question h3 { font-size: 22px; color: #fff; }
+.opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.opts button {
+  border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--radius); padding: 12px 20px;
+  font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: background-color var(--t), color var(--t), border-color var(--t);
+}
+.opts button:hover { background: #fff; color: var(--clr-ink); border-color: #fff; }
+
+.results { margin-top: 36px; display: grid; gap: 16px; color: var(--clr-ink); }
+.results > p { color: var(--clr-on-ink); font-size: var(--fs-sm); display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; }
+.results > p button { color: #fff; text-decoration: underline; text-underline-offset: 4px; font-size: var(--fs-sm); }
+.results ul { list-style: none; padding: 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); background: var(--clr-bg); border-radius: var(--radius-sm); }
+
+@media (max-width: 959px) { .results ul { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 599px) {
+  .finder { padding-block: 56px; }
+  .steps { grid-template-columns: 1fr; gap: 6px; }
+  .results ul { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 72%; overflow-x: auto; scrollbar-width: none; }
+}

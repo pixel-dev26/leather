@@ -1,0 +1,13 @@
+/* v11rule.md §6 product card, premium pass */
+.card { position: relative; display: grid; gap: 12px; align-content: start; }
+.well { position: relative; display: block; aspect-ratio: 4 / 5; background: var(--clr-well); border-radius: var(--radius-sm); overflow: hidden; }
+.well img { object-fit: contain; padding: 11%; mix-blend-mode: multiply; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card:hover .well img { transform: scale(1.04); }
+.new { position: absolute; top: 14px; left: 14px; font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+.heart { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; display: grid; place-items: center; opacity: 0.7; transition: opacity var(--t), color var(--t); }
+.heart:hover { opacity: 1; color: var(--clr-brass); }
+.card .name { font-family: var(--font-serif); font-size: 15px; line-height: 1.35; letter-spacing: 0; }
+.name a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.price { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: -4px; font-size: var(--fs-xs); color: var(--clr-ink-2); font-variant-numeric: tabular-nums; }
+.swatches { display: flex; gap: 5px; }
+.swatches i { width: 9px; height: 9px; border-radius: 50%; }

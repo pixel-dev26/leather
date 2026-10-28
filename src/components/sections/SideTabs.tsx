@@ -4,9 +4,9 @@ import styles from "./SideTabs.module.css";
 export default function SideTabs() {
   return (
     <aside className={styles.tabs} aria-label="Quick links">
-      <a href="#trade" className={`${styles.tab} ${styles.trade}`}>Trade enquiries</a>
-      <a href="mailto:sales@morucha.co.uk?subject=Swatch%20box" className={`${styles.tab} ${styles.swatch}`}>
-        Request swatches
+      <a href="#trade" className={`${styles.tab} ${styles.trade}`}>Wholesale enquiries</a>
+      <a href="mailto:sales@fbco.com.au?subject=Size%20help" className={`${styles.tab} ${styles.swatch}`}>
+        Size help
       </a>
     </aside>
   );

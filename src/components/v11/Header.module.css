@@ -1,0 +1,67 @@
+/* v11rule.md §6 announcement line, header, full-width menu and drawer (premium pass) */
+.bar { background: var(--clr-ink); color: rgba(255, 255, 255, 0.78); text-align: center; font-size: var(--fs-label); font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 11px var(--gutter); }
+
+.header {
+  position: sticky; top: 0; z-index: 30; height: 76px; background: var(--clr-bg); border-bottom: 1px solid var(--clr-hair);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 28px; padding-inline: var(--gutter);
+}
+.header ul { list-style: none; padding: 0; display: flex; gap: 28px; }
+.left, .right { min-width: 0; }
+.right { display: flex; justify-content: flex-end; align-items: center; gap: 28px; }
+.item > a {
+  position: relative; display: block; padding-block: 28px; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap;
+}
+.item > a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease); }
+.item > a:hover::after, .item > a.hot::after, .item > a:focus-visible::after { transform: scaleX(1); }
+
+.logo { display: block; justify-self: center; }
+.logo img { height: 28px; width: auto; display: block; }
+.icons { display: flex; gap: 14px; }
+.icons > * { width: 34px; height: 34px; display: grid; place-items: center; }
+.icons > *:hover { opacity: 0.6; }
+.menuBtn { display: none; width: 38px; height: 38px; place-items: center; }
+
+/* full-width column menu */
+.mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--clr-bg); border-bottom: 1px solid var(--clr-hair); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; }
+.megaOpen { opacity: 1; visibility: visible; transform: none; }
+.megaInner { max-width: var(--page-max); margin-inline: auto; padding: 40px var(--gutter) 48px; display: grid; grid-template-columns: repeat(3, 1fr) 1.6fr; gap: 48px; }
+.megaInner > div { display: grid; gap: 14px; align-content: start; }
+.megaInner ul { display: grid; gap: 4px; }
+.megaInner ul a { font-family: var(--font-serif); font-size: 15px; line-height: 2; }
+.megaInner ul a:hover { color: var(--clr-ink-2); }
+.feature { display: grid; gap: 12px; grid-column: 4; }
+.featureImg { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius-sm); overflow: hidden; }
+.featureImg img { object-fit: cover; transition: transform 1s var(--ease); }
+.feature:hover .featureImg img { transform: scale(1.03); }
+.featureText { font-family: var(--font-serif); font-size: 15px; display: flex; align-items: baseline; gap: 14px; }
+
+/* drawer (under 1100px) */
+.scrim { position: fixed; inset: 0; z-index: 40; background: rgba(28, 27, 25, 0.4); opacity: 0; pointer-events: none; transition: opacity var(--t); }
+.drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 41; width: min(400px, 100%); background: var(--clr-bg);
+  padding: 18px 28px 32px; transform: translateX(-100%); transition: transform 0.4s var(--ease); overflow-y: auto;
+}
+.open.scrim { opacity: 1; pointer-events: auto; }
+.open.drawer { transform: none; }
+.close { width: 38px; height: 38px; display: grid; place-items: center; margin-left: -10px; }
+.drawerList { list-style: none; padding: 16px 0 0; display: grid; }
+.drawerList > li > a, .drawerList summary { display: flex; justify-content: space-between; padding-block: 16px; border-bottom: 1px solid var(--clr-hair); font-family: var(--font-serif); font-size: 20px; cursor: pointer; list-style: none; }
+.drawerList summary::-webkit-details-marker { display: none; }
+.drawerList summary::after { content: "+"; font-family: var(--font-sans); font-weight: 300; }
+.drawerList details[open] summary::after { content: "−"; }
+.drawerCol { display: grid; gap: 8px; padding: 16px 0 8px; }
+.drawerCol ul { list-style: none; padding: 0; display: grid; gap: 4px; }
+.drawerCol a { font-size: var(--fs-sm); }
+
+@media (max-width: 1099px) {
+  .header { grid-template-columns: auto 1fr auto; height: 64px; }
+  .menuBtn { display: grid; margin-left: -8px; }
+  .left, .right nav { display: none; }
+  .logo { justify-self: center; }
+  .logo img { height: 24px; }
+}
+@media (max-width: 599px) {
+  .bar { letter-spacing: 0.12em; font-size: 9px; }
+  .icons .hideSm { display: none; }
+  .icons { gap: 4px; }
+}

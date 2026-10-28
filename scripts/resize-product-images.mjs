@@ -6,7 +6,7 @@
 // Re-run whenever the product photos change:  npm run images   (add -- --force to remake every copy)
 // Copies newer than their original are skipped, and copies whose original is gone are deleted.
 // Keep WIDTHS in step with src/lib/image-loader.ts, src/components/v5/ProductPhoto.jsx and the sized()
-// helper in public/v5/main.js.
+// helper in public/morucha/main.js.
 // sharp ships with Next.js (an optional dependency of `next`), so nothing extra needs installing.
 
 import fs from "node:fs/promises";

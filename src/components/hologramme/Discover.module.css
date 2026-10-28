@@ -1,0 +1,79 @@
+/* hologramme-rule.md §7 tabs, trending stage, colour explorer, shop the look */
+
+/* tabs */
+.tabs { display: flex; justify-content: center; gap: 28px; margin: -12px 0 28px; flex-wrap: wrap; }
+.tabs button { font-size: 15px; color: var(--clr-text-2); padding: 4px 0; }
+.tabs button:hover { color: var(--clr-text); }
+.tabs .tabOn { color: var(--clr-text); text-decoration: underline; text-underline-offset: 6px; }
+.panel { animation: fade 0.4s ease-out; }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } }
+.center { text-align: center; margin: 24px 0 0; }
+
+/* trending stage */
+.stage { position: relative; min-height: 520px; display: grid; place-items: center; background: var(--clr-well); overflow: hidden; container-type: inline-size; }
+.words {
+  position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 0.95;
+  font-family: var(--font-serif); color: transparent; -webkit-text-stroke: 1.2px var(--clr-outline-word); user-select: none;
+}
+/* sized so the longest word (HOLOGRAMME, 10 letters) fits the panel width */
+.words span { font-size: clamp(36px, 8.4cqi, 150px); letter-spacing: 0.12em; white-space: nowrap; }
+.words small { font: 500 clamp(12px, 1.8cqi, 26px)/1.4 var(--font-sans); letter-spacing: 0.4em; color: var(--clr-outline-word); -webkit-text-stroke: 0; margin-top: 12px; }
+.product { position: relative; width: min(34%, 400px); aspect-ratio: 1; }
+.product img { object-fit: contain; mix-blend-mode: multiply; opacity: 0; transform: scale(0.96); transition: opacity 0.5s ease, transform 0.5s ease; }
+.product img.shown { opacity: 1; transform: none; }
+.dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; }
+.dots button { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--clr-well); outline: 1px solid var(--clr-text-3); transition: outline-color var(--t); }
+.dots .dotOn { outline: 1.5px solid var(--clr-text); }
+.mini {
+  position: absolute; right: 32px; bottom: 90px; display: flex; gap: 12px; align-items: center; padding: 10px 16px 10px 10px;
+  border-radius: var(--radius-panel); background: rgba(250, 255, 244, 0.85); backdrop-filter: blur(6px); font-size: var(--fs-xs);
+}
+.mini b { display: block; font-family: var(--font-serif); font-weight: 400; font-size: 15px; }
+.mini:hover b { color: var(--clr-action); }
+.miniImg { position: relative; flex: none; width: 56px; height: 56px; border-radius: var(--radius-arrow); overflow: hidden; background: var(--clr-white); }
+.miniImg img { object-fit: cover; }
+
+/* colour explorer */
+.colours { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin: -10px 0 24px; }
+.colours button { display: inline-flex; align-items: center; gap: 9px; font-size: var(--fs-body); color: var(--clr-text-2); }
+.colours button:hover, .colours .colourOn { color: var(--clr-text); }
+.colours .colourOn { text-decoration: underline; text-underline-offset: 6px; }
+.colours i { width: 22px; height: 22px; border-radius: 50%; outline: 1px solid var(--clr-line); outline-offset: 2px; }
+.colourImg { position: relative; aspect-ratio: 16 / 7; border-radius: var(--radius-panel); overflow: hidden; background: var(--clr-well); }
+.colourImg img { object-fit: cover; opacity: 0; transition: opacity 0.6s ease; }
+.colourImg img.shown { opacity: 1; }
+.colourLink { position: absolute; left: 24px; bottom: 24px; background: var(--clr-bg); border-radius: 999px; padding: 8px 18px; font-size: var(--fs-xs); }
+.colourLink:hover { background: var(--clr-band); }
+
+/* shop the look */
+/* edge to edge: no side gutter or rounded corners, capped so it never fills more than ~80% of the screen height */
+.look { position: relative; width: 100%; aspect-ratio: 16 / 7; max-height: 80vh; min-height: 420px; overflow: hidden; }
+.look > img { object-fit: cover; }
+.spot { position: absolute; z-index: 1; }
+.hot {
+  position: relative; display: grid; place-items: center; width: 32px; height: 32px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: rgba(250, 255, 244, 0.92); font-size: var(--fs-xs); box-shadow: 0 0 0 7px rgba(250, 255, 244, 0.35);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.hotOn { background: var(--clr-action); color: var(--clr-white); animation: none; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 11px rgba(250, 255, 244, 0.15); } }
+.lookCard {
+  position: absolute; left: 26px; top: -36px; width: 270px; display: flex; gap: 12px; align-items: center;
+  padding: 10px; border-radius: var(--radius-panel); background: var(--clr-bg); font-size: var(--fs-xs); animation: fade 0.3s ease-out;
+}
+.lookCardLeft { left: auto; right: 26px; }
+.lookCard .miniImg { width: 60px; height: 60px; }
+.lookCard b { display: block; font-family: var(--font-serif); font-weight: 400; font-size: 15px; line-height: 1.3; }
+.lookCard u { color: var(--clr-action); text-underline-offset: 3px; }
+
+@media (max-width: 599px) {
+  .stage { min-height: 400px; }
+  .product { width: 60%; }
+  .mini { right: 12px; left: 12px; bottom: 64px; }
+  .colourImg, .look { aspect-ratio: 4 / 3; }
+  .colours { gap: 14px 20px; }
+  .lookCard { width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hot { animation: none; }
+}
