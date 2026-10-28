@@ -69,10 +69,12 @@ export const versions: Version[] = [
   },
   {
     id: "v12",
-    name: "Numbered",
+    name: "Cuero",
+    domain: "cuero.in",
     reference: "ghurka.com",
-    summary: "A white, photo-led page where every wallet is named by its model number: 720px photo pairs, product rails that run off the edge, a soft serif over a plain grotesk, and no capitals anywhere.",
+    secondary: "cuero.in (client logo, photos, film and products, used with permission)",
+    summary: "The v12 layout for Cuero: ivory pages and dark-brown ink, Cuero's own photography and workshop film, New Arrivals and Top Picks rails, Shop by Style, a close-up of the Royce Derby and editorial banners.",
     type: "Newsreader · Hanken Grotesk",
-    swatches: ["#FFFFFF", "#F4F2F1", "#140D0A", "#776E6E", "#20202C"],
+    swatches: ["#FBF9F4", "#F2EEE6", "#2B2019", "#7A6E64", "#B08A3E"],
   },
 ];

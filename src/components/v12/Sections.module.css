@@ -29,6 +29,8 @@
 .matImg { position: relative; display: block; height: 320px; overflow: hidden; }
 .matImg img { object-fit: cover; transition: transform 1.2s var(--ease); }
 .mat:hover .matImg img { transform: scale(1.03); }
+.matContain { background: var(--clr-well); }
+.matContain img { object-fit: contain; padding: 10%; mix-blend-mode: multiply; }
 
 .story { padding-block: 110px 104px; }
 .tbc { color: var(--clr-ink-2); font-style: italic; }

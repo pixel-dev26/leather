@@ -38,8 +38,8 @@ export default function Header() {
           <nav aria-label="Shop"><ul>{navLeft.map((n) => <li key={n.label}><a href={n.href}>{n.label}</a></li>)}</ul></nav>
           <button className={styles.searchSm} aria-label="Search"><Icon name="search" size={19} /></button>
         </div>
-        <a href="#top" className={styles.logo} aria-label="Morucha home">
-          <Image src={logo} alt="" width={180} height={45} priority />
+        <a href="#top" className={styles.logo} aria-label="Cuero home">
+          <Image src={logo} alt="" width={763} height={257} priority />
         </a>
         <div className={styles.right}>
           <nav aria-label="About"><ul>{navRight.map((n) => <li key={n.label}><a href={n.href}>{n.label}</a></li>)}</ul></nav>

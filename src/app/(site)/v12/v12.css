@@ -1,14 +1,15 @@
 /* v12 design tokens and base styles, see v12rule.md. Everything is scoped under .v12 so other versions are untouched. */
 .v12 {
   /* colour (§2), measured on ghurka.com */
-  --clr-bg: #ffffff;
-  --clr-ink: #140d0a;
-  --clr-ink-2: #776e6e;
-  --clr-well: #f4f2f1;
-  --clr-band: #20202c;
-  --clr-btn: #13142a;
-  --clr-field: #e9ecef;
-  --clr-hair: #ece8e5;
+  /* Cuero: v12's white warmed to ivory and its ink to dark brown, to sit with Cuero's warm-lit photography */
+  --clr-bg: #fbf9f4;
+  --clr-ink: #2b2019;
+  --clr-ink-2: #7a6e64;
+  --clr-well: #f2eee6;
+  --clr-band: #2b2019;
+  --clr-btn: #2b2019;
+  --clr-field: #ece6db;
+  --clr-hair: #e8e1d6;
   --clr-fade: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.42) 100%);
 
   /* type (§3) */

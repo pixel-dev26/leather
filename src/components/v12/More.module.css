@@ -1,4 +1,4 @@
-/* v12rule.md §9 revision 2 sections (section types from cuero.in, Morucha's own photos) */
+/* v12rule.md §9 revision 2 sections (section types from cuero.in; client photos and film are Cuero's own) */
 .section { padding-block: 88px 96px; }
 .head { display: grid; justify-items: center; gap: 14px; margin-bottom: 36px; padding-inline: var(--gutter); text-align: center; }
 .sub { color: var(--clr-ink-2); font-weight: 400; }
@@ -43,6 +43,9 @@
 .banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 8, 6, 0.72) 0%, rgba(10, 8, 6, 0.35) 48%, rgba(10, 8, 6, 0) 75%); }
 .bannerText { position: absolute; z-index: 1; left: 96px; top: 50%; transform: translateY(-50%); max-width: 470px; display: grid; gap: 18px; color: #fff; }
 .bannerText p { font-size: 16px; font-weight: 400; line-height: 1.6; color: rgba(255, 255, 255, 0.88); }
+.film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.right::after { background: linear-gradient(270deg, rgba(10, 8, 6, 0.72) 0%, rgba(10, 8, 6, 0.35) 48%, rgba(10, 8, 6, 0) 75%); }
+.right .bannerText { left: auto; right: 96px; }
 .rule { width: 48px; height: 1px; background: rgba(255, 255, 255, 0.7); }
 .lightBtn { justify-self: start; border-color: rgba(255, 255, 255, 0.9); background: rgba(248, 249, 250, 0.12); }
 .lightBtn:hover { background: #fff; color: var(--clr-ink); border-color: #fff; }
@@ -57,7 +60,7 @@
 /* reviews */
 .reviews { display: grid; grid-template-columns: 1fr 1fr; min-height: 640px; }
 .reviewImg { position: relative; min-height: 640px; overflow: hidden; }
-.reviewText { padding: 96px 112px; display: grid; align-content: center; gap: 26px; background: #efebe7; }
+.reviewText { padding: 96px 112px; display: grid; align-content: center; gap: 26px; background: #efe8dc; }
 .quote { margin: 0; font-family: var(--font-serif); font-weight: 300; font-size: 30px; line-height: 1.35; color: var(--clr-ink-2); font-style: italic; }
 .who { display: grid; gap: 2px; }
 .who span { color: var(--clr-ink-2); }
@@ -68,7 +71,7 @@
 
 /* promises */
 .promises { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #e6e0dc; border-block: 1px solid #e6e0dc; }
-.promises li { background: #fff; display: grid; justify-items: center; align-content: start; gap: 12px; padding: 56px 28px 60px; text-align: center; }
+.promises li { background: var(--clr-bg); display: grid; justify-items: center; align-content: start; gap: 12px; padding: 56px 28px 60px; text-align: center; }
 .promIcon { stroke-width: 1.1; }
 .promises h3 { font-family: var(--font-serif); font-weight: 400; font-size: 22px; line-height: 1.2; }
 .promises p { max-width: 230px; color: var(--clr-ink-2); font-size: 13px; font-weight: 400; }
@@ -82,8 +85,8 @@
   .look { grid-template-columns: 1fr 1fr; grid-template-rows: 420px 280px 300px; }
   .lookItem:first-child { grid-row: 1; grid-column: 1 / 3; }
   .lookItem:last-child { grid-column: 1 / 3; }
-  .bannerText { left: var(--gutter); right: var(--gutter); top: auto; bottom: 48px; transform: none; }
-  .banner::after { background: linear-gradient(180deg, rgba(10, 8, 6, 0.1) 30%, rgba(10, 8, 6, 0.75) 100%); }
+  .bannerText, .right .bannerText { left: var(--gutter); right: var(--gutter); top: auto; bottom: 48px; transform: none; }
+  .banner::after, .right::after { background: linear-gradient(180deg, rgba(10, 8, 6, 0.1) 30%, rgba(10, 8, 6, 0.75) 100%); }
   .promises { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 599px) {
@@ -104,4 +107,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .track { animation: none; }
+  .film { display: none; }
 }

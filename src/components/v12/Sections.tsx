@@ -45,7 +45,7 @@ export function Leathers() {
         {leathers.items.map((m) => (
           <li key={m.title}>
             <a href={m.href} className={styles.mat}>
-              <span className={styles.matImg}><Image src={m.image.src} alt={m.image.alt} fill sizes="(max-width: 599px) 78vw, 430px" /></span>
+              <span className={`${styles.matImg} ${"fit" in m && m.fit === "contain" ? styles.matContain : ""}`}><Image src={m.image.src} alt={m.image.alt} fill sizes="(max-width: 599px) 78vw, 430px" /></span>
               <span>{m.title}</span>
             </a>
           </li>

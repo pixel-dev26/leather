@@ -7,7 +7,7 @@ import styles from "./Footer.module.css";
 
 /**
  * v12rule.md §6 footer: an ink rule, four link columns with serif heads and the newsletter on the right (grey field, dark
- * button), then a second rule with the region, copyright and the Morucha bull where Ghurka has its seal.
+ * button), then a second rule with the region, copyright and the client’s logo where Ghurka has its seal.
  * The sign-up has no list behind it yet, so it only confirms on the page.
  */
 export default function Footer() {
@@ -44,7 +44,7 @@ export default function Footer() {
           <p className={styles.region}>{footer.region}</p>
           <p className={styles.copy}>{footer.copyright}</p>
         </div>
-        <Image src={logo} alt="Morucha" width={136} height={34} className={styles.mark} />
+        <Image src={logo} alt="Cuero" width={763} height={257} className={styles.mark} />
       </div>
     </footer>
   );

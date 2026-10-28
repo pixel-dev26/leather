@@ -1,246 +1,217 @@
-// v12 "Numbered" home page copy and data (reference: ghurka.com, see v12rule.md). Every product, price and photo comes
-// from the live store data in ./products.json and /public; the product records are v11's, renamed the Ghurka way
-// ("Soft Bifold No. 2028") from the M-code in each store title. A product without an M-code keeps a plain name; no
-// number is ever made up. [TBC] marks anything that still needs confirming by Morucha.
+// v12 home page, client: Cuero (cuero.in). Layout and section types are v12's (v12rule.md); the logo, photographs,
+// workshop film, product names and prices are Cuero's own, used with Cuero's permission (collected 28 Oct 2026 from
+// cuero.in and its Shopify product feed; files in /public/images/cuero). Headings and lines are newly written from
+// Cuero's stated facts (made to order, ships within 25 days, Pune atelier since 2014, free shipping across India) for
+// Cuero to approve. [TBC] marks anything Cuero still has to supply. Board: https://claude.ai/artifact/JAVtWyBpZzFERyBKMSExrq
+// The Morucha v12 this replaced is in git history at commit 05d2f9f.
 
-import { cards as v11Cards, type Card } from "./home-v11";
-import { getProduct } from "./products";
+const c = (file: string) => `/images/cuero/${file}.webp`;
+const shoe = (file: string) => `/images/cuero/products/${file}.webp`;
+const store = (handle: string) => `https://cuero.in/products/${handle}`;
+const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
-const img = (file: string) => `/images/banners/${file}.webp`;
-
-export const logo = "/brand/morucha-logo.webp";
+export const logo = "/images/cuero/logo.png";
 
 /* ------------------------------------------------------------------ products */
 
-export type NumberedCard = Card & { hover?: string; tag?: string };
-
-// Short shape names drafted from the store titles (concept board §08: still open for Morucha to change)
-const names: Record<string, string> = {
-  "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028": "Soft Bifold",
-  "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy": "Vertical Wallet",
-  "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m2015-black-tan": "Soft Bifold",
-  "morucha-men-s-tap-go-rfid-blocking-leather-wallet-minimalist-passcase-bifold-with-external-card-pocket-m130-black": "Tap & Go Wallet",
-  "morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy": "Passcase",
-  "morucha-men-s-rfid-blocking-genuine-leather-wallet-slim-bifold-card-holder-with-id-window-8-card-slots-m110-tan": "Slim Bifold",
-  "morucha-men-s-distressed-hunter-leather-rfid-blocking-wallet-m105-dark-brown": "Hunter Wallet",
-  "men-rfid-blocking-real-soft-leather-passcase-wallet-black-brown": "Passcase Bifold",
-  "morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90": "Clutch Wallet",
-  "morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95": "Clutch Wallet",
-  "mens-rfid-hunter-leather-billfold-wallet": "Hunter Billfold",
-  "minimalist-genuine-leather-rfid-wallet-black-orange": "Slim Tap and Go Wallet",
-  "2-in-1-compact-business-card-holder-wallet": "2-in-1 Card Holder Wallet",
-  "mens-rfid-nappa-leather-billfold-wallet": "Nappa Billfold",
+export type NumberedCard = {
+  handle: string;
+  name: string;
+  price: string;
+  href: string;
+  image: { src: string; alt: string };
+  hover?: string;
+  swatches: { name: string; fill: string }[];
+  tag?: string;
 };
 
-function numbered(c: Card): NumberedCard {
-  const p = getProduct(c.handle);
-  const title = p?.title ?? "";
-  // The model code as the store title writes it: M-75, M95, M2028, M-2028 … The vertical M-2028 "copy" is M2025.
-  const code = /\bM-?\s?(\d{2,4})\b(?![\s\S]*\bM-?\s?\d{2,4}\b)/.exec(title)?.[1];
-  const base = names[c.handle] ?? c.name.replace(/\s+M\d+$/, "");
+const hex = { brown: "#5a3624", black: "#1d1b1a", blue: "#2b3550", green: "#3f4a34", chestnut: "#8a4b2a", tan: "#b07a45" };
+const sw = (...names: (keyof typeof hex)[]) => names.map((n) => ({ name: n[0].toUpperCase() + n.slice(1), fill: hex[n] }));
+
+// Cuero's store names without the brand prefix, its prices, and its own photos (first photo, second on hover)
+function product(handle: string, name: string, price: number, swatches: NumberedCard["swatches"], files = handle, compareAt?: number): NumberedCard {
   return {
-    ...c,
-    name: code ? `${base} No. ${code}` : base,
-    hover: p?.images[1]?.src,
-    tag: /gift box/i.test(title) ? "Gift box" : undefined,
+    handle,
+    name,
+    price: inr(price),
+    href: store(handle),
+    image: { src: shoe(`${files}-1`), alt: `Cuero ${name}` },
+    hover: shoe(`${files}-2`),
+    swatches,
+    tag: compareAt ? `Was ${inr(compareAt)}` : undefined,
   };
 }
 
-const byHandle = new Map(v11Cards.map((c) => [c.handle, c]));
-const pick = (handles: string[]) =>
-  handles.map((h) => {
-    const c = byHandle.get(h);
-    if (!c) throw new Error(`Product not available in products.json: ${h}`);
-    return numbered(c);
-  });
-
-const newest = v11Cards.filter((c) => c.isNew);
-const newestYear = getProduct(newest[0]?.handle ?? "")?.createdAt.slice(0, 4) ?? "2026";
-const words = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-
-// Two-tone and multi-colour wallets first, then single colours, as on the concept board
-const newOrder = [
-  "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028",
-  "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028-copy",
-  "morucha-men-s-distressed-hunter-leather-rfid-blocking-wallet-m105-dark-brown",
-  "morucha-men-s-tap-go-rfid-blocking-leather-wallet-minimalist-passcase-bifold-with-external-card-pocket-m130-black",
-  "morucha-men-s-rfid-blocking-soft-leather-passcase-wallet-bifold-card-holder-with-id-windows-gift-box-m115-burgundy",
-  "morucha-men-s-rfid-blocking-genuine-leather-wallet-slim-bifold-card-holder-with-id-window-8-card-slots-m110-tan",
-];
+// From Cuero's "New Arrival" collection
 export const newIn = {
-  title: "New In",
-  items: pick([...newOrder, ...newest.map((c) => c.handle).filter((h) => !newOrder.includes(h))]),
+  title: "New Arrivals",
+  items: [
+    product("dark-brown-derby-shoes-for-men-full-grain-calf-leather", "Royce Derby", 15900, sw("brown", "black"), "royce-derby"),
+    product("cuero-matrix-monks", "Meridian Matrix Monks", 15900, sw("brown")),
+    product("cuero-stride-pebble-grain-loafers-midnight-blue", "Meridian Stride Pebble-Grain Loafers", 15900, sw("blue")),
+    product("cuero-legacy-mules", "Meridian Legacy Mules", 12500, sw("brown")),
+    product("cuero-signature-woven-sliders", "Meridian Signature Woven Sliders", 9500, sw("tan")),
+    product("cuero-chairman-briefcase", "Chairman Briefcase", 7650, sw("black", "brown", "green", "blue"), undefined, 8999),
+  ],
 };
 
-// The same bestseller list v11 uses
+// From Cuero's "Top Picks" collection
 export const bestsellers = {
-  title: "Our Bestsellers",
-  items: pick([
-    "mens-rfid-hunter-leather-billfold-wallet",
-    "men-rfid-blocking-real-soft-leather-passcase-wallet-black-brown",
-    "minimalist-genuine-leather-rfid-wallet-black-orange",
-    "morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m90",
-    "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028",
-    "morucha-clutch-wallet-for-women-genuine-leather-rfid-blocking-high-capacity-cardholder-m95",
-    "2-in-1-compact-business-card-holder-wallet",
-    "mens-rfid-nappa-leather-billfold-wallet",
-  ]),
+  title: "Top Picks",
+  items: [
+    product("ascent-peshawari-sandals-brown", "Ascent Peshawari Sandals Brown", 12500, sw("brown")),
+    product("ascent-kensington-suede-loafers-blue", "Ascent Kensington Suede Loafers Blue", 15900, sw("blue")),
+    product("cuero-jodhpur-boots-chestnut", "Jodhpur Boots Chestnut", 17900, sw("chestnut")),
+    product("sliders-in-blue-goat-suede-arch-support-comfort", "Azure Sliders", 8500, sw("blue")),
+    product("parker-brown", "Parker Loafers Brown", 16900, sw("brown")),
+    product("cuero-obsidian-tommy-loafers", "Obsidian Tommy Loafers", 14900, sw("black")),
+    product("amari-loafers-black", "Amari Loafers Black", 14900, sw("black")),
+    product("peshawari-sandals-men", "Peshawari Sandals", 12500, sw("brown")),
+  ],
 };
 
 /* ------------------------------------------------------------------ header */
 
-export const announcement = "Free UK delivery, and orders before 3.30pm leave the same day.";
+export const announcement = "Every pair is made to order and ships within 25 days. Free shipping across India.";
 
 export const navLeft = [
-  { label: "New In", href: "#new" },
-  { label: "Men", href: "#men" },
-  { label: "Women", href: "#women" },
-  { label: "Card Holders", href: "#card-holders" },
-  { label: "Gifts", href: "#gifts" },
+  { label: "New Arrivals", href: "#new" },
+  { label: "Loafers", href: "#styles" },
+  { label: "Oxfords & Derbies", href: "#styles" },
+  { label: "Sliders & Sandals", href: "#styles" },
+  { label: "Accessories", href: "#new" },
 ];
 export const navRight = [{ label: "Our Story", href: "#story" }];
 
 /* ------------------------------------------------------------------ sections */
 
 export const hero = {
-  title: `The ${newestYear} Range`,
-  text: `${words[newest.length] ?? newest.length} new wallets in soft and hunter leather.`.replace(/^./, (s) => s.toUpperCase()),
+  title: "The Meridian Line",
+  text: "Six new monks, loafers, mules and sliders.",
   cta: { label: "Explore the Collection", href: "#new" },
-  image: { src: img("v1-banner-3"), alt: "Man in a blue suit holding a Morucha leather wallet" },
+  image: { src: c("hero"), alt: "Cuero loafers and sandals on brass plinths beside lit diyas" },
 };
 
 export const pairs = [
   [
-    { id: "men", title: "Men", href: "#new", image: { src: img("banner-3"), alt: "Man sliding a leather wallet into his jacket pocket", position: "50% 30%" } },
-    { id: "women", title: "Women", href: "#bestsellers", image: { src: img("women-purse"), alt: "Woman holding a two-tone leather purse", position: "50% 40%" } },
-  ],
-  [
-    { id: "card-holders", title: "Card Holders", href: "#bestsellers", image: { src: img("card-holder"), alt: "Hands opening a black leather card holder", position: "50% 45%" } },
-    { id: "gifts", title: "Gifts", href: "#bestsellers", image: { src: img("insta-4"), alt: "Black leather wallet beside a Morucha gift box", position: "50% 50%" } },
+    { id: "derby", title: "Derby", href: "#styles", image: { src: c("col-derby"), alt: "Brown derby shoes on sunlit stone steps", position: "50% 70%" } },
+    { id: "moccasins", title: "Moccasins", href: "#styles", image: { src: c("col-moccasins"), alt: "Black and brown moccasins on a terracotta floor", position: "50% 60%" } },
   ],
 ];
 
 export const leathers = {
   title: "Choose Your Leather",
-  text: "Distressed hunter leather that wears in, soft leather for a slim pocket, smooth nappa, or a two-tone pairing. Pick the leather first, then the shape.",
+  text: "Full-grain calf for a sharp shine, suede for a softer finish, pebble grain for texture, or woven leather for summer. Pick the leather, then the shape.",
   items: [
-    { title: "Hunter Leather", href: "#bestsellers", image: { src: img("since-1"), alt: "Open hunter leather wallet on a workbench" } },
-    { title: "Soft Leather", href: "#new", image: { src: img("hunter-leather"), alt: "Black soft leather wallet" } },
-    { title: "Two-Tone", href: "#new", image: { src: img("tanned-with"), alt: "Two-tone leather wallets laid out on wood" } },
-    { title: "Colour", href: "#bestsellers", image: { src: img("new-leather-1"), alt: "Leather colour swatches beside finished wallets" } },
+    { title: "Full-grain Calf", href: "#new", fit: "contain", image: { src: shoe("royce-derby-5"), alt: "Royce Derby in full-grain calf leather" } },
+    { title: "Suede", href: "#bestsellers", fit: "contain", image: { src: shoe("ascent-kensington-suede-loafers-blue-1"), alt: "Kensington loafers in blue suede" } },
+    { title: "Pebble Grain", href: "#new", fit: "contain", image: { src: shoe("cuero-stride-pebble-grain-loafers-midnight-blue-1"), alt: "Stride loafers in midnight-blue pebble-grain leather" } },
+    { title: "Woven", href: "#new", fit: "contain", image: { src: shoe("cuero-signature-woven-sliders-1"), alt: "Signature sliders in woven leather" } },
   ],
 };
 
 export const story = {
-  title: "Since [TBC]",
-  text: "[TBC: the founding story, two or three sentences in Morucha’s own words: who started it, where, and why.]",
-  cta: { label: "Our Story", href: "#story" },
+  title: "Since 2014",
+  text: "Cuero has been making shoes in its Pune atelier since 2014: leather from established tanneries, cut and finished by its own craftsmen, and each pair made once it’s ordered.",
+  cta: { label: "Our Story", href: "https://cuero.in/pages/our-story" },
 };
 
 /* ------------------------------------------------------------------ footer */
 
 export const footer = {
   columns: [
-    { title: "Help", links: ["Delivery", "Returns", "Contact Us", "FAQs"] },
-    { title: "Shop", links: ["Men", "Women", "Card Holders", "Gifts"] },
-    { title: "About Us", links: ["Our Story", "Our Leather", "Instagram [TBC]"] },
+    { title: "Shop", links: ["New Arrivals", "Footwear", "Accessories", "Gift Cards"] },
+    { title: "Explore", links: ["Our Story", "Contact Us", "Journal"] },
+    { title: "Help", links: ["Shipping", "Refunds", "Privacy", "Terms"] },
   ],
-  newsletter: {
-    title: "Sign Up for Our Newsletter",
-    text: "New leathers first, and offers for subscribers. [TBC: sign-up discount]",
-  },
-  region: "United Kingdom (GBP £)",
-  copyright: `© ${new Date().getFullYear()} Morucha`,
+  newsletter: { title: "Join the List", text: "New pairs and workshop news, by email." },
+  region: "India (INR ₹)",
+  copyright: `© ${new Date().getFullYear()} Cuero`,
 };
 
-/* ------------------------------------------------------------------ revision 2 (cuero.in section types) */
-// Board: https://claude.ai/artifact/MdpdB9VTRzafnRGCGCSS6g. Section types and sizes follow cuero.in; every photo,
-// product and promise is Morucha's own.
+export const contact = { title: "Cuero", lines: ["Sr no 33/1/4/1, Pandurang Industrial Area,", "Wadgaon Khurd, Pune 411041", "info@cuero.in"] };
 
-export const factsStrip = ["Free UK delivery", "Same-day dispatch before 3.30pm", "30-day returns", "Gift boxed", "RFID blocking"];
+/* ------------------------------------------------------------------ revision 2 sections */
 
-const styleCount = (style: Card["style"] | Card["style"][]) =>
-  v11Cards.filter((c) => (Array.isArray(style) ? style.includes(c.style) : c.style === style)).length;
+export const factsStrip = ["Made in India", "Made in our Pune atelier", "Crafting since 2014", "Made to order", "Free shipping across India"];
 
+// Counts are the sizes of Cuero's own collections on 28 Oct 2026
 export const styles = {
   title: "Shop by Style",
-  all: { label: "All styles", href: "#bestsellers" },
+  all: { label: "All styles", href: "https://cuero.in/collections/footwear" },
   items: [
-    { title: "Bifold Wallets", count: styleCount("bifold"), image: { src: img("insta-2"), alt: "Bifold leather wallets on a wooden table", position: "50% 50%" } },
-    { title: "Passcase Wallets", count: styleCount("passcase"), image: { src: img("since-2"), alt: "Passcase wallets with tab closures laid out together", position: "50% 50%" } },
-    { title: "Slim & Tap and Go", count: styleCount("slim"), image: { src: img("men-wallet"), alt: "Hand holding a slim black and orange leather wallet", position: "50% 40%" } },
-    { title: "Card Holders", count: styleCount("card holder"), image: { src: img("insta-5"), alt: "Navy leather card holder held open with a card", position: "40% 50%" } },
-    { title: "Clutch Wallets", count: styleCount("clutch"), image: { src: img("women-wallet"), alt: "Red leather clutch wallet held in both hands", position: "50% 50%" } },
-    { title: "Purses", count: styleCount("purse"), image: { src: img("banner-image-1"), alt: "Woman holding a colourful leather purse", position: "50% 40%" } },
-  ].map((s) => ({ ...s, href: "#bestsellers" })),
+    { title: "Loafers", count: 24, handle: "loafers", image: { src: c("col-loafers"), alt: "Brown penny loafers against a green wall", position: "50% 70%" } },
+    { title: "Oxfords", count: 7, handle: "oxfords-1", image: { src: c("col-oxfords"), alt: "Black oxfords on a dark plinth", position: "50% 60%" } },
+    { title: "Monks", count: 7, handle: "monks-1", image: { src: c("col-monks"), alt: "Burgundy double-monk shoes against a pink arch", position: "50% 70%" } },
+    { title: "Sliders", count: 12, handle: "sliders-1", image: { src: c("col-slides"), alt: "Black and navy leather sliders against a lilac wall", position: "50% 60%" } },
+    { title: "Sandals", count: 2, handle: "sandals", image: { src: c("col-sandals"), alt: "Brown Peshawari sandals on white steps", position: "50% 70%" } },
+    { title: "Boots", count: 2, handle: "boots-1", image: { src: c("col-boots"), alt: "Chestnut boots in a terracotta alcove", position: "50% 70%" } },
+  ].map((s) => ({ ...s, href: `https://cuero.in/collections/${s.handle}` })),
 };
 
-// One product up close: the M-2028 soft bifold, with facts taken from its store title and options
-const detailHandle = "morucha-men-s-rfid-blocking-leather-wallet-genuine-soft-leather-bifold-with-coin-pocket-id-windows-m-2028";
-const detailProduct = getProduct(detailHandle);
-const detailCard = byHandle.get(detailHandle);
-if (!detailProduct || !detailCard) throw new Error(`Product not available in products.json: ${detailHandle}`);
-const photo = (n: number) => detailProduct.images[n - 1]?.src ?? detailProduct.images[0].src;
+// The Royce Derby up close; facts from its listing on cuero.in
 export const detail = {
   label: "The Detail",
-  title: numbered(detailCard).name,
+  title: "Royce Derby",
   facts: [
-    { label: "Leather", value: "Soft leather, two-tone" },
-    { label: "Inside", value: "Coin pocket, ID windows" },
-    { label: "Protection", value: "RFID blocking" },
-    { label: "Colours", value: String(detailCard.swatches.length) },
-    { label: "Price", value: detailCard.price },
+    { label: "Upper", value: "Full-grain calf leather" },
+    { label: "Construction", value: "Goodyear-welted, stitched leather sole" },
+    { label: "Style", value: "Plain toe, three eyelets" },
+    { label: "Colours", value: "Brown, Black" },
+    { label: "Sizes", value: "UK 4–13" },
+    { label: "Price", value: inr(15900) },
   ],
-  main: { src: photo(11), alt: "Soft Bifold No. 2028 in black and tan, closed" },
+  main: { src: shoe("royce-derby-3"), alt: "A pair of Royce Derby shoes in dark brown" },
   thumbs: [
-    { src: photo(18), alt: "No. 2028 open with cards, notes and coins" },
-    { src: photo(10), alt: "The zipped coin pocket of No. 2028" },
+    { src: shoe("royce-derby-6"), alt: "Royce Derby from the side" },
+    { src: shoe("royce-derby-8"), alt: "Royce Derby showing the stitched leather sole" },
   ],
-  cta: { label: "Shop No. 2028", href: detailCard.href },
+  cta: { label: "Shop the Royce", href: store("dark-brown-derby-shoes-for-men-full-grain-calf-leather") },
 };
 
-export const hunterBanner = {
-  title: "Hunter Leather",
-  text: "Distressed leather that shows every year it’s carried. Wallets and trifolds, all with RFID blocking inside.",
-  cta: { label: "Shop Hunter Leather", href: "#bestsellers" },
-  image: { src: img("since-1"), alt: "Open hunter leather wallet on a workbench", position: "60% 50%" },
+export const rangeBanner = {
+  title: "The Elite Crafts",
+  text: "A short edit of Cuero’s most finished pairs, for the occasions that ask for them.",
+  cta: { label: "Discover the Edit", href: "https://cuero.in/collections/elite-crafts" },
+  image: { src: c("elite-crafts"), alt: "Grey tasselled loafer stepping past a vintage trunk", position: "30% 50%" },
+  align: "right" as const,
 };
 
 export const lookbook = {
-  title: "In Hand",
-  text: "Morucha wallets and purses, carried.",
+  title: "In the Making",
+  text: "Stills from Cuero’s workshop film.",
   items: [
-    { caption: "Burgundy leather", image: { src: img("insta-1"), alt: "Burgundy leather wallet held open with cards", position: "45% 50%" } },
-    { caption: "Clutch wallet", image: { src: img("insta-6"), alt: "Red leather clutch on a wooden table", position: "50% 50%" } },
-    { caption: "Tan leather", image: { src: img("card-holder-new"), alt: "Tan leather wallet held open with a card", position: "50% 50%" } },
-    { caption: "Two-tone bifold", image: { src: img("new-season"), alt: "Man in a blue suit holding a black and blue wallet", position: "50% 45%" } },
+    { caption: "Lasting", image: { src: c("film-f24"), alt: "Hands smoothing an insole onto a shoe last", position: "40% 50%" } },
+    { caption: "Cutting", image: { src: c("film-f45"), alt: "Cutting a leather pattern by hand", position: "50% 50%" } },
+    { caption: "Patterns", image: { src: c("film-f9"), alt: "Trimming a paper pattern with a knife", position: "50% 50%" } },
+    { caption: "The last", image: { src: c("film-f3"), alt: "A shoe last on the workbench", position: "50% 60%" } },
   ],
 };
 
 export const craftBanner = {
-  title: "Behind Every Wallet",
-  text: "Leather chosen, cut and stitched into wallets made for daily use.",
+  title: "Behind Every Pair",
+  text: "Cut, lasted and stitched by hand in Cuero’s Pune atelier.",
   cta: { label: "Our Story", href: "#story" },
-  image: { src: img("crafted-with"), alt: "Hands working leather at a workbench", position: "50% 45%" },
+  image: { src: c("film-f33"), alt: "A craftsman at the workbench", position: "50% 50%" },
+  video: "/images/cuero/workshop-loop.mp4",
+  align: "left" as const,
 };
 
-// Must be real, verified customer reviews before launch; nothing here is invented.
+// Verified reviews to be supplied by Cuero; nothing here is invented.
 export const reviews = {
   title: "What customers say",
   rating: "[TBC: rating and number of reviews]",
-  image: { src: img("insta-3"), alt: "Brown leather wallet held open with notes and cards" },
+  image: { src: c("film-f16"), alt: "Finishing a shoe at the bench" },
   items: [
-    { quote: "[A real, verified customer review, no more than 30 words, quoted exactly.]", name: "[First name, town]", product: "[product name and No.]" },
-    { quote: "[A second verified review: TBC.]", name: "[First name, town]", product: "[product]" },
-    { quote: "[A third verified review: TBC.]", name: "[First name, town]", product: "[product]" },
+    { quote: "[A verified Cuero customer review, supplied by Cuero.]", name: "[Name]", product: "[product]" },
+    { quote: "[A second verified review: TBC.]", name: "[Name]", product: "[product]" },
+    { quote: "[A third verified review: TBC.]", name: "[Name]", product: "[product]" },
   ],
 };
 
 export const promises = [
-  { icon: "van", title: "Free UK Delivery", text: "On every order, however small." },
-  { icon: "clock", title: "Same-Day Dispatch", text: "Order before 3.30pm and it leaves today." },
-  { icon: "return", title: "30-Day Returns", text: "Not right? Send it back within 30 days." },
-  { icon: "gift", title: "Gift Boxed", text: "Every wallet ships in a gift box." },
+  { icon: "van", title: "Free Shipping", text: "On every pair, anywhere in India." },
+  { icon: "hide", title: "Chosen Leather", text: "Sourced from established tanneries." },
+  { icon: "needle", title: "Made by Hand", text: "Cut, lasted and stitched in our Pune atelier." },
+  { icon: "box", title: "Made to Order", text: "Your pair is made once you order it. Allow up to 25 days." },
 ] as const;
-
-export const contact = { title: "Morucha", lines: ["[TBC: business address]", "[TBC: customer email]", "[TBC: phone, if listed]"] };

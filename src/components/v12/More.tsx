@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { craftBanner, detail, factsStrip, hunterBanner, lookbook, promises, styles as styleTiles } from "@/content/home-v12";
+import { craftBanner, detail, factsStrip, lookbook, promises, rangeBanner, styles as styleTiles } from "@/content/home-v12";
 import Icon from "@/components/v11/Icons";
 import styles from "./More.module.css";
 
@@ -68,13 +68,26 @@ export function Detail() {
   );
 }
 
-type BannerData = typeof hunterBanner;
+type BannerData = {
+  title: string;
+  text: string;
+  cta: { label: string; href: string };
+  image: { src: string; alt: string; position: string };
+  video?: string;
+  align?: "left" | "right";
+};
 
-/** v12rule.md §9 editorial banner: full-bleed photo, a dark wash from the left, a short rule, light title, line, button. */
+/**
+ * v12rule.md §9 editorial banner: full-bleed photo (or a silent looping film over its poster), a dark wash from the
+ * text side, a short rule, light title, line, button.
+ */
 export function Banner({ data, tall, id }: { data: BannerData; tall?: boolean; id: string }) {
   return (
-    <section className={`${styles.banner} ${tall ? styles.tall : ""}`} aria-labelledby={id}>
+    <section className={`${styles.banner} ${tall ? styles.tall : ""} ${data.align === "right" ? styles.right : ""}`} aria-labelledby={id}>
       <Image src={data.image.src} alt={data.image.alt} fill sizes="100vw" style={{ objectPosition: data.image.position }} />
+      {data.video && (
+        <video className={styles.film} src={data.video} poster={data.image.src} autoPlay muted loop playsInline preload="metadata" aria-hidden />
+      )}
       <div className={styles.bannerText}>
         <span className={styles.rule} aria-hidden />
         <h2 id={id} className="v12-display">{data.title}</h2>
@@ -84,7 +97,7 @@ export function Banner({ data, tall, id }: { data: BannerData; tall?: boolean; i
     </section>
   );
 }
-export const HunterBanner = () => <Banner data={hunterBanner} id="v12-hunter-title" />;
+export const RangeBanner = () => <Banner data={rangeBanner} id="v12-range-title" />;
 export const CraftBanner = () => <Banner data={craftBanner} id="v12-craft-title" tall />;
 
 /** v12rule.md §9 In Hand: one tall photo with three to its right, small captions on each. */

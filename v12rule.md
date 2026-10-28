@@ -1,4 +1,6 @@
-# Morucha — Design Rules v12 "Numbered"
+# Design Rules v12 — client: Cuero (layout first built as Morucha "Numbered")
+
+**Client and content (28 Oct 2026):** v12 now shows **Cuero** (cuero.in). Cuero's logo, photographs, workshop film, product names and prices are used with Cuero's permission, confirmed by the project owner; files are in `/public/images/cuero`. Headings and lines are newly written from Cuero's stated facts for Cuero to approve. Colours are warmed for Cuero: page `#FBF9F4`, ink `#2B2019`, ink 2 `#7A6E64`, well `#F2EEE6`, band and button `#2B2019`. Board: https://claude.ai/artifact/JAVtWyBpZzFERyBKMSExrq. The Morucha v12 is in git history at commit 05d2f9f; the Morucha-specific rules below (numbered names, Morucha red) applied to that version.
 
 Primary reference: **ghurka.com** (Ghurka, leather goods, New York), measured on 28 Oct 2026 at 1440 × 900 and 390 × 844 (computed styles and screenshots of every section).
 Approved board: https://claude.ai/artifact/1ZMwCUrL28tJKJxTLJnDdW
