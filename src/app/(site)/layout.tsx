@@ -1,21 +1,6 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Montserrat } from "next/font/google";
+import { garamond, montserrat } from "@/fonts";
 import "./globals.css";
-
-const garamond = EB_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-garamond",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Morucha | British Leather, Tanned with Care",

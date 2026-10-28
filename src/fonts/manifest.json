@@ -1,0 +1,96 @@
+{
+  "EB Garamond": [
+    {
+      "path": "./files/eb-garamond-400-500-italic.woff2",
+      "weight": "400 500",
+      "style": "italic"
+    },
+    {
+      "path": "./files/eb-garamond-400-500.woff2",
+      "weight": "400 500",
+      "style": "normal"
+    }
+  ],
+  "Montserrat": [
+    {
+      "path": "./files/montserrat-400-600.woff2",
+      "weight": "400 600",
+      "style": "normal"
+    }
+  ],
+  "Jost": [
+    {
+      "path": "./files/jost-400-700-italic.woff2",
+      "weight": "400 700",
+      "style": "italic"
+    },
+    {
+      "path": "./files/jost-400-700.woff2",
+      "weight": "400 700",
+      "style": "normal"
+    }
+  ],
+  "Instrument Serif": [
+    {
+      "path": "./files/instrument-serif-400-italic.woff2",
+      "weight": "400",
+      "style": "italic"
+    }
+  ],
+  "Roboto Condensed": [
+    {
+      "path": "./files/roboto-condensed-700.woff2",
+      "weight": "700",
+      "style": "normal"
+    }
+  ],
+  "Inter": [
+    {
+      "path": "./files/inter-400-500.woff2",
+      "weight": "400 500",
+      "style": "normal"
+    }
+  ],
+  "Playfair Display": [
+    {
+      "path": "./files/playfair-display-400-500.woff2",
+      "weight": "400 500",
+      "style": "normal"
+    }
+  ],
+  "Funnel Sans": [
+    {
+      "path": "./files/funnel-sans-400-500.woff2",
+      "weight": "400 500",
+      "style": "normal"
+    }
+  ],
+  "Libre Baskerville": [
+    {
+      "path": "./files/libre-baskerville-400.woff2",
+      "weight": "400",
+      "style": "normal"
+    }
+  ],
+  "Figtree": [
+    {
+      "path": "./files/figtree-400-600.woff2",
+      "weight": "400 600",
+      "style": "normal"
+    }
+  ],
+  "Newsreader": [
+    {
+      "path": "./files/newsreader-200-800.woff2",
+      "weight": "200 800",
+      "style": "normal"
+    }
+  ],
+  "Hanken Grotesk": [
+    {
+      "path": "./files/hanken-grotesk-100-900.woff2",
+      "weight": "100 900",
+      "style": "normal"
+    }
+  ]
+}
