@@ -13,7 +13,8 @@ const basePath = isExport && baseSegments.length ? `/${baseSegments.join("/")}` 
 const nextConfig: NextConfig = {
   // `next dev` (and a plain `next build`) work in .next-app. A static export always builds in .next (Next forces that
   // when distDir names the export folder), so an export can never overwrite a running dev server's files.
-  distDir: ".next-app",
+  // On Vercel (VERCEL=1) the build stays in .next, the only folder Vercel's Next.js builder reads.
+  distDir: process.env.VERCEL ? ".next" : ".next-app",
   ...(isExport && {
     output: "export",
     basePath,
